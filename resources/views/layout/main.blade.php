@@ -85,13 +85,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../../index.html" class="nav-link">
+                    <a href="/transaksi/penjualan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Transaksi Penjualan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../index2.html" class="nav-link">
+                    <a href="/transaksi/pembelian" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Transaksi Pembelian</p>
                     </a>
@@ -108,19 +108,19 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../../index.html" class="nav-link">
+                    <a href="/data/stok" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Stok Barang</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../index2.html" class="nav-link">
+                    <a href="/data/supplier" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Supplier</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../index3.html" class="nav-link">
+                    <a href="/data/customer" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Customer</p>
                     </a>
@@ -137,19 +137,19 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="../../index.html" class="nav-link">
+                    <a href="/laporan/penjualan" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Penjualan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../index2.html" class="nav-link">
+                    <a href="/laporan/pembelian" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Pembelian</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="../../index3.html" class="nav-link">
+                    <a href="/laporan/gudang" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Gudang</p>
                     </a>

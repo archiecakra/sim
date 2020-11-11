@@ -3,9 +3,8 @@
 @section('title', 'Transaksi Pembelian Barang')
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="#">Home</a></li>
-<li class="breadcrumb-item"><a href="#">Layout</a></li>
-<li class="breadcrumb-item active">Fixed Layout</li>
+<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+<li class="breadcrumb-item"><a href="#">Transaksi Pembelian</a></li>
 @endsection
 
 @section('content')

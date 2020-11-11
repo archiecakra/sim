@@ -16,3 +16,35 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 });
+
+Route::get('/transaksi/pembelian', function () {
+    return view('transaksi_pembelian');
+});
+
+Route::get('/transaksi/penjualan', function () {
+    return view('transaksi_penjualan');
+});
+
+Route::get('/laporan/gudang', function () {
+    return view('laporan_gudang');
+});
+
+Route::get('/laporan/pembelian', function () {
+    return view('laporan_pembelian');
+});
+
+Route::get('/laporan/penjualan', function () {
+    return view('laporan_penjualan');
+});
+
+Route::get('/data/customer', function () {
+    return view('data_customer');
+});
+
+Route::get('/data/stok', function () {
+    return view('data_stok');
+});
+
+Route::get('/data/supplier', function () {
+    return view('data_supplier');
+});
