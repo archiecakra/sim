@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+<li class="breadcrumb-item">Dashboard</li>
 @endsection
 
 @section('content')

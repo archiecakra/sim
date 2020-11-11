@@ -7,13 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../css/fa.all.min.css">
+  <link rel="stylesheet" href="{{ url('/css/fa.all.min.css') }}">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="{{ url('/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ url('/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
-    <link href="../css/googlefont.css" rel="stylesheet">
+  <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
   </head>
   <body class="hold-transition sidebar-mini layout-fixed text-sm">
   <!-- Site wrapper -->
@@ -32,7 +32,7 @@
             <a href="#" class="nav-link">Contact</a>
           </li>
         </ul>
-
+        
         <!-- SEARCH FORM -->
 
         <!-- Right navbar links -->
@@ -68,7 +68,7 @@
               <!-- Add icons to the links using the .nav-icon class
                   with font-awesome or any other icon font library -->
               <li class="nav-item">
-                <a href="../widgets.html" class="nav-link">
+                <a href="{{ url('/') }}" class="nav-link">
                   <i class="nav-icon fas fa-list-alt"></i>
                   <p>
                     Dashboard
@@ -85,13 +85,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/transaksi/penjualan" class="nav-link">
+                  <a href="{{ url('/transaksi/penjualan') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Transaksi Penjualan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/transaksi/pembelian" class="nav-link">
+                    <a href="{{ url('/transaksi/pembelian') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Transaksi Pembelian</p>
                     </a>
@@ -108,19 +108,19 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/data/stok" class="nav-link">
+                    <a href="{{ url('/data/stok') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Stok Barang</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/data/supplier" class="nav-link">
+                    <a href="{{ url('/data/supplier') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Supplier</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/data/customer" class="nav-link">
+                    <a href="{{ url('/data/customer') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Customer</p>
                     </a>
@@ -137,19 +137,19 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/laporan/penjualan" class="nav-link">
+                    <a href="{{ url('/laporan/penjualan') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Penjualan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/laporan/pembelian" class="nav-link">
+                    <a href="{{ url('/laporan/pembelian') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Pembelian</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/laporan/gudang" class="nav-link">
+                    <a href="{{ url('/laporan/gudang') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Gudang</p>
                     </a>
@@ -189,9 +189,9 @@
 
       <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-          <b>Version</b> 3.0.5
+          <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2020 <a href="http://adminlte.io">Archie Cakra</a>.</strong> All rights
+        <strong>Copyright &copy; 2020 Archie Cakra.</strong> All rights
         reserved.
       </footer>
 
@@ -204,14 +204,14 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="../js/jquery.min.js"></script>
+  <script src="{{ url('/js/jquery.min.js') }}"></script>
   <!-- Bootstrap 4 -->
-  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url('/js/bootstrap.bundle.min.js') }}"></script>
   <!-- overlayScrollbars -->
-  <script src="../js/jquery.overlayScrollbars.min.js"></script>
+  <script src="{{ url('/js/jquery.overlayScrollbars.min.js') }}"></script>
   <!-- AdminLTE App -->
-  <script src="../js/adminlte.min.js"></script>
+  <script src="{{ url('/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="../js/demo.js"></script>
+  <script src="{{ url('/js/demo.js') }}"></script>
   </body>
 </html>
