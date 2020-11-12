@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ItemController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,9 +43,7 @@ Route::get('/data/customer', function () {
     return view('data_customer');
 });
 
-Route::get('/data/stok', function () {
-    return view('data_stok');
-});
+Route::get('/data/stok', [ItemController::class, 'index']);
 
 Route::get('/data/supplier', function () {
     return view('data_supplier');
