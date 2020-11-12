@@ -16,7 +16,7 @@
       <div class="col-12">
         <!-- Default box -->
         <div class="card collapsed-card bg-secondary">
-          <div class="card-header">
+          <div class="card-header" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
             <h3 class="card-title">Tambah Barang</h3>
 
             <div class="card-tools">
@@ -27,11 +27,75 @@
             </div>
           </div>
           <div class="card-body">
-            Start creating your amazing application!
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="ip_publik">Jumlah Barang</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="ip_publik" data-inputmask="'alias': 'ip'" data-mask placeholder="112.140.160.112">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleFormControlFile1">Gambar</label>
+                  <input type="file" class="form-control-file border" id="exampleFormControlFile1">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="ip_publik">Jumlah Barang</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="ip_publik" data-inputmask="'alias': 'ip'" data-mask placeholder="112.140.160.112">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="ip_lokal">Satuan</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="ip_lokal" data-inputmask="'alias': 'ip'" data-mask placeholder="172.18.1.112">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="ip_lokal">Harga</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="ip_lokal" data-inputmask="'alias': 'ip'" data-mask placeholder="172.18.1.112">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="ip_lokal">Expired Date</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="ip_lokal" data-inputmask="'alias': 'ip'" data-mask placeholder="172.18.1.112">
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            Footer
+            <button class="btn btn-md btn-primary float-right">Tambah</button>
           </div>
           <!-- /.card-footer-->
         </div>
@@ -59,6 +123,8 @@
                   <th>satuan</th>
                   <th>harga</th>
                   <th>expiry</th>
+                  <th>Gambar</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,6 +136,8 @@
                   <td>karung</td>
                   <td>Rp. 200000</td>
                   <td>12-01-2012</td>
+                  <td></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -79,6 +147,8 @@
                   <td>karung</td>
                   <td>Rp. 200000</td>
                   <td>12-01-2012</td>
+                  <td></td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -88,6 +158,8 @@
                   <td>karung</td>
                   <td>Rp. 200000</td>
                   <td>12-01-2012</td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
