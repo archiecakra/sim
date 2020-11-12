@@ -116,51 +116,39 @@
             <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
               <thead class="thead-dark">
                 <tr>
-                  <th>#</th>
-                  <th>Kode Barang</th>
-                  <th>Nama Barang</th>
-                  <th>jumlah</th>
-                  <th>satuan</th>
-                  <th>harga</th>
-                  <th>expiry</th>
-                  <th>Gambar</th>
-                  <th>Aksi</th>
+                  <th scope="col">#</th>
+                  <th scope="col">Kode Barang</th>
+                  <th scope="col">Nama Barang</th>
+                  <th scope="col">Kategori</th>
+                  <th scope="col">Sub Kategori</th>
+                  <th scope="col">Merk</th>
+                  <th scope="col">Harga Jual</th>
+                  <th scope="col">Harga Beli</th>
+                  <th scope="col">Stok</th>
+                  <th scope="col">Satuan</th>
+                  <th scope="col">expiry</th>
+                  <th scope="col">Gambar</th>
+                  <th scope="col">Aksi</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($items as $item)
                 <tr>
-                  <td>1</td>
-                  <td>0420-bako-01</td>
-                  <td>beras lele</td>
-                  <td>10</td>
-                  <td>karung</td>
-                  <td>Rp. 200000</td>
-                  <td>12-01-2012</td>
-                  <td></td>
+                  <td scope="row">{{ $loop->iteration }}</td>
+                  <td>{{ $item->id }}</td>
+                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->kategori }}</td>
+                  <td>{{ $item->sub_kategori }}</td>
+                  <td>{{ $item->merk }}</td>
+                  <td>Rp. {{ $item->harga }},00</td>
+                  <td>Rp. {{ $item->harga_beli }},00</td>
+                  <td>{{ $item->stok }}</td>
+                  <td>{{ $item->satuan }}</td>
+                  <td>{{ $item->expired_at }}</td>
+                  <td>{{ $item->gambar }}</td>
                   <td></td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>0119-bako-02</td>
-                  <td>beras lele</td>
-                  <td>10</td>
-                  <td>karung</td>
-                  <td>Rp. 200000</td>
-                  <td>12-01-2012</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>1019-bako-03</td>
-                  <td>beras lele</td>
-                  <td>10</td>
-                  <td>karung</td>
-                  <td>Rp. 200000</td>
-                  <td>12-01-2012</td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

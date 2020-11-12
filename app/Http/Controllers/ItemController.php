@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Item;
+
 class ItemController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('data/stok/stok_index');
+        $items = Item::all();
+        return view('data/stok/stok_index', ['items' => $items]);
     }
 
     /**
