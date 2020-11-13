@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ItemsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,32 +19,7 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/transaksi/pembelian', function () {
-    return view('transaksi_pembelian');
-});
-
-Route::get('/transaksi/penjualan', function () {
-    return view('transaksi_penjualan');
-});
-
-Route::get('/laporan/gudang', function () {
-    return view('laporan_gudang');
-});
-
-Route::get('/laporan/pembelian', function () {
-    return view('laporan_pembelian');
-});
-
-Route::get('/laporan/penjualan', function () {
-    return view('laporan_penjualan');
-});
-
-Route::get('/data/customer', function () {
-    return view('data_customer');
-});
-
-Route::get('/data/stok', [ItemController::class, 'index']);
-
-Route::get('/data/supplier', function () {
-    return view('data_supplier');
-});
+//Route stok barang
+Route::get('/items', [ItemsController::class, 'index']);
+Route::get('/items/create', [ItemsController::class, 'create']);
+Route::get('/items/{item}', [ItemsController::class, 'show']);

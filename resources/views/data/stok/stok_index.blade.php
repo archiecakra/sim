@@ -15,102 +15,11 @@
     <div class="row">
       <div class="col-12">
         <!-- Default box -->
-        <div class="card collapsed-card bg-secondary">
-          <div class="card-header" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-            <h3 class="card-title">Tambah Barang</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="ip_publik">Jumlah Barang</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                    </div>
-                    <input type="text" class="form-control form-control-sm" id="ip_publik" data-inputmask="'alias': 'ip'" data-mask placeholder="112.140.160.112">
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label for="exampleFormControlFile1">Gambar</label>
-                  <input type="file" class="form-control-file border" id="exampleFormControlFile1">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="ip_publik">Jumlah Barang</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                    </div>
-                    <input type="text" class="form-control form-control-sm" id="ip_publik" data-inputmask="'alias': 'ip'" data-mask placeholder="112.140.160.112">
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label for="ip_lokal">Satuan</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                    </div>
-                    <input type="text" class="form-control form-control-sm" id="ip_lokal" data-inputmask="'alias': 'ip'" data-mask placeholder="172.18.1.112">
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label for="ip_lokal">Harga</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                    </div>
-                    <input type="text" class="form-control form-control-sm" id="ip_lokal" data-inputmask="'alias': 'ip'" data-mask placeholder="172.18.1.112">
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label for="ip_lokal">Expired Date</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                    </div>
-                    <input type="text" class="form-control form-control-sm" id="ip_lokal" data-inputmask="'alias': 'ip'" data-mask placeholder="172.18.1.112">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button class="btn btn-md btn-primary float-right">Tambah</button>
-          </div>
-          <!-- /.card-footer-->
-        </div>
-        <!-- /.card -->
-        <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Stok Gudang</h3>
+            <h3 class="card-title">Daftar Stok Gudang</h3>
 
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>
+            <a href="/items/create" class="btn btn-primary float-right text-white">Tambah Barang</a>
           </div>
           <div class="card-body">
             <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
