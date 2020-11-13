@@ -36,7 +36,31 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'kategori' => 'required',
+            'sub_kategori' => 'required',
+            'merk' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required|numeric',
+            'harga_beli' => 'required|numeric',
+            'stok' => 'required|numeric',
+            'expired_at' => 'required|date',
+        ]);
+
+        Item::create([
+            'nama' => $request->nama,
+            'kategori' => $request->kategori,
+            'sub_kategori' => $request->sub_kategori,
+            'merk' => $request->merk,
+            'satuan' => $request->satuan,
+            'harga' => $request->harga,
+            'harga_beli' => $request->harga_beli,
+            'stok' => $request->stok,
+            'expired_at' => $request->expired_at,
+        ]);
+
+        return redirect('/items')->with('message', 'Data Barang Berhasil Ditambahkan');
     }
 
     /**

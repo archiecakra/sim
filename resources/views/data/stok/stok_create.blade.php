@@ -21,7 +21,8 @@
             <h3 class="card-title">Tambah Barang</h3>
           </div>
           <div class="card-body">
-            <form method="POST" action="/items/create">
+            <form method="POST" action="/items">
+              @csrf
               <div class="form-group">
                 <label for="nama">Nama</label>
                 <div class="input-group">
@@ -67,35 +68,45 @@
                 </div>
               </div>
               <div class="form-row">
-                <div class="col-1">
+                <div class="col-2">
                   <div class="form-group">
                     <label for="stok">Jumlah</label>
                     <input type="text" class="form-control form-control-sm" id="stok" name="stok" placeholder="23">
                   </div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="form-group">
                     <label for="satuan">Satuan</label>
                     <input type="text" class="form-control form-control-sm" id="satuan" name="satuan" placeholder="23">
                   </div>
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="harga_beli">Harga Beli (Rupiah)</label>
-                    <input type="text" class="form-control form-control-sm" id="harga_beli" name="harga_beli" placeholder="23">
+                    <label for="harga_beli">Harga Beli</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas">Rp.</i></span>
+                      </div>
+                      <input type="text" class="form-control form-control-sm" id="harga_beli" name="harga_beli" placeholder="45000">
+                    </div>
                   </div>
                 </div>
-                <div class="col-5">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="harga">Harga Jual (Rupiah)</label>
-                    <input type="text" class="form-control form-control-sm" id="harga" name="harga" placeholder="23">
+                    <label for="harga">Harga Jual</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas">Rp.</i></span>
+                      </div>
+                      <input type="text" class="form-control form-control-sm" id="harga" name="harga" placeholder="50000">
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="expired_at">Merk</label>
+                    <label for="expired_at">Tanggal Expired</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-laptop"></i></span>
@@ -106,17 +117,18 @@
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <label for="exampleFormControlFile1">Gambar Barang</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <label for="gambar">Gambar Barang</label>
+                    <input type="file" class="form-control-file" id="gambar" name="gambar">
                   </div>
                 </div>
               </div>
-            </form>
+            
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <button class="btn btn-md btn-primary float-right">Tambah</button>
+            <button class="btn btn-md btn-primary float-right">Tambah Barang</button>
           </div>
+            </form>
           <!-- /.card-footer-->
         </div>
         <!-- /.card -->
