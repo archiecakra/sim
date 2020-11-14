@@ -46,7 +46,10 @@ class ItemsController extends Controller
             'harga_beli' => 'required|numeric',
             'stok' => 'required|numeric',
             'expired_at' => 'required|date',
+            'gambar' => 'required|image'
         ]);
+
+        $namaGambar = $request->nama.'.'.$request->gambar->extension();
 
         Item::create([
             'nama' => $request->nama,
@@ -58,6 +61,7 @@ class ItemsController extends Controller
             'harga_beli' => $request->harga_beli,
             'stok' => $request->stok,
             'expired_at' => $request->expired_at,
+            'gambar' => $request->gambar->storeAs('gambar', $namaGambar)
         ]);
 
         return redirect('/items')->with('message', 'Data Barang Berhasil Ditambahkan');

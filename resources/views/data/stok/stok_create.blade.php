@@ -21,7 +21,7 @@
             <h3 class="card-title">Tambah Barang</h3>
           </div>
           <div class="card-body">
-            <form method="POST" action="/items">
+            <form method="POST" action="/items" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
                 <label for="nama">Nama</label>
@@ -29,7 +29,10 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                   </div>
-                  <input type="text" class="form-control form-control-sm" id="nama" name="nama" placeholder="Sunlight 50 gr">
+                <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Sunlight 50 gr" value="{{ old('nama') }}">
+                  @error('nama')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
               </div>
               <div class="row">
@@ -40,7 +43,10 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm" id="merk" name="merk" placeholder="Sunlight 50 gr">
+                      <input type="text" class="form-control form-control-sm @error('merk') is-invalid @enderror" id="merk" name="merk" placeholder="Sunlight 50 gr" value="{{ old('merk') }}">
+                      @error('merk')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -51,7 +57,10 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm" id="kategori" name="kategori" placeholder="Sunlight 50 gr">
+                      <input type="text" class="form-control form-control-sm @error('kategori') is-invalid @enderror" id="kategori" name="kategori" placeholder="Sunlight 50 gr" value="{{ old('kategori') }}">
+                      @error('kategori')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -62,7 +71,10 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm" id="sub_kategori" name="sub_kategori" placeholder="Sunlight 50 gr">
+                      <input type="text" class="form-control form-control-sm @error('sub_kategori') is-invalid @enderror" id="sub_kategori" name="sub_kategori" placeholder="Sunlight 50 gr" value="{{ old('sub_kategori') }}">
+                      @error('sub_kategori')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -70,14 +82,20 @@
               <div class="form-row">
                 <div class="col-2">
                   <div class="form-group">
-                    <label for="stok">Jumlah</label>
-                    <input type="text" class="form-control form-control-sm" id="stok" name="stok" placeholder="23">
+                    <label for="stok">Stok</label>
+                    <input type="text" class="form-control form-control-sm @error('stok') is-invalid @enderror" id="stok" name="stok" placeholder="23" value="{{ old('stok') }}">
+                    @error('stok')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <div class="col-2">
                   <div class="form-group">
                     <label for="satuan">Satuan</label>
-                    <input type="text" class="form-control form-control-sm" id="satuan" name="satuan" placeholder="23">
+                    <input type="text" class="form-control form-control-sm @error('satuan') is-invalid @enderror" id="satuan" name="satuan" placeholder="23" value="{{ old('satuan') }}">
+                    @error('satuan')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <div class="col-4">
@@ -87,7 +105,10 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas">Rp.</i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm" id="harga_beli" name="harga_beli" placeholder="45000">
+                      <input type="text" class="form-control form-control-sm @error('harga_beli') is-invalid @enderror" id="harga_beli" name="harga_beli" placeholder="45000" value="{{ old('harga_beli') }}">
+                      @error('harga_beli')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -98,7 +119,10 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas">Rp.</i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm" id="harga" name="harga" placeholder="50000">
+                      <input type="text" class="form-control form-control-sm @error('harga') is-invalid @enderror" id="harga" name="harga" placeholder="50000" value="{{ old('harga') }}">
+                      @error('harga')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -111,14 +135,20 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm" id="expired_at" name="expired_at" placeholder="Sunlight 50 gr">
+                      <input type="text" class="form-control form-control-sm @error('expired_at') is-invalid @enderror" id="expired_at" name="expired_at" placeholder="Sunlight 50 gr" value="{{ old('expired_at') }}">
+                      @error('expired_at')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
                     </div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="gambar">Gambar Barang</label>
-                    <input type="file" class="form-control-file" id="gambar" name="gambar">
+                    <input type="file" class="form-control-file @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                    @error('gambar')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>

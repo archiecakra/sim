@@ -34,37 +34,48 @@
             <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Kode Barang</th>
-                  <th scope="col">Nama Barang</th>
-                  <th scope="col">Kategori</th>
-                  <th scope="col">Sub Kategori</th>
-                  <th scope="col">Merk</th>
-                  <th scope="col">Harga Jual</th>
-                  <th scope="col">Harga Beli</th>
-                  <th scope="col">Stok</th>
-                  <th scope="col">Satuan</th>
-                  <th scope="col">expiry</th>
-                  <th scope="col">Gambar</th>
-                  <th scope="col">Aksi</th>
+                  <th class="align-middle" scope="col">#</th>
+                  <th class="align-middle" scope="col">Kode Barang</th>
+                  <th class="align-middle" scope="col">Nama Barang</th>
+                  <th class="align-middle" scope="col">Kategori</th>
+                  <th class="align-middle" scope="col">Sub Kategori</th>
+                  <th class="align-middle" scope="col">Merk</th>
+                  <th class="align-middle" scope="col">Harga Jual</th>
+                  <th class="align-middle" scope="col">Harga Beli</th>
+                  <th class="align-middle" scope="col">Stok</th>
+                  <th class="align-middle" scope="col">Satuan</th>
+                  <th class="align-middle" scope="col">expiry</th>
+                  <th class="align-middle" scope="col" style="width: 15%;">Gambar</th>
+                  <th class="align-middle" scope="col">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($items as $item)
                 <tr>
-                  <td scope="row">{{ $loop->iteration }}</td>
-                  <td>{{ $item->id }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->kategori }}</td>
-                  <td>{{ $item->sub_kategori }}</td>
-                  <td>{{ $item->merk }}</td>
-                  <td>Rp. {{ $item->harga }},00</td>
-                  <td>Rp. {{ $item->harga_beli }},00</td>
-                  <td>{{ $item->stok }}</td>
-                  <td>{{ $item->satuan }}</td>
-                  <td>{{ $item->expired_at }}</td>
-                  <td>{{ $item->gambar }}</td>
-                  <td></td>
+                  <td scope="row" class="align-middle">{{ $loop->iteration }}</td>
+                  <td class="align-middle">{{ $item->id }}</td>
+                  <td class="align-middle">{{ $item->nama }}</td>
+                  <td class="align-middle">{{ $item->kategori }}</td>
+                  <td class="align-middle">{{ $item->sub_kategori }}</td>
+                  <td class="align-middle">{{ $item->merk }}</td>
+                  <td class="align-middle">Rp. {{ $item->harga }},00</td>
+                  <td class="align-middle">Rp. {{ $item->harga_beli }},00</td>
+                  <td class="align-middle">{{ $item->stok }}</td>
+                  <td class="align-middle">{{ $item->satuan }}</td>
+                  <td class="align-middle text-nowrap">{{ $item->expired_at }}</td>
+                  <td class="align-middle"><img src="{{ $item->gambar }}" class="img-thumbnail" alt="{{ $item->nama }}"></td>
+                  <td class="align-middle">
+                    <form action="">
+                      @method('patch')
+                      @csrf
+                      <button class="btn btn-primary btn-xs"><i class="fas fa-md fa-edit"></i></button>
+                    </form>
+                    <form action="items/{{ $item->id }}" method="POST">
+                      @method('delete')
+                      @csrf
+                      <button href="" class="btn btn-danger btn-xs"><i class="fas fa-md fa-trash-alt"></i></button>
+                    </form>
+                  </td>
                 </tr>
                 @endforeach
               </tbody>
