@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->string('satuan');
             $table->integer('harga');
             $table->integer('harga_beli');
-            $table->integer('stock');
+            $table->integer('stok');
             $table->date('expired_at');
             $table->string('gambar');
             $table->timestamps();
