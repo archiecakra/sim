@@ -24,3 +24,4 @@ Route::get('/items', [ItemsController::class, 'index']);
 Route::get('/items/create', [ItemsController::class, 'create']);
 Route::get('/items/{item}', [ItemsController::class, 'show']);
 Route::post('/items', [ItemsController::class, 'store']);
+Route::delete('/items/{item}', [ItemsController::class, 'destroy']);
