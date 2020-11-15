@@ -29,3 +29,6 @@ Route::get('/', function () {
 // Route::patch('/items/{item}', [ItemsController::class, 'update']);
 
 Route::resource('items', ItemsController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
