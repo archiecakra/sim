@@ -27,6 +27,18 @@
           </li>
         </ul>
         
+        <ul class="nav navbar-nav ml-auto">
+          <a class="btn btn-danger btn-sm" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>
+        </ul>
+
         <!-- SEARCH FORM -->
 
         <!-- Right navbar links -->
@@ -52,7 +64,7 @@
               <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">Alexander Pierce</a>
+              <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
           </div>
 
