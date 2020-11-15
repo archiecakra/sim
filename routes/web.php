@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,13 @@ use App\Http\Controllers\ItemsController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+//Index Route
+Route::get('/', [LoginController::class, 'showLoginForm']);
 
-//Route stok barang
+//Dashboard Route
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+//Stok Barang Route
 // Route::get('/items', [ItemsController::class, 'index']);
 // Route::get('/items/create', [ItemsController::class, 'create']);
 // Route::get('/items/{item}', [ItemsController::class, 'show']);
@@ -31,4 +35,4 @@ Route::get('/', function () {
 Route::resource('items', ItemsController::class);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
