@@ -28,7 +28,7 @@
           <div class="card-header">
             <h3 class="card-title">Daftar Stok Gudang</h3>
 
-            <a href="/items/create" class="btn btn-primary float-right text-white">Tambah Barang</a>
+            <a href="{{ url('/items/create') }}" class="btn btn-primary float-right text-white">Tambah Barang</a>
           </div>
           <div class="card-body">
             <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
@@ -63,17 +63,13 @@
                   <td class="align-middle">{{ $item->stok }}</td>
                   <td class="align-middle">{{ $item->satuan }}</td>
                   <td class="align-middle text-nowrap">{{ $item->expired_at }}</td>
-                  <td class="align-middle"><img src="{{ $item->gambar }}" class="img-thumbnail" alt="{{ $item->nama }}"></td>
+                  <td class="align-middle"><img src="{{ url('/'.$item->gambar) }}" class="img-thumbnail" alt="{{ $item->nama }}"></td>
                   <td class="align-middle">
-                    <form action="">
-                      @method('patch')
-                      @csrf
-                      <button class="btn btn-primary btn-xs"><i class="fas fa-md fa-edit"></i></button>
-                    </form>
-                    <form action="items/{{ $item->id }}" method="POST">
+                    <a class="btn btn-primary btn-xs" href="{{ url('/items/'.$item->id.'/edit') }}"><i class="fas fa-md fa-edit"></i></a>
+                    <form action="{{ url('/items/'.$item->id) }}" method="POST">
                       @method('delete')
                       @csrf
-                      <button href="" class="btn btn-danger btn-xs"><i class="fas fa-md fa-trash-alt"></i></button>
+                      <button class="btn btn-danger btn-xs"><i class="fas fa-md fa-trash-alt"></i></button>
                     </form>
                   </td>
                 </tr>

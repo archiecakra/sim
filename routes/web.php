@@ -25,3 +25,5 @@ Route::get('/items/create', [ItemsController::class, 'create']);
 Route::get('/items/{item}', [ItemsController::class, 'show']);
 Route::post('/items', [ItemsController::class, 'store']);
 Route::delete('/items/{item}', [ItemsController::class, 'destroy']);
+Route::get('/items/{item}/edit', [ItemsController::class, 'edit']);
+Route::patch('/items/{item}', [ItemsController::class, 'update']);

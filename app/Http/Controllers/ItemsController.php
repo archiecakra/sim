@@ -86,7 +86,7 @@ class ItemsController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view('data/stok/stok_edit', ['item' => $item]);
     }
 
     /**
@@ -98,7 +98,27 @@ class ItemsController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        if ($request->hasFile('gambar')) {
+            $namaGambar = $request->nama.'.'.$request->gambar->extension();
+            $gambar = $request->gambar->storeAs('gambar', $namaGambar);
+        } else {
+            $gambar = $item->gambar;
+        }
+
+        Item::where('id', $item->id)
+            ->update([
+                'nama' => $request->nama,
+                'kategori' => $request->kategori,
+                'sub_kategori' => $request->sub_kategori,
+                'merk' => $request->merk,
+                'satuan' => $request->satuan,
+                'harga' => $request->harga,
+                'harga_beli' => $request->harga_beli,
+                'stok' => $request->stok,
+                'expired_at' => $request->expired_at,
+                'gambar' => $gambar
+            ]);
+        return redirect('/items')->with('message', 'Data Barang Berhasil Diubah');
     }
 
     /**
