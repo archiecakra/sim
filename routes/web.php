@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 //Dashboard Route
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-//Stok Barang Route
+//Stok Barang Routes
 // Route::get('/items', [ItemsController::class, 'index']);
 // Route::get('/items/create', [ItemsController::class, 'create']);
 // Route::get('/items/{item}', [ItemsController::class, 'show']);
@@ -31,8 +32,11 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route::delete('/items/{item}', [ItemsController::class, 'destroy']);
 // Route::get('/items/{item}/edit', [ItemsController::class, 'edit']);
 // Route::patch('/items/{item}', [ItemsController::class, 'update']);
-
 Route::resource('items', ItemsController::class);
-Auth::routes();
 
+//Data Pegawai Routes
+Route::resource('employees', EmployeeController::class);
+
+//Auth Routes
+Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);

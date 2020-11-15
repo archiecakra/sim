@@ -13,7 +13,7 @@ class User extends Authenticatable
 
     public function employee()
     {
-        return $this->hasOne('\App\Models\Employee');
+        return $this->hasOne('App\Models\Employee');
     }
 
     /**
