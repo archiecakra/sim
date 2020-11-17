@@ -126,15 +126,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/customers') }}" class="nav-link">
+                    <a href="{{ url('/users') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Data Pelanggan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/employees') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Data Pegawai</p>
+                      <p>Data Pengguna</p>
                     </a>
                   </li>
                 </ul>

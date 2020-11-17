@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 
 /*
@@ -34,8 +36,11 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route::patch('/items/{item}', [ItemsController::class, 'update']);
 Route::resource('items', ItemsController::class);
 
-//Data Pegawai Routes
+//Data Pengguna Routes
+Route::get('/users', [UserController::class, 'index']);
 Route::resource('employees', EmployeeController::class);
+Route::resource('customers', CustomerController::class);
+
 
 //Auth Routes
 Auth::routes();

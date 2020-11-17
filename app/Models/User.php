@@ -11,9 +11,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public function employee()
+    public function userdetail()
     {
-        return $this->hasOne('App\Models\Employee');
+        return $this->hasOne('App\Models\Userdetail');
     }
 
     /**
