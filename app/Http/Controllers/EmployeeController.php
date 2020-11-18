@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Userdetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -35,7 +37,30 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'nama'      => 'required|string|max:255',
+            'username'  => 'required|string|alpha_num|max:255',
+            'email'     => 'required|string|email|max:255',
+            'phone'     => 'required|string|numeric',
+            'password'  => 'required|string|min:8|confirmed',
+            'alamat'    => 'required|string|max:255',
+            'role'      => 'required|in:admin,staff,customer',
+        ]);
+
+        User::create([
+            'name'      => $request->nama,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+            'password'  => Hash::make($request->password)
+        ]);
+
+        Userdetail::create([
+            'nama'      => $request->nama,
+            'alamat'      => $request->alamat,
+            'role'      => $request->role,
+        ]);
     }
 
     /**

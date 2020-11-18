@@ -14,7 +14,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-9">
+      <div class="col-12">
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
@@ -31,30 +31,6 @@
                   </div>
                 <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama" value="{{ old('nama') }}">
                   @error('nama')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                  </div>
-                <input type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukkan Password" value="{{ old('password') }}">
-                  @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="role">Hak Akses</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                  </div>
-                <input type="text" class="form-control form-control-sm @error('role') is-invalid @enderror" id="role" name="role" placeholder="Sunlight 50 gr" value="{{ old('role') }}">
-                  @error('role')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
@@ -92,6 +68,45 @@
               <div class="row">
                 <div class="col">
                   <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                      </div>
+                    <input type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" id="password" name="password" placeholder="Masukkan Password">
+                      @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="password-confirm">Confirm Password</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                      </div>
+                    <input type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" id="password-confirm" name="password_confirmation" placeholder="Masukkan Password">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="role">Hak Akses</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                  </div>
+                <input type="text" class="form-control form-control-sm @error('role') is-invalid @enderror" id="role" name="role" placeholder="Sunlight 50 gr" value="{{ old('role') }}">
+                  @error('role')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
                     <label for="phone">Nomor Telepon</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -106,11 +121,16 @@
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <label for="gambar">Gambar Barang</label>
-                    <input type="file" class="form-control-file @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
-                    @error('gambar')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <label for="alamat">Alamat</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                      </div>
+                      <input type="text" class="form-control form-control-sm @error('alamat') is-invalid @enderror" id="alamat" name="alamat" placeholder="Masukkan Nomor Telepon" value="{{ old('alamat') }}">
+                      @error('alamat')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
                   </div>
                 </div>
               </div>
@@ -118,7 +138,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <button class="btn btn-md btn-primary float-right">Tambah Barang</button>
+              <button type="submit" class="btn btn-md btn-primary float-right">Tambah Pegawai</button>
               <a href="{{ url('/users') }}" class="btn btn-md btn-secondary">Kembali</a>
             </div>
           </form>
@@ -126,14 +146,6 @@
         </div>
         <!-- /.card -->
       </div>
-      <div class="col-3">
-      <div class="card">
-        <img class="card-img-top" src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="Card image cap">
-        <div class="card-body">
-          <p class="card-text">Tinjauan Gambar Barang</p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 </section>
