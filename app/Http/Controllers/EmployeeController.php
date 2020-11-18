@@ -37,12 +37,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+
         $request->validate([
             'nama'      => 'required|string|max:255',
             'username'  => 'required|string|alpha_num|max:255',
             'email'     => 'required|string|email|max:255',
-            'phone'     => 'required|string|numeric',
+            'phone'     => 'required|string|numeric|digits_between:9,14',
             'password'  => 'required|string|min:8|confirmed',
             'alamat'    => 'required|string|max:255',
             'role'      => 'required|in:admin,staff,customer',
@@ -56,11 +56,16 @@ class EmployeeController extends Controller
             'password'  => Hash::make($request->password)
         ]);
 
+        $user_id = User::where('phone', $request->phone)->first();
+
         Userdetail::create([
+            'user_id'   => $user_id->id,
             'nama'      => $request->nama,
-            'alamat'      => $request->alamat,
+            'alamat'    => $request->alamat,
             'role'      => $request->role,
         ]);
+
+        return redirect('/users')->with('message', 'Data Pegawai Berhasil Ditambahkan');
     }
 
     /**
