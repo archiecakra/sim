@@ -66,7 +66,7 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('data/supplier/supplier_edit', ['supplier' => $supplier]);
     }
 
     /**
@@ -78,7 +78,11 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        Supplier::where('id', $supplier->id)
+            ->update([
+                'nama' => $request->nama
+            ]);
+        return redirect('/suppliers')->with('message', 'Data Supplier Berhasil Diubah');
     }
 
     /**
