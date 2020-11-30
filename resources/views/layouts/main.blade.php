@@ -120,7 +120,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/data/supplier') }}" class="nav-link">
+                    <a href="{{ url('/suppliers') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Supplier</p>
                     </a>

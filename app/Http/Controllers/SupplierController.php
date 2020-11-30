@@ -14,7 +14,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('data/supplier/supplier_index');
+        $suppliers = Supplier::all();
+        return view('data/supplier/supplier_index', ['suppliers' => $suppliers]);
     }
 
     /**
@@ -24,7 +25,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('data/supplier/supplier_create');
     }
 
     /**
@@ -35,7 +36,15 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        Supplier::create([
+            'nama' => $request->nama
+        ]);
+
+        return redirect('/suppliers')->with('message', 'Supplier Berhasil Ditambahkan');
     }
 
     /**
