@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::get('/users', [UserController::class, 'index']);
 Route::resource('employees', EmployeeController::class);
 Route::resource('customers', CustomerController::class);
 
+//Data Supplier
+Route::resource('suppliers', SupplierController::class);
 
 //Auth Routes
 Auth::routes();
