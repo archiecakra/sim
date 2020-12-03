@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 
 //Dashboard Route
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+//Transaksi Pembelian Barang
+Route::resource('/transaction/purchase', PurchaseController::class);
 
 //Stok Barang Routes
 // Route::get('/items', [ItemsController::class, 'index']);
