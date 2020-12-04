@@ -17,19 +17,17 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Daftar Transaksi Pembelian</h3>
-            <a href="{{ url('/transaction/purchase/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a>
+            <h3 class="card-title">Title</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fas fa-times"></i></button>
+            </div>
           </div>
           <div class="card-body">
-            <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
-              <thead>
-                <tr>
-                  <th class="align-middle" scope="col">#</th>
-                  <th class="align-middle" scope="col">#</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+            Start creating your amazing application!
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
