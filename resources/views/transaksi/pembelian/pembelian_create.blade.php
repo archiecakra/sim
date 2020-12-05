@@ -12,12 +12,12 @@
 <section class="content">
 
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
+    <div class="row justify-content-center">
+      <div class="col-10">
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Title</h3>
+            <h3 class="card-title">Tambah Transaksi Pembelian</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -27,7 +27,57 @@
             </div>
           </div>
           <div class="card-body">
-            Start creating your amazing application!
+            <div class="form-group">
+              <label for="supplier_id">Nama Supplier</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                </div>
+                <select class="custom-select custom-select-md" name="supplier_id" id="supplier_id">
+                  <option value="">--- Pilih Supplier ---</option>
+                  @foreach ($suppliers as $supplier)
+                  <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
+                  @endforeach
+                </select>
+                @error('supplier_id')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <label for="">Daftar Barang Pembelian</label>
+              </div>
+              <div class="card-body">
+                <table class="table table-sm bg-light table-striped text-center table-hover" id="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nama Barang</th>
+                      <th scope="col">Harga</th>
+                      <th scope="col">Jumlah</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td scope="row" class="align-middle">1</td>
+                      <td class="align-middle">
+                        <select class="custom-select custom-select-xs" name="supplier_id" id="supplier_id">
+                          <option value="">--- Pilih Barang ---</option>
+                          @foreach ($items as $item)
+                          <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                          @endforeach
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-footer">
+                <button id="add_row" class="btn btn-primary float-left btn-xs">+ Tambah Baris</button>
+                <button id='delete_row' class="float-right btn btn-danger btn-xs">- Hapus Baris</button>
+              </div>
+            </div>
           </div>
           <!-- /.card-body -->
           <div class="card-footer">

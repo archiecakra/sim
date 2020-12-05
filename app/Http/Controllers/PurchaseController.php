@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purchase;
+use App\Models\Item;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -24,7 +26,9 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers = Supplier::all();
+        $items = Item::all();
+        return view('transaksi.pembelian.pembelian_create', compact('suppliers', 'items'));
     }
 
     /**

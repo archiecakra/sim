@@ -25,10 +25,23 @@
               <thead>
                 <tr>
                   <th class="align-middle" scope="col">#</th>
-                  <th class="align-middle" scope="col">#</th>
+                  <th class="align-middle" scope="col">Kode Transaksi</th>
+                  <th class="align-middle" scope="col">Supplier</th>
+                  <th class="align-middle" scope="col">Total Pembelian</th>
+                  <th class="align-middle" scope="col">Tanggal Pembelian</th>
+                  <th class="align-middle" scope="col">Aksi</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <tr>
+                  <td scope="row" class="align-middle"></td>
+                  <td class="align-middle"></td>
+                  <td class="align-middle"></td>
+                  <td class="align-middle"></td>
+                  <td class="align-middle"></td>
+                  <td class="align-middle"></td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <!-- /.card-body -->
