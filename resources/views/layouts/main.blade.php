@@ -219,5 +219,24 @@
   <script src="{{ url('/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ url('/js/demo.js') }}"></script>
+  <!-- my custom script -->
+  <script>
+    let row_number = 1;
+    $("#add_row").click(function(e){
+      e.preventDefault();
+      let new_row_number = row_number - 1;
+      $('#item' + row_number).html($('#item' + new_row_number).html()).find('td:first-child');
+      $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
+      row_number++;
+    });
+
+    $("#delete_row").click(function(e){
+      e.preventDefault();
+      if(row_number > 1){
+        $("#item" + (row_number - 1)).html('');
+        row_number--;
+      }
+    });
+  </script>
   </body>
 </html>

@@ -49,27 +49,32 @@
                 <label for="">Daftar Barang Pembelian</label>
               </div>
               <div class="card-body">
-                <table class="table table-sm bg-light table-striped text-center table-hover" id="table">
+                <table class="table table-bordered table-md tb bg-light table-striped text-center table-hover" id="table">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
                       <th scope="col">Nama Barang</th>
                       <th scope="col">Harga</th>
                       <th scope="col">Jumlah</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td scope="row" class="align-middle">1</td>
+                    <tr id="item0">
                       <td class="align-middle">
-                        <select class="custom-select custom-select-xs" name="supplier_id" id="supplier_id">
+                        <select class="form-control form-control-sm" name="item_id[]" id="item_id">
                           <option value="">--- Pilih Barang ---</option>
                           @foreach ($items as $item)
                           <option value="{{ $item->id }}">{{ $item->nama }}</option>
                           @endforeach
                         </select>
                       </td>
+                      <td class="align-middle">
+                        <input id="harga" name="harga[]" type="text" class="form-control form-control-sm @error('harga') is-invalid @enderror" placeholder="5000" value="">
+                      </td>
+                      <td class="align-middle">
+                        <input type="number" class="form-control form-control-sm @error('jumlah') is-invalid @enderror" id="jumlah" name="jumlah[]" placeholder="1" value="">
+                      </td>
                     </tr>
+                    <tr id="item1"></tr>
                   </tbody>
                 </table>
               </div>
