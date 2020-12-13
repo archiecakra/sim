@@ -35,16 +35,12 @@
               <thead class="thead-dark">
                 <tr>
                   <th class="align-middle" scope="col">#</th>
-                  <th class="align-middle" scope="col">Kode Barang</th>
                   <th class="align-middle" scope="col">Nama Barang</th>
                   <th class="align-middle" scope="col">Kategori</th>
-                  <th class="align-middle" scope="col">Sub Kategori</th>
-                  <th class="align-middle" scope="col">Merk</th>
                   <th class="align-middle" scope="col">Harga Jual</th>
                   <th class="align-middle" scope="col">Harga Beli</th>
                   <th class="align-middle" scope="col">Stok</th>
                   <th class="align-middle" scope="col">Satuan</th>
-                  <th class="align-middle" scope="col">expiry</th>
                   <th class="align-middle" scope="col" style="width: 15%;">Gambar</th>
                   <th class="align-middle" scope="col">Aksi</th>
                 </tr>
@@ -53,16 +49,12 @@
                 @foreach ($items as $item)
                 <tr>
                   <td scope="row" class="align-middle">{{ $loop->iteration }}</td>
-                  <td class="align-middle">{{ $item->id }}</td>
                   <td class="align-middle">{{ $item->nama }}</td>
-                  <td class="align-middle">{{ $item->kategori }}</td>
-                  <td class="align-middle">{{ $item->sub_kategori }}</td>
-                  <td class="align-middle">{{ $item->merk }}</td>
-                  <td class="align-middle">Rp. {{ $item->harga }},00</td>
+                  <td class="align-middle">{{ $item->category->nama }}</td>
                   <td class="align-middle">Rp. {{ $item->harga_beli }},00</td>
+                  <td class="align-middle">Rp. {{ $item->harga_jual }},00</td>
                   <td class="align-middle">{{ $item->stok }}</td>
-                  <td class="align-middle">{{ $item->satuan }}</td>
-                  <td class="align-middle text-nowrap">{{ $item->expired_at }}</td>
+                  <td class="align-middle">{{ $item->unit->nama }}</td>
                   <td class="align-middle"><img src="{{ url('/'.$item->gambar) }}" class="img-thumbnail" alt="{{ $item->nama }}"></td>
                   <td class="align-middle">
                     <a class="btn btn-primary btn-xs" href="{{ url('/items/'.$item->id.'/edit') }}"><i class="fas fa-md fa-edit"></i></a>
@@ -78,9 +70,9 @@
             </table>
           </div>
           <!-- /.card-body -->
-          <div class="card-footer">
+          {{-- <div class="card-footer">
             Footer
-          </div>
+          </div> --}}
           <!-- /.card-footer-->
         </div>
         <!-- /.card -->

@@ -109,7 +109,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?php echo e(url('/transaction/purchase')); ?>" class="nav-link">
+                    <a href="<?php echo e(url('/items/units/')); ?>" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Satuan</p>
                     </a>
@@ -203,7 +203,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="<?php echo e(url('/items')); ?>" class="nav-link">
+                    <a href="<?php echo e(url('/suppliers/create')); ?>" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Supplier</p>
                     </a>

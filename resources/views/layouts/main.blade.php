@@ -108,7 +108,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/transaction/purchase') }}" class="nav-link">
+                    <a href="{{ url('/items/units/') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Satuan</p>
                     </a>
@@ -202,7 +202,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/items') }}" class="nav-link">
+                    <a href="{{ url('/suppliers/create') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Supplier</p>
                     </a>

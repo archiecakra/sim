@@ -10,8 +10,13 @@ class Item extends Model
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function suppliers()
+    public function category()
     {
-        return $this->belongsToMany('Supplier');
+        return $this->belongsTo(Category::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
     }
 }

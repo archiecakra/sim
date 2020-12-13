@@ -16,16 +16,16 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('kategori');
-            $table->string('sub_kategori');
-            $table->string('merk');
-            $table->string('satuan');
-            $table->integer('harga');
+            $table->foreignId('category_id')->nullable();
+            $table->foreignId('unit_id')->nullable();
             $table->integer('harga_beli');
+            $table->integer('harga_jual');
             $table->integer('stok');
-            $table->date('expired_at');
             $table->string('gambar');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('set null');
         });
     }
 

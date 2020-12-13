@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -20,7 +22,7 @@ class ItemsController extends Controller
     public function index()
     {
         $items = Item::all();
-        return view('data/stok/stok_index', ['items' => $items]);
+        return view('stok/barang/barang_index', ['items' => $items]);
     }
 
     /**
@@ -30,7 +32,9 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        return view('data/stok/stok_create');
+        $categories = Category::all();
+        $units = Unit::all();
+        return view('stok/barang/barang_create', compact('categories', 'units'));
     }
 
     /**
@@ -43,14 +47,11 @@ class ItemsController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'kategori' => 'required',
-            'sub_kategori' => 'required',
-            'merk' => 'required',
-            'satuan' => 'required',
-            'harga' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'unit_id' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
             'harga_beli' => 'required|numeric',
             'stok' => 'required|numeric',
-            'expired_at' => 'required|date',
             'gambar' => 'required|image'
         ]);
 
@@ -58,14 +59,11 @@ class ItemsController extends Controller
 
         Item::create([
             'nama' => $request->nama,
-            'kategori' => $request->kategori,
-            'sub_kategori' => $request->sub_kategori,
-            'merk' => $request->merk,
-            'satuan' => $request->satuan,
-            'harga' => $request->harga,
+            'category_id' => $request->category_id,
+            'unit_id' => $request->unit_id,
+            'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
             'stok' => $request->stok,
-            'expired_at' => $request->expired_at,
             'gambar' => $request->gambar->storeAs('gambar', $namaGambar)
         ]);
 
@@ -91,7 +89,7 @@ class ItemsController extends Controller
      */
     public function edit(Item $item)
     {
-        return view('data/stok/stok_edit', ['item' => $item]);
+        return view('stok/barang/barang_edit', ['item' => $item]);
     }
 
     /**
@@ -113,14 +111,11 @@ class ItemsController extends Controller
         Item::where('id', $item->id)
             ->update([
                 'nama' => $request->nama,
-                'kategori' => $request->kategori,
-                'sub_kategori' => $request->sub_kategori,
-                'merk' => $request->merk,
-                'satuan' => $request->satuan,
-                'harga' => $request->harga,
+                'category_id' => $request->category_id,
+                'unit_id' => $request->unit_id,
+                'harga_jual' => $request->harga_jual,
                 'harga_beli' => $request->harga_beli,
                 'stok' => $request->stok,
-                'expired_at' => $request->expired_at,
                 'gambar' => $gambar
             ]);
         return redirect('/items')->with('message', 'Data Barang Berhasil Diubah');

@@ -88,6 +88,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         Category::destroy($category->id);
-        return redirect('/items/categories')->with('message', 'Kategori Berhasil Dihapus');
+        return redirect('/items/categories')->with('message', 'Kategori '.$category->nama.' Berhasil Dihapus');
     }
 }

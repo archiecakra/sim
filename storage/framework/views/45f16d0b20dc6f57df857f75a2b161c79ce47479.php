@@ -1,13 +1,13 @@
-@extends('layouts/main')
 
-@section('title', 'Data Stok Gudang')
 
-@section('breadcrumb')
+<?php $__env->startSection('title', 'Data Stok Gudang'); ?>
+
+<?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 <li class="breadcrumb-item"><a href="#">Data Stok</a></li>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Main content -->
 <section class="content">
 
@@ -15,20 +15,20 @@
     <div class="row">
       <div class="col-12">
         <!-- Default box -->
-        @if (session('message'))
+        <?php if(session('message')): ?>
           <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <strong>{{ session('message') }}</strong>
+            <strong><?php echo e(session('message')); ?></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        @endif
+        <?php endif; ?>
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Daftar Stok Gudang</h3>
 
-            <a href="{{ url('/items/create') }}" class="btn btn-primary float-right text-white">Tambah Barang</a>
+            <a href="<?php echo e(url('/items/create')); ?>" class="btn btn-primary float-right text-white">Tambah Barang</a>
           </div>
           <div class="card-body">
             <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
@@ -50,30 +50,30 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($items as $item)
+                <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                  <td scope="row" class="align-middle">{{ $loop->iteration }}</td>
-                  <td class="align-middle">{{ $item->id }}</td>
-                  <td class="align-middle">{{ $item->nama }}</td>
-                  <td class="align-middle">{{ $item->kategori }}</td>
-                  <td class="align-middle">{{ $item->sub_kategori }}</td>
-                  <td class="align-middle">{{ $item->merk }}</td>
-                  <td class="align-middle">Rp. {{ $item->harga }},00</td>
-                  <td class="align-middle">Rp. {{ $item->harga_beli }},00</td>
-                  <td class="align-middle">{{ $item->stok }}</td>
-                  <td class="align-middle">{{ $item->satuan }}</td>
-                  <td class="align-middle text-nowrap">{{ $item->expired_at }}</td>
-                  <td class="align-middle"><img src="{{ url('/'.$item->gambar) }}" class="img-thumbnail" alt="{{ $item->nama }}"></td>
+                  <td scope="row" class="align-middle"><?php echo e($loop->iteration); ?></td>
+                  <td class="align-middle"><?php echo e($item->id); ?></td>
+                  <td class="align-middle"><?php echo e($item->nama); ?></td>
+                  <td class="align-middle"><?php echo e($item->kategori); ?></td>
+                  <td class="align-middle"><?php echo e($item->sub_kategori); ?></td>
+                  <td class="align-middle"><?php echo e($item->merk); ?></td>
+                  <td class="align-middle">Rp. <?php echo e($item->harga); ?>,00</td>
+                  <td class="align-middle">Rp. <?php echo e($item->harga_beli); ?>,00</td>
+                  <td class="align-middle"><?php echo e($item->stok); ?></td>
+                  <td class="align-middle"><?php echo e($item->satuan); ?></td>
+                  <td class="align-middle text-nowrap"><?php echo e($item->expired_at); ?></td>
+                  <td class="align-middle"><img src="<?php echo e(url('/'.$item->gambar)); ?>" class="img-thumbnail" alt="<?php echo e($item->nama); ?>"></td>
                   <td class="align-middle">
-                    <a class="btn btn-primary btn-xs" href="{{ url('/items/'.$item->id.'/edit') }}"><i class="fas fa-md fa-edit"></i></a>
-                    <form action="{{ url('/items/'.$item->id) }}" method="POST">
-                      @method('delete')
-                      @csrf
+                    <a class="btn btn-primary btn-xs" href="<?php echo e(url('/items/'.$item->id.'/edit')); ?>"><i class="fas fa-md fa-edit"></i></a>
+                    <form action="<?php echo e(url('/items/'.$item->id)); ?>" method="POST">
+                      <?php echo method_field('delete'); ?>
+                      <?php echo csrf_field(); ?>
                       <button class="btn btn-danger btn-xs"><i class="fas fa-md fa-trash-alt"></i></button>
                     </form>
                   </td>
                 </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </tbody>
             </table>
           </div>
@@ -89,4 +89,5 @@
   </div>
 </section>
 <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts/main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sim\resources\views/data/stok/stok_index.blade.php ENDPATH**/ ?>

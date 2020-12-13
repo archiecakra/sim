@@ -14,7 +14,8 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        $units = Unit::all();
+        return view('stok.barang.satuan.satuan_index', compact('units'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('stok.barang.satuan.satuan_create');
     }
 
     /**
@@ -35,7 +36,12 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        Unit::create($request->all());
+        return redirect('/items/units')->with('message', 'Satuan '.$request->nama.' Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +63,7 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        //
+        return view('stok.barang.satuan.satuan_edit', compact('unit'));
     }
 
     /**
@@ -69,7 +75,8 @@ class UnitController extends Controller
      */
     public function update(Request $request, Unit $unit)
     {
-        //
+        Unit::where('id', $unit->id)->update($request->except(['_token', '_method' ]));
+        return redirect('/items/units')->with('message', 'Satuan Berhasil Diubah');
     }
 
     /**
@@ -80,6 +87,7 @@ class UnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        Unit::destroy($unit->id);
+        return redirect('/items/units')->with('message', 'Satuan '.$unit->nama.' Berhasil Dihapus');
     }
 }
