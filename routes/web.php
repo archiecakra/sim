@@ -10,6 +10,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,16 +32,12 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 //Transaksi Pembelian Barang
 Route::resource('/transaction/purchase', PurchaseController::class);
+Route::resource('/transaction/sales', PurchaseController::class);
 
-//Stok Barang Routes
-// Route::get('/items', [ItemsController::class, 'index']);
-// Route::get('/items/create', [ItemsController::class, 'create']);
-// Route::get('/items/{item}', [ItemsController::class, 'show']);
-// Route::post('/items', [ItemsController::class, 'store']);
-// Route::delete('/items/{item}', [ItemsController::class, 'destroy']);
-// Route::get('/items/{item}/edit', [ItemsController::class, 'edit']);
-// Route::patch('/items/{item}', [ItemsController::class, 'update']);
-Route::resource('items', ItemsController::class);
+//Barang Routes
+Route::resource('/items/categories', CategoryController::class);
+Route::resource('/items/units', UnitController::class);
+Route::resource('/items', ItemsController::class);
 
 //Data Pengguna Routes
 Route::get('/users', [UserController::class, 'index']);
