@@ -30,7 +30,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                   </div>
-                <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Sunlight 50 gr" value="{{ $item->nama }}">
+                <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Buku Tulis Sidu 58 Lembar" value="{{ $item->nama }}">
                   @error('nama')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -39,62 +39,37 @@
               <div class="row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="merk">Merk</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                      </div>
-                      <input type="text" class="form-control form-control-sm @error('merk') is-invalid @enderror" id="merk" name="merk" placeholder="Sunlight 50 gr" value="{{ $item->merk }}">
-                      @error('merk')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="kategori">Kategori</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                      </div>
-                      <input type="text" class="form-control form-control-sm @error('kategori') is-invalid @enderror" id="kategori" name="kategori" placeholder="Sunlight 50 gr" value="{{ $item->kategori }}">
-                      @error('kategori')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="sub_kategori">Sub-Kategori</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                      </div>
-                      <input type="text" class="form-control form-control-sm @error('sub_kategori') is-invalid @enderror" id="sub_kategori" name="sub_kategori" placeholder="Sunlight 50 gr" value="{{ $item->sub_kategori }}">
-                      @error('sub_kategori')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-2">
-                  <div class="form-group">
-                    <label for="stok">Stok</label>
-                    <input type="text" class="form-control form-control-sm @error('stok') is-invalid @enderror" id="stok" name="stok" placeholder="23" value="{{ $item->stok }}">
-                    @error('stok')
+                    <label for="category_id">Kategori</label>
+                    <select name="category_id" id="category_id" class="form-control form-control-sm @error('category_id') is-invalid @enderror">
+                      @foreach ($categories as $category)
+                      <option value="{{ $category->id }}" @if ($category->id==$item->category_id) selected @endif>{{ $category->nama }}</option>
+                      @endforeach
+                    </select>
+                    @error('category_id')
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
                 </div>
-                <div class="col-2">
+                <div class="col">
                   <div class="form-group">
-                    <label for="satuan">Satuan</label>
-                    <input type="text" class="form-control form-control-sm @error('satuan') is-invalid @enderror" id="satuan" name="satuan" placeholder="23" value="{{ $item->satuan }}">
-                    @error('satuan')
+                    <label for="unit_id">Satuan</label>
+                    <select name="unit_id" id="unit_id" class="form-control form-control-sm @error('unit_id') is-invalid @enderror">
+                      @foreach ($units as $unit)
+                      <option value="{{ $unit->id }}" @if ($unit->id==$item->unit_id) selected @endif>{{ $unit->nama }}</option>
+                      @endforeach
+                    </select>
+                    @error('unit_id')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-4">
+                  <div class="form-group">
+                    <label for="stok">Stok</label>
+                    <input type="text" class="form-control form-control-sm @error('stok') is-invalid @enderror" id="stok" name="stok" placeholder="23" value="{{ $item->stok }}">
+                    @error('stok')
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
@@ -115,43 +90,25 @@
                 </div>
                 <div class="col-4">
                   <div class="form-group">
-                    <label for="harga">Harga Jual</label>
+                    <label for="harga_jual">Harga Jual</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas">Rp.</i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm @error('harga') is-invalid @enderror" id="harga" name="harga" placeholder="50000" value="{{ $item->harga }}">
-                      @error('harga')
+                      <input type="text" class="form-control form-control-sm @error('harga_jual') is-invalid @enderror" id="harga_jual" name="harga_jual" placeholder="50000" value="{{ $item->harga_jual }}">
+                      @error('harga_jual')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col">
-                  <div class="form-group">
-                    <label for="expired_at">Tanggal Expired</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                      </div>
-                      <input type="text" class="form-control form-control-sm @error('expired_at') is-invalid @enderror" id="expired_at" name="expired_at" placeholder="Sunlight 50 gr" value="{{ $item->expired_at }}">
-                      @error('expired_at')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <label for="gambar">Gambar Barang</label>
-                    <input type="file" class="form-control-file @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
-                    @error('gambar')
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="gambar">Gambar Barang</label>
+                <input type="file" class="form-control-file @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                @error('gambar')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
             
           </div>

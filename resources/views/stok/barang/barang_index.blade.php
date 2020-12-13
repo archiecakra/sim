@@ -50,11 +50,19 @@
                 <tr>
                   <td scope="row" class="align-middle">{{ $loop->iteration }}</td>
                   <td class="align-middle">{{ $item->nama }}</td>
-                  <td class="align-middle">{{ $item->category->nama }}</td>
+                  @if ($item->category_id==NULL)
+                    <td class="align-middle">-</td>
+                  @else
+                    <td class="align-middle">{{ $item->category->nama }}</td>
+                  @endif
                   <td class="align-middle">Rp. {{ $item->harga_beli }},00</td>
                   <td class="align-middle">Rp. {{ $item->harga_jual }},00</td>
                   <td class="align-middle">{{ $item->stok }}</td>
-                  <td class="align-middle">{{ $item->unit->nama }}</td>
+                  @if ($item->unit_id==NULL)
+                    <td class="align-middle">-</td>
+                  @else
+                    <td class="align-middle">{{ $item->unit->nama }}</td>
+                  @endif
                   <td class="align-middle"><img src="{{ url('/'.$item->gambar) }}" class="img-thumbnail" alt="{{ $item->nama }}"></td>
                   <td class="align-middle">
                     <a class="btn btn-primary btn-xs" href="{{ url('/items/'.$item->id.'/edit') }}"><i class="fas fa-md fa-edit"></i></a>

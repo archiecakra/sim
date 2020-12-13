@@ -89,7 +89,9 @@ class ItemsController extends Controller
      */
     public function edit(Item $item)
     {
-        return view('stok/barang/barang_edit', ['item' => $item]);
+        $categories = Category::all();
+        $units = Unit::all();
+        return view('stok/barang/barang_edit', compact('categories', 'units', 'item'));
     }
 
     /**
