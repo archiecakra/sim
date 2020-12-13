@@ -31,10 +31,12 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 //Transaksi Pembelian Barang
-Route::resource('/transaction/purchase', PurchaseController::class);
 Route::resource('/transaction/sales', PurchaseController::class);
 
-//Barang Routes
+//Stok Routes
+//Pembelian Barang
+Route::resource('/items/purchases', PurchaseController::class);
+//Barang
 Route::resource('/items/categories', CategoryController::class);
 Route::resource('/items/units', UnitController::class);
 Route::resource('/items', ItemsController::class);

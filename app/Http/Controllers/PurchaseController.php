@@ -16,7 +16,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return view('transaksi.pembelian.pembelian_index');
+        return view('stok.pembelian.pembelian_index');
     }
 
     /**
@@ -28,7 +28,7 @@ class PurchaseController extends Controller
     {
         $suppliers = Supplier::all();
         $items = Item::all();
-        return view('transaksi.pembelian.pembelian_create', compact('suppliers', 'items'));
+        return view('stok.pembelian.pembelian_create', compact('suppliers', 'items'));
     }
 
     /**

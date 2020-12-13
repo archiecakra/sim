@@ -125,21 +125,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/transaction/sales') }}" class="nav-link">
+                    <a href="{{ url('/items/purchases/create') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Pembelian</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/transaction/purchase') }}" class="nav-link">
+                    <a href="{{ url('/items/purchases') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pembelian</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/transaction/purchase') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Kategori</p>
                     </a>
                   </li>
                 </ul>
