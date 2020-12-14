@@ -390,11 +390,26 @@
       }
     });
 
-    $("#item_id").change(function(){
-      // var harga = $(this).data("harga");
-      var harga = $(this).find(':selected').data('harga')
-      alert(harga);
+    $(document).on('change', 'select.item', function(){
+      var jumlah = '';
+      var harga = $(this).find(':selected').data('harga');
+      
+      $(document).on('change', 'input.jumlah', function(){
+        var jumlah = $(this).val();
+      });
+      alert(harga*jumlah);
     });
+
+    // $(".item").change(function(){
+    //   // var harga = $(this).data("harga");
+    //   var harga = $(this).find(':selected').data('harga')
+    //   alert(harga);
+    // });
+
+    // $(document).change('select.item', function () {
+    //   var harga = $(this).find(':selected').data('harga')
+    //   alert(harga);
+    // });
   </script>
   </body>
 </html>
