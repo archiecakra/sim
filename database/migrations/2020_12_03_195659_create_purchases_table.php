@@ -22,8 +22,8 @@ class CreatePurchasesTable extends Migration
             $table->string('keterangan');
             $table->timestamps();
 
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
-            $table->foreign('purchase_detail_id')->references('id')->on('purchase_details');
+            // $table->foreign('supplier_id')->references('id')->on('suppliers');
+            // $table->foreign('purchase_detail_id')->references('id')->on('purchase_details');
         });
     }
 

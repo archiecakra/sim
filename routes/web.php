@@ -30,9 +30,6 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 //Dashboard Route
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
-//Transaksi Pembelian Barang
-Route::resource('/transaction/sales', PurchaseController::class);
-
 //Stok Routes
 //Pembelian Barang
 Route::resource('/items/purchases', PurchaseController::class);
