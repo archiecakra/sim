@@ -9,6 +9,7 @@ use Hash;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Unit;
+use App\Models\Supplier;
 
 class StartingSeeder extends Seeder
 {
@@ -58,6 +59,15 @@ class StartingSeeder extends Seeder
         foreach ($units as $unit) {
             # code...
             Unit::create($unit);
+        }
+
+        $suppliers =([
+            ['nama' => 'CV. Artha Mandiri'], ['nama' => 'PT. Mandiri Prima'], ['nama' => 'PT. Bangun Sejahtera'], ['nama' => 'PT. Digi'],
+        ]);
+
+        foreach ($suppliers as $supplier) {
+            # code...
+            Supplier::create($supplier);
         }
     }
 }
