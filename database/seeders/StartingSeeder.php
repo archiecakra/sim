@@ -34,7 +34,7 @@ class StartingSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@admin.com',
                 'phone' => '081331818699',
-                'password' => Hash::make('admin')
+                'password' => Hash::make('123')
             ]
         ]);
         
