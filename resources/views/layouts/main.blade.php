@@ -373,7 +373,10 @@
   <script src="{{ url('/js/demo.js') }}"></script>
   <!-- my custom script -->
   <script>
+    var jumlah = '';
+    var harga = '';
     let row_number = 1;
+    
     $("#add_row").click(function(e){
       e.preventDefault();
       let new_row_number = row_number - 1;
@@ -391,13 +394,15 @@
     });
 
     $(document).on('change', 'select.item', function(){
-      var jumlah = '';
-      var harga = $(this).find(':selected').data('harga');
-      
-      $(document).on('change', 'input.jumlah', function(){
-        var jumlah = $(this).val();
-      });
-      alert(harga*jumlah);
+
+      window.harga = $(this).find(':selected').data('harga');
+      alert(harga);
+      $(this).nextAll('input').removeAttr('disabled');
+    });
+
+    $(document).on('change', 'input.jumlah', function(){
+      window.jumlah = $(this).val();
+      alert(jumlah);
     });
 
     // $(".item").change(function(){

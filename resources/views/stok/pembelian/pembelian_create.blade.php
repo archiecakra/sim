@@ -68,7 +68,7 @@
                         </select>
                       </td>
                       <td class="align-middle">
-                        <input type="number" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" placeholder="1">
+                        <input type="number" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" placeholder="1" disabled>
                       </td>
                       <td class="align-middle">
                         <input type="number" class="form-control form-control-sm total">
