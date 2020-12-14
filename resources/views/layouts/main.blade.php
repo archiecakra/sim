@@ -389,6 +389,12 @@
         row_number--;
       }
     });
+
+    $("#item_id").change(function(){
+      // var harga = $(this).data("harga");
+      var harga = $(this).find(':selected').data('harga')
+      alert(harga);
+    });
   </script>
   </body>
 </html>

@@ -63,12 +63,12 @@
                         <select class="form-control form-control-sm" name="item_id[]" id="item_id">
                           <option value="">--- Pilih Barang ---</option>
                           @foreach ($items as $item)
-                          <option value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_beli.' /'.$item->unit->nama }}</option>
+                          <option data-harga="{{ $item->harga_beli }}" value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_beli.' /'.$item->unit->nama }}</option>
                           @endforeach
                         </select>
                       </td>
                       <td class="align-middle">
-                        <input type="number" class="form-control form-control-sm @error('jumlah') is-invalid @enderror" id="jumlah" name="jumlah[]" placeholder="1" value="">
+                        <input type="number" class="form-control form-control-sm @error('jumlah') is-invalid @enderror" id="jumlah" name="jumlah[]" placeholder="1">
                       </td>
                       <td class="align-middle">
                         <input type="number" class="form-control form-control-sm">
