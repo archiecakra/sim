@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Purchase;
-use App\Models\Item;
-use App\Models\Supplier;
 use Illuminate\Http\Request;
+
+use App\Models\Item;
+use App\Models\Purchase;
+use App\Models\PurchaseDetail;
+use App\Models\Supplier;
 
 class PurchaseController extends Controller
 {
@@ -39,7 +41,30 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $count = Purchase::all()->count();
+        $items = $request->input('item_id');
+        $jumlah = $request->input('jumlah');
+        Purchase::create([
+            'kode_pembelian' => 'PRC'.$count,
+            'supplier_id' => $request->supplier_id,
+            'total_bayar' => $request->total_bayar,
+        ])->purchaseDetail()->create([
+            'purchase_id' => $count,
+        ])->items()->attach(
+            $items,
+            $jumlah,
+        );
+        // PurchaseDetail::create([
+        //     'purchase_id' => $count,
+        // ]);
+        // $pdetail = PurchaseDetail::create($request->except('_token'));
+        // $items = $request->input('item_id', []);
+        // $jumlah = $request->input('jumlah', []);
+        // for ($iteration=0; $iteration < count($items); $iteration++) {
+        //     if ($items[$iteration] != '') {
+        //         $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
+        //     }
+        // }
     }
 
     /**

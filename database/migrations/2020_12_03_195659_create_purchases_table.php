@@ -17,13 +17,11 @@ class CreatePurchasesTable extends Migration
             $table->id();
             $table->char('kode_pembelian', '9');
             $table->foreignId('supplier_id');
-            $table->foreignId('purchase_detail_id');
-            $table->integer('total_bayar');
-            $table->string('keterangan');
+            $table->integer('total_bayar')->nullable($value = true);
+            $table->string('keterangan')->nullable($value = true);
             $table->timestamps();
 
-            // $table->foreign('supplier_id')->references('id')->on('suppliers');
-            // $table->foreign('purchase_detail_id')->references('id')->on('purchase_details');
+            $table->foreign('supplier_id')->references('id')->on('suppliers');
         });
     }
 

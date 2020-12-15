@@ -17,18 +17,19 @@ class CreatePurchaseDetailsTable extends Migration
             $table->id();
             $table->foreignId('purchase_id');
             $table->timestamps();
+
+            $table->foreign('purchase_id')->references('id')->on('purchases');
         });
 
         //Membuat constraint table purchases
-        Schema::table('purchases', function (Blueprint $table) {
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
-            $table->foreign('purchase_detail_id')->references('id')->on('purchase_details');
-        });
+        // Schema::table('purchases', function (Blueprint $table) {
+        //     $table->foreign('supplier_id')->references('id')->on('suppliers');
+        // });
 
         //Membuat constraint table purchase_details
-        Schema::table('purchase_details', function (Blueprint $table) {
-            $table->foreign('purchase_id')->references('id')->on('purchases');
-        });
+        // Schema::table('purchase_details', function (Blueprint $table) {
+        //     $table->foreign('purchase_id')->references('id')->on('purchases');
+        // });
     }
 
     /**
