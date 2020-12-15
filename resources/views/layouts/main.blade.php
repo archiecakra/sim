@@ -7,15 +7,14 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ url('/css/fa.all.min.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/fa.all.min.css') }}">
     <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ url('/css/OverlayScrollbars.min.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/OverlayScrollbars.min.css') }}">
     <!-- Theme style -->
-  <link rel="stylesheet" href="{{ url('/css/adminlte.min.css') }}">
-  <link rel="stylesheet" href="{{ url('/css/sim.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/sim.css') }}">
     <!-- Google Font: Source Sans Pro -->
-  <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
-  {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
+    <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
   <!-- Site wrapper -->

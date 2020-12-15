@@ -16,6 +16,7 @@ class CreateItemPurchaseDetailTable extends Migration
         Schema::create('item_purchase_detail', function (Blueprint $table) {
             $table->foreignId('item_id');
             $table->foreignId('purchase_detail_id');
+            $table->integer('jumlah');
             $table->timestamps();
 
             $table->foreign('item_id')->references('id')->on('items');
