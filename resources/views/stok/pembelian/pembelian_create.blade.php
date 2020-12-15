@@ -47,6 +47,8 @@
             <div class="card">
               <div class="card-header">
                 <label for="">Daftar Barang Pembelian</label>
+                <button id="add_row" class="btn btn-primary float-right btn-sm"><i class="fa fa-plus"></i></button>
+                <button id='delete_row' class="float-right btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
               </div>
               <div class="card-body">
                 <table class="table table-bordered table-md tb bg-light table-striped text-center table-hover" id="table">
@@ -71,7 +73,12 @@
                         <input type="number" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" placeholder="1" disabled>
                       </td>
                       <td class="align-middle">
-                        <input type="number" class="form-control form-control-sm total">
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Rp.</span>
+                          </div>
+                          <input type="number" class="form-control form-control-sm total" placeholder="0" disabled>
+                        </div>
                       </td>
                     </tr>
                     <tr id="item1"></tr>
@@ -79,8 +86,14 @@
                 </table>
               </div>
               <div class="card-footer">
-                <button id="add_row" class="btn btn-primary float-left btn-xs">+ Tambah Baris</button>
-                <button id='delete_row' class="float-right btn btn-danger btn-xs">- Hapus Baris</button>
+                <div id="grand-total" class="float-right">
+                  <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Total Pembelian</span><span class="input-group-text">Rp. </span>
+                    </div>
+                    <input id="total_bayar" name="total_bayar" type="number" class="form-control" value="0" readonly>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -96,4 +109,47 @@
   </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+<script>
+  var jumlah = '';
+  var harga = '';
+  let row_number = 1;
+  
+  $("#add_row").click(function(e){
+    e.preventDefault();
+    let new_row_number = row_number - 1;
+    $('#item' + row_number).html($('#item' + new_row_number).html()).find('td:first-child');
+    $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
+    row_number++;
+    $('input.jumlah').eq(row_number-1).attr('disabled', true);
+  });
+
+  $("#delete_row").click(function(e){
+    e.preventDefault();
+    if(row_number > 1){
+      $("#item" + (row_number - 1)).html('');
+      row_number--;
+    }
+  });
+
+  $(document).on('change', 'select.item', function(){
+    let idx = $(this).index('select.item');
+    window.harga = $(this).find(':selected').data('harga');
+    $('.jumlah').eq(idx).removeAttr('disabled');
+  });
+
+  $(document).on('change', 'input.jumlah', function(){
+    var sum = 0;
+    let idx = $(this).index('input.jumlah');
+    window.jumlah = $(this).val();
+    $('.total').eq(idx).val(jumlah*harga);
+    $('.total').each(function() {
+        sum += 1*($(this).val());
+    });
+    $('#total_bayar').val(sum);
+  });
+
+</script>
 @endsection

@@ -372,40 +372,6 @@
   <!-- AdminLTE for demo purposes -->
   <script src="{{ url('/js/demo.js') }}"></script>
   <!-- my custom script -->
-  <script>
-    var jumlah = '';
-    var harga = '';
-    let row_number = 1;
-    
-    $("#add_row").click(function(e){
-      e.preventDefault();
-      let new_row_number = row_number - 1;
-      $('#item' + row_number).html($('#item' + new_row_number).html()).find('td:first-child');
-      $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
-      row_number++;
-      alert(row_number);
-      $('input.jumlah').eq(row_number-1).attr('disabled', true);
-    });
-
-    $("#delete_row").click(function(e){
-      e.preventDefault();
-      if(row_number > 1){
-        $("#item" + (row_number - 1)).html('');
-        row_number--;
-      }
-    });
-
-    $(document).on('change', 'select.item', function(){
-
-      window.harga = $(this).find(':selected').data('harga');
-      let idx = $(this).index('select.item');
-      $('.jumlah').eq(idx).removeAttr('disabled');
-    });
-
-    $(document).on('change', 'input.jumlah', function(){
-      window.jumlah = $(this).val();
-    });
-
-  </script>
+  @yield('js')
   </body>
 </html>
