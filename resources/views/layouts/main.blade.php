@@ -383,6 +383,8 @@
       $('#item' + row_number).html($('#item' + new_row_number).html()).find('td:first-child');
       $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
       row_number++;
+      alert(row_number);
+      $('input.jumlah').eq(row_number-1).attr('disabled', true);
     });
 
     $("#delete_row").click(function(e){
@@ -396,25 +398,14 @@
     $(document).on('change', 'select.item', function(){
 
       window.harga = $(this).find(':selected').data('harga');
-      alert(harga);
-      $(this).nextAll('input').removeAttr('disabled');
+      let idx = $(this).index('select.item');
+      $('.jumlah').eq(idx).removeAttr('disabled');
     });
 
     $(document).on('change', 'input.jumlah', function(){
       window.jumlah = $(this).val();
-      alert(jumlah);
     });
 
-    // $(".item").change(function(){
-    //   // var harga = $(this).data("harga");
-    //   var harga = $(this).find(':selected').data('harga')
-    //   alert(harga);
-    // });
-
-    // $(document).change('select.item', function () {
-    //   var harga = $(this).find(':selected').data('harga')
-    //   alert(harga);
-    // });
   </script>
   </body>
 </html>
