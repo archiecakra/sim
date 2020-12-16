@@ -32,11 +32,15 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 //Stok Routes
 //Pembelian Barang
-Route::resource('/items/purchases', PurchaseController::class);
+Route::name('purchases')->group(function () {
+    Route::resource('/items/purchases', PurchaseController::class);
+});
 //Barang
-Route::resource('/items/categories', CategoryController::class);
-Route::resource('/items/units', UnitController::class);
-Route::resource('/items', ItemsController::class);
+Route::name('items')->group(function () {
+    Route::resource('/items/categories', CategoryController::class);
+    Route::resource('/items/units', UnitController::class);
+    Route::resource('/items', ItemsController::class);
+});
 
 //Data Pengguna Routes
 Route::get('/users', [UserController::class, 'index']);

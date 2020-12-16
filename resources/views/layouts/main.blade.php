@@ -79,8 +79,8 @@
                 </a>
               </li>
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Stok</h6></li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item has-treeview {{ (request()->is('*items*') && request()->segment(2) != 'purchases') ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*items*') && request()->segment(2) != 'purchases') ? 'active' : ''}}">
                   <i class="nav-icon fas fa-box"></i>
                   <p>
                     Barang
@@ -89,33 +89,33 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/items/create') }}" class="nav-link">
+                    <a href="{{ url('/items/create') }}" class="nav-link {{ request()->is('*items/create') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Barang</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/items') }}" class="nav-link">
+                    <a href="{{ url('/items') }}" class="nav-link {{ request()->is('*items') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Barang</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/items/categories/') }}" class="nav-link">
+                    <a href="{{ url('/items/categories') }}" class="nav-link {{ request()->is('*items/categories') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Kategori</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/items/units/') }}" class="nav-link">
+                    <a href="{{ url('/items/units') }}" class="nav-link {{ request()->is('*items/units') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Satuan</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item has-treeview {{ (request()->is('*purchases*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*purchases*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-gifts"></i>
                   <p>
                     Pembelian Barang
@@ -124,13 +124,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/items/purchases/create') }}" class="nav-link">
+                    <a href="{{ url('/items/purchases/create') }}" class="nav-link {{ request()->is('*items/purchases/create') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Pembelian</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/items/purchases') }}" class="nav-link">
+                    <a href="{{ url('/items/purchases') }}" class="nav-link {{ request()->is('*items/purchases') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pembelian</p>
                     </a>
