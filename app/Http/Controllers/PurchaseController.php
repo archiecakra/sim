@@ -18,7 +18,10 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return view('stok.pembelian.pembelian_index');
+        $purchases = Purchase::with('purchaseDetail.items')->get();
+        // $pdetails = PurchaseDetail::with('items')->get();
+        // dd($purchases);
+        return view('stok.pembelian.pembelian_index', compact('purchases'));
     }
 
     /**

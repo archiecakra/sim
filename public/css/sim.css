@@ -10,6 +10,10 @@
     margin-bottom: 3px;
 }
 
+.product-list {
+    padding-top: 15px;
+}
+
 /* div#grand-total {
     border-radius: 3.5%;
     padding-top: 5px;
