@@ -14,11 +14,19 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
+        @if (session('message'))
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>{{ session('message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endif
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Daftar Transaksi Pembelian</h3>
-            <a href="{{ url('/transaction/purchase/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a>
+            <a href="{{ url('/items/purchases/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a>
           </div>
           <div class="card-body">
             <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">

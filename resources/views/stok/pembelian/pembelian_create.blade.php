@@ -48,7 +48,7 @@
                 </div>
                 <div class="card">
                   <div class="card-header">
-                    <label for="">Daftar Barang Pembelian</label>
+                    <label for="">Detail Pembelian</label>
                     <button id="add_row" class="btn btn-primary float-right btn-sm"><i class="fa fa-plus"></i></button>
                     <button id='delete_row' class="float-right btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
                   </div>
@@ -98,10 +98,18 @@
                     </div>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="keterangan">Keterangan Pembelian</label>
+                  <textarea class="form-control" name="keterangan" id="keterangan" rows="3" placeholder="Silahkan isi keterangan pembelian jika perlu...."></textarea>
+                  @error('keterangan')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <button type="submit" class="btn btn-success btn-md float-right">Submit</button>
+              <a class="btn btn-secondary btn-md" href="{{ url('/items/purchases/') }}">Kembali</a>
+              <button type="submit" class="btn btn-primary btn-md float-right">Submit</button>
             </div>
             <!-- /.card-footer-->
           </div>

@@ -19,4 +19,9 @@ class Item extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function purchaseDetail()
+    {
+        return $this->belongsToMany(PurchaseDetail::class)->withPivot(['jumlah']);
+    }
 }

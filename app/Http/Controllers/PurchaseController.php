@@ -42,29 +42,24 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
         $count = Purchase::all()->count();
-        $items = $request->input('item_id');
-        $jumlah = $request->input('jumlah');
         Purchase::create([
             'kode_pembelian' => 'PRC'.$count,
             'supplier_id' => $request->supplier_id,
             'total_bayar' => $request->total_bayar,
-        ])->purchaseDetail()->create([
-            'purchase_id' => $count,
-        ])->items()->attach(
-            $items,
-            $jumlah,
-        );
-        // PurchaseDetail::create([
-        //     'purchase_id' => $count,
-        // ]);
-        // $pdetail = PurchaseDetail::create($request->except('_token'));
-        // $items = $request->input('item_id', []);
-        // $jumlah = $request->input('jumlah', []);
-        // for ($iteration=0; $iteration < count($items); $iteration++) {
-        //     if ($items[$iteration] != '') {
-        //         $order->products()->attach($products[$product], ['quantity' => $quantities[$product]]);
-        //     }
-        // }
+            'keterangan' => $request->keterangan,
+        ]);
+
+        $purchase = Purchase::latest()->first();
+        $pdetail = PurchaseDetail::create([
+            'purchase_id' => $purchase->id,
+        ]);
+        $items = $request->input('item_id', []);
+        $jumlah = $request->input('jumlah', []);
+        for ($iteration=0; $iteration < count($items); $iteration++) {
+            $pdetail->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+        }
+        
+        return redirect('/items/purchases')->with('message', 'Data Pembelian Berhasil Ditambahkan');
     }
 
     /**

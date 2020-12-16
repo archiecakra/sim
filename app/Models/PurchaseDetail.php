@@ -16,6 +16,6 @@ class PurchaseDetail extends Model
 
     public function items()
     {
-        return $this->belongsToMany(Item::class)->withPivot(['jumlah']);
+        return $this->belongsToMany(Item::class)->withTimestamps();
     }
 }

@@ -371,6 +371,9 @@
   <!-- AdminLTE for demo purposes -->
   <script src="{{ url('/js/demo.js') }}"></script>
   <!-- my custom script -->
+  <script>
+    $('.alert').delay(1000).fadeOut(1000);
+  </script>
   @yield('js')
   </body>
 </html>
