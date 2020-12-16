@@ -18,7 +18,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::with('purchaseDetail.items')->get();
+        $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
         // $pdetails = PurchaseDetail::with('items')->get();
         // dd($purchases);
         return view('stok.pembelian.pembelian_index', compact('purchases'));
@@ -60,6 +60,10 @@ class PurchaseController extends Controller
         $jumlah = $request->input('jumlah', []);
         for ($iteration=0; $iteration < count($items); $iteration++) {
             $pdetail->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+            $detail_stok = $pdetail->items()->where('id', $items[$iteration])->first();
+            $detail_stok->stok += $jumlah[$iteration];
+            $detail_stok->save();
+            // dd($jumlah[$iteration]);
         }
         
         return redirect('/items/purchases')->with('message', 'Data Pembelian Berhasil Ditambahkan');
