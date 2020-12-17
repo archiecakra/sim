@@ -52,7 +52,7 @@
                     <button id="add_row" class="btn btn-primary float-right btn-sm"><i class="fa fa-plus"></i></button>
                     <button id='delete_row' class="float-right btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body table-responsive">
                     <table class="table table-bordered table-md tb bg-light table-striped text-center table-hover" id="table">
                       <thead>
                         <tr>
@@ -132,7 +132,8 @@
   $("#add_row").click(function(e){
     e.preventDefault();
     let new_row_number = row_number - 1;
-    $('#item' + row_number).html($('#item' + new_row_number).html()).find('td:first-child');
+    // $('#item' + row_number).html($('#item' + new_row_number).html());
+    $('#item' + new_row_number).children().clone(true,true).appendTo('#item' + row_number);
     $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
     row_number++;
     $('input.jumlah').eq(row_number-1).attr('disabled', true);
