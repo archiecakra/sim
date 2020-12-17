@@ -29,42 +29,43 @@
             <a href="{{ url('/items/purchases/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a>
           </div>
           <div class="card-body">
-            <table class="table table-sm bg-light table-bordered table-striped text-center table-hover">
-              <thead>
-                <tr>
-                  <th class="align-middle" scope="col">Tanggal Pembelian</th>
-                  <th class="align-middle" scope="col">Kode Transaksi</th>
-                  <th class="align-middle" scope="col">Supplier</th>
-                  <th class="align-middle" scope="col">Barang</th>
-                  <th class="align-middle" scope="col">Total Pembelian</th>
-                  <th class="align-middle" scope="col">Keterangan</th>
-                  <th class="align-middle" scope="col">Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($purchases as $purchase)
+            <div class="table-responsive-md">
+              <table id="datatable" class="table table-sm bg-light table-bordered table-striped text-center table-hover">
+                <thead>
                   <tr>
-                    <td class="align-middle">{{ $purchase->created_at }}</td>
-                    <td class="align-middle">{{ $purchase->kode_pembelian }}</td>
-                    <td class="align-middle text-left">{{ $purchase->supplier->nama }}</td>
-                    <td class="align-middle text-left">
-                      <ul class="product-list">
-                        @foreach ($purchase->purchaseDetail->items as $item)
-                          <li>{{ $item->nama.' @Rp.'.$item->harga_beli.' x '.$item->pivot->jumlah.' '.$item->unit->nama }}</li>
-                        @endforeach
-                      </ul>
-                    </td>
-                    <td class="align-middle">{{ 'Rp. '.$purchase->total_bayar.' ,-' }}</td>
-                    <td class="align-middle text-left">{{ $purchase->keterangan }}</td>
-                    <td class="align-middle"></td>
+                    <th class="align-middle" scope="col">Tanggal Pembelian</th>
+                    <th class="align-middle" scope="col">Kode Transaksi</th>
+                    <th class="align-middle" scope="col">Supplier</th>
+                    <th class="align-middle" scope="col">Barang</th>
+                    <th class="align-middle" scope="col">Total Pembelian</th>
+                    <th class="align-middle" scope="col">Keterangan</th>
+                    <th class="align-middle" scope="col">Aksi</th>
                   </tr>
-                @endforeach
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  @foreach ($purchases as $purchase)
+                    <tr>
+                      <td class="align-middle">{{ $purchase->created_at }}</td>
+                      <td class="align-middle">{{ $purchase->kode_pembelian }}</td>
+                      <td class="align-middle text-left">{{ $purchase->supplier->nama }}</td>
+                      <td class="align-middle text-left">
+                        <ul class="product-list">
+                          @foreach ($purchase->purchaseDetail->items as $item)
+                            <li>{{ $item->nama.' @Rp.'.$item->harga_beli.' x '.$item->pivot->jumlah.' '.$item->unit->nama }}</li>
+                          @endforeach
+                        </ul>
+                      </td>
+                      <td class="align-middle">{{ 'Rp. '.$purchase->total_bayar.' ,-' }}</td>
+                      <td class="align-middle text-left">{{ $purchase->keterangan }}</td>
+                      <td class="align-middle"></td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            Footer
           </div>
           <!-- /.card-footer-->
         </div>

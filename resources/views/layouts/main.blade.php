@@ -13,6 +13,8 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ url('/css/sim.css') }}">
+    <!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/datatables.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
   </head>
@@ -71,7 +73,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
               <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link">
+                <a href="{{ url('/') }}" class="nav-link {{ (request()->is('*dashboard')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-list-alt"></i>
                   <p>
                     Dashboard
@@ -370,11 +372,16 @@
   <script src="{{ url('/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ url('/js/demo.js') }}"></script>
+  <!-- datatables -->
+  <script type="text/javascript" src="{{ url('/js/datatables.min.js') }}"></script>
   <!-- my custom script -->
   <script>
     $('.alert').delay(1000).fadeOut(1000);
     $('.card').hide();
     $('.card').fadeIn(1000);
+    $(document).ready(function() {
+      $('#datatable').DataTable();
+    } );
   </script>
   @yield('js')
   </body>
