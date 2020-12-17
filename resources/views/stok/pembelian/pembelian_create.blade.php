@@ -72,7 +72,7 @@
                             </select>
                           </td>
                           <td class="align-middle">
-                            <input type="number" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" placeholder="1" disabled>
+                            <input type="number" oninput="validity.valid||(value='');" min="0" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" placeholder="1" disabled>
                           </td>
                           <td class="align-middle">
                             <div class="input-group input-group-sm">
@@ -93,7 +93,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">Total Pembelian</span><span class="input-group-text">Rp. </span>
                         </div>
-                        <input id="total_bayar" name="total_bayar" type="number" class="form-control" value="0" readonly>
+                        <input id="total_bayar" name="total_bayar" min="0" type="number" class="form-control" value="0" readonly>
                       </div>
                     </div>
                   </div>
@@ -126,6 +126,7 @@
 <script>
   var jumlah = '';
   var harga = '';
+  var sum = 0;
   let row_number = 1;
   
   $("#add_row").click(function(e){
@@ -149,10 +150,14 @@
     let idx = $(this).index('select.item');
     window.harga = $(this).find(':selected').data('harga');
     $('.jumlah').eq(idx).removeAttr('disabled');
+    $('.total').eq(idx).val(jumlah*harga);
+    $('.total').each(function() {
+        sum += 1*($(this).val());
+    });
+    $('#total_bayar').val(sum);
   });
 
   $(document).on('change', 'input.jumlah', function(){
-    var sum = 0;
     let idx = $(this).index('input.jumlah');
     window.jumlah = $(this).val();
     $('.total').eq(idx).val(jumlah*harga);
