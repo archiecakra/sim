@@ -81,6 +81,8 @@
       </div>
       <!-- ./col -->
     </div>
+    <div class="row">
+    </div>
   </div>
 </section>
 <!-- /.content -->

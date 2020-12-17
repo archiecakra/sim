@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ url('/css/sim.css') }}">
     <!-- datatables -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/datatables.min.css') }}">
+    <!-- select2 BS4 -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/select2-bootstrap4.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
   </head>
@@ -372,6 +375,8 @@
   <script src="{{ url('/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ url('/js/demo.js') }}"></script>
+  <!-- Select2 BS4 -->
+  <script src="{{ url('/js/select2.full.min.js') }}"></script>
   <!-- datatables -->
   <script type="text/javascript" src="{{ url('/js/datatables.min.js') }}"></script>
   <!-- my custom script -->
@@ -382,6 +387,14 @@
     $(document).ready(function() {
       $('#datatable').DataTable();
     } );
+    $('select').select2({
+      theme: 'bootstrap4'
+    });
+    // function initSelect2() {
+    //   $('select').select2({
+    //     theme: 'bootstrap4'
+    //   });
+    // }
   </script>
   @yield('js')
   </body>
