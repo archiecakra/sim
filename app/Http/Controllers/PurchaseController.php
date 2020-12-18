@@ -86,6 +86,9 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
+        // Post::with('user')->with(['favorites' => function($query) {
+        //     $query->where('favorites.user_id', auth()->id);
+        // }])->get();
     }
 
     /**
