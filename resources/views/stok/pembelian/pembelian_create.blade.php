@@ -134,7 +134,6 @@
   $("#add_row").click(function(e){
     e.preventDefault();
     let new_row_number = row_number - 1;
-    // $('#item' + row_number).html($('#item' + new_row_number).html());
     var clone = $('#item0').children().clone(true,true);
     $('#item' + row_number).html('').append(clone);
     $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');

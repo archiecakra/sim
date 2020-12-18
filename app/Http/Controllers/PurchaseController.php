@@ -44,12 +44,12 @@ class PurchaseController extends Controller
     {
         $count = Purchase::all()->count();
         Purchase::create([
-            'kode_pembelian' => 'PRC'.$count,
+            'kode_pembelian' => 'PRC'.sprintf("%04s", $count++),
             'supplier_id' => $request->supplier_id,
             'total_bayar' => $request->total_bayar,
             'keterangan' => $request->keterangan,
         ]);
-
+            
         $purchase = Purchase::latest()->first();
         $pdetail = PurchaseDetail::create([
             'purchase_id' => $purchase->id,
@@ -86,15 +86,6 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        $id = $purchase->id;
-        // dd($id);
-
-        $pdetail = PurchaseDetail::with(['items' => function ($query, $id) {
-            $query->where('id', $id);
-        }])->first();
-
-        
-        return view('stok.pembelian.pembelian_edit', compact('purchase'));
     }
 
     /**
