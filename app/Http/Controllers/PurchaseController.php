@@ -19,8 +19,6 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
-        // $pdetails = PurchaseDetail::with('items')->get();
-        // dd($purchases);
         return view('stok.pembelian.pembelian_index', compact('purchases'));
     }
 
@@ -88,7 +86,15 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        //
+        $id = $purchase->id;
+        // dd($id);
+
+        $pdetail = PurchaseDetail::with(['items' => function ($query, $id) {
+            $query->where('id', $id);
+        }])->first();
+
+        
+        return view('stok.pembelian.pembelian_edit', compact('purchase'));
     }
 
     /**
