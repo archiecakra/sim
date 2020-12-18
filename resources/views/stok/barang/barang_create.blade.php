@@ -39,7 +39,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="category_id">Kategori</label>
-                    <select name="category_id" id="category_id" class="form-control form-control-sm @error('category_id') is-invalid @enderror">
+                    <select name="category_id" id="category_id" class="select2 form-control form-control-sm @error('category_id') is-invalid @enderror">
                       @foreach ($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->nama }}</option>
                       @endforeach
@@ -52,7 +52,7 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="unit_id">Satuan</label>
-                    <select name="unit_id" id="unit_id" class="form-control form-control-sm @error('unit_id') is-invalid @enderror">
+                    <select name="unit_id" id="unit_id" class="select2 form-control form-control-sm @error('unit_id') is-invalid @enderror">
                       @foreach ($units as $unit)
                       <option value="{{ $unit->id }}">{{ $unit->nama }}</option>
                       @endforeach

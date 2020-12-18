@@ -387,7 +387,7 @@
     $(document).ready(function() {
       $('#datatable').DataTable();
     } );
-    $('select').select2({
+    $('.select2').select2({
       theme: 'bootstrap4'
     });
     // function initSelect2() {

@@ -79,15 +79,16 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text">Rp.</span>
                               </div>
-                              <input type="number" class="form-control form-control-sm total" placeholder="0" disabled>
+                              <input type="number" class="form-control form-control-sm total" placeholder="0" value="0" disabled>
                             </div>
                           </td>
                         </tr>
-                        <tr id="item1"></tr>
+                        <tr id="item1"><td colspan="3">Belum ada data, Silahkan tambah baris....</td></tr>
                       </tbody>
                     </table>
                   </div>
                   <div class="card-footer">
+                    <button id="simpan" type="button" class="btn btn-success btn-sm">Simpan</button>
                     <div id="grand-total" class="float-right">
                       <div class="input-group input-group-sm mb-2">
                         <div class="input-group-prepend">
@@ -109,7 +110,7 @@
             <!-- /.card-body -->
             <div class="card-footer">
               <a class="btn btn-secondary btn-md" href="{{ url('/items/purchases/') }}">Kembali</a>
-              <button type="submit" class="btn btn-primary btn-md float-right">Submit</button>
+              <button id="submit" type="submit" class="btn btn-primary btn-md float-right" disabled>Submit</button>
             </div>
             <!-- /.card-footer-->
           </div>
@@ -123,27 +124,34 @@
 @endsection
 
 @section('js')
-<script>
+<script> 
   var jumlah = '';
   var harga = '';
-  var sum = 0;
   let row_number = 1;
+
+  $('#item0').hide();
   
   $("#add_row").click(function(e){
     e.preventDefault();
     let new_row_number = row_number - 1;
     // $('#item' + row_number).html($('#item' + new_row_number).html());
-    $('#item' + new_row_number).children().clone(true,true).appendTo('#item' + row_number);
+    var clone = $('#item0').children().clone(true,true);
+    $('#item' + row_number).html('').append(clone);
     $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
     row_number++;
     $('input.jumlah').eq(row_number-1).attr('disabled', true);
+    $('select.item').eq(row_number-1).select2();
   });
 
   $("#delete_row").click(function(e){
     e.preventDefault();
     if(row_number > 1){
       $("#item" + (row_number - 1)).html('');
+      $("#item"+row_number).remove();
       row_number--;
+      if (row_number == 1) {
+        $("#item"+row_number).html('<td colspan="3">Belum ada data, Silahkan tambah baris....</td>');
+      }
     }
   });
 
@@ -152,21 +160,27 @@
     window.harga = $(this).find(':selected').data('harga');
     $('.jumlah').eq(idx).removeAttr('disabled');
     $('.total').eq(idx).val(jumlah*harga);
-    $('.total').each(function() {
-        sum += 1*($(this).val());
-    });
-    $('#total_bayar').val(sum);
   });
 
   $(document).on('change', 'input.jumlah', function(){
     let idx = $(this).index('input.jumlah');
     window.jumlah = $(this).val();
     $('.total').eq(idx).val(jumlah*harga);
+  });
+  
+  $('#simpan').click(function () {
+    var sum = 0;
     $('.total').each(function() {
-        sum += 1*($(this).val());
+        var total = parseInt($(this).val());
+        parseInt(sum += total);
+        $('#total_bayar').val(sum);
     });
-    $('#total_bayar').val(sum);
+    $('#submit').removeAttr('disabled');
   });
 
+  $('form').submit(function () {
+    $("#item0").remove();
+    return true;
+  });
 </script>
 @endsection
