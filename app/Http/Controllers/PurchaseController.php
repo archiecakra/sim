@@ -86,9 +86,11 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        // Post::with('user')->with(['favorites' => function($query) {
-        //     $query->where('favorites.user_id', auth()->id);
-        // }])->get();
+        $suppliers = Supplier::all();
+        $items = Item::all();
+        $detail = PurchaseDetail::with('items')->where('id', $purchase->id)->first();
+        // dd($detail->items);
+        return view('stok.pembelian.pembelian_edit', compact('purchase', 'detail', 'items', 'suppliers'));
     }
 
     /**
