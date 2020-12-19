@@ -101,28 +101,42 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        // dd($request);
         Purchase::where('id', $purchase->id)->update([
             'supplier_id' => $request->supplier_id,
             'total_bayar' => $request->total_bayar,
             'keterangan' => $request->keterangan,
         ]);
 
-        $pdetail = PurchaseDetail::where('id', $purchase->id)->first();
+        // $pdetail = PurchaseDetail::where('id', $purchase->id)->first();
+        $pdetail = PurchaseDetail::with('items')->find($purchase->id);
         // dd($pdetail->items);
         // dd($pdetail->items[0]->pivot->jumlah);
-
+        // dd($pdetail);
         $items = $request->input('item_id', []);
         $jumlah = $request->input('jumlah', []);
+        // dd($request);
         for ($iteration=0; $iteration < count($items); $iteration++) {
+            dd($pdetail->items[1]->exists());
+           
             $item = Item::where('id', $items[$iteration])->first();
-            dd($item);
-            $detail_stok = $pdetail->items()->where('id', 3)->first();
-            dd($detail_stok);
-            $detail_stok->stok = ($detail_stok->stok - $pdetail->items[$iteration]->pivot->jumlah) + $jumlah[$iteration];
-            $detail_stok->save();
-            $pdetail->items()->sync($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+            // dd(($item->stok - $pdetail->items[$iteration]->pivot->jumlah) + $jumlah[$iteration]);
+            // $detail_stok = $pdetail->items()->where('id', 3)->first();
+            $detail_stok = ($item->stok - $pdetail->items[$iteration]->pivot->jumlah) + $jumlah[$iteration];
+            // dd($items[$iteration]);
+            $item->stok = $detail_stok;
+            $item->save();
+            // $pdetail->items()->sync([
+            //     $items[$iteration] => ['jumlah' => $jumlah[$iteration]]
+            // ]);
         }
+        
+        // foreach ($items as $item) {
+        //     # code...
+        //     $iteration = 0;
+        //     $item_id_array[$items[$iteration]] = ['jumlah' => $jumlah[$iteration]];
+        //     $iteration++;
+        // }
+        // $pdetail->items()->sync($items);
         
         return redirect('/items/purchases')->with('message', 'Data Pembelian Dengan Code : '.$purchase->kode_pembelian.' Berhasil Diubah');
     }
