@@ -15,7 +15,9 @@
     <div class="row justify-content-center">
       <div class="col-10">
         <!-- Default box -->
-        <form action="{{ url('/items/purchases') }}" method="POST">
+        <form action="{{ url('/items/purchases/'.$purchase->id) }}" method="POST">
+          @method('patch')
+          @csrf
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Tambah Transaksi Pembelian</h3>
@@ -28,7 +30,6 @@
               </div>
             </div>
             <div class="card-body">
-                @csrf
                 <div class="form-group">
                   <label for="supplier_id">Nama Supplier</label>
                   <div class="input-group">
@@ -85,14 +86,14 @@
                         @foreach ($detail->items as $purchased)
                           <tr id="item{{ $loop->iteration }}">
                             <td class="align-middle">
-                              <select class="form-control form-control-sm item" name="item_id[]">
+                              <select class="select2 form-control form-control-sm item" name="item_id[]">
                                 @foreach ($items as $item)
                                 <option data-harga="{{ $item->harga_beli }}" value="{{ $item->id }}" @if ($item->id == $purchased->id) selected @endif>{{ $item->nama.' @'.$item->harga_beli.' /'.$item->unit->nama }}</option>
                                 @endforeach
                               </select>
                             </td>
                             <td class="align-middle">
-                              <input type="number" value="{{ $purchased->pivot->jumlah }}" oninput="validity.valid||(value='');" min="0" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" >
+                              <input type="number" value="{{ $purchased->pivot->jumlah }}" oninput="validity.valid||(value='');" min="0" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]">
                             </td>
                             <td class="align-middle">
                               <div class="input-group input-group-sm">

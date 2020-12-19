@@ -89,7 +89,6 @@ class PurchaseController extends Controller
         $suppliers = Supplier::all();
         $items = Item::all();
         $detail = PurchaseDetail::with('items')->where('id', $purchase->id)->first();
-        // dd($detail->items);
         return view('stok.pembelian.pembelian_edit', compact('purchase', 'detail', 'items', 'suppliers'));
     }
 
@@ -102,7 +101,30 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        //
+        // dd($request);
+        Purchase::where('id', $purchase->id)->update([
+            'supplier_id' => $request->supplier_id,
+            'total_bayar' => $request->total_bayar,
+            'keterangan' => $request->keterangan,
+        ]);
+
+        $pdetail = PurchaseDetail::where('id', $purchase->id)->first();
+        // dd($pdetail->items);
+        // dd($pdetail->items[0]->pivot->jumlah);
+
+        $items = $request->input('item_id', []);
+        $jumlah = $request->input('jumlah', []);
+        for ($iteration=0; $iteration < count($items); $iteration++) {
+            $item = Item::where('id', $items[$iteration])->first();
+            dd($item);
+            $detail_stok = $pdetail->items()->where('id', 3)->first();
+            dd($detail_stok);
+            $detail_stok->stok = ($detail_stok->stok - $pdetail->items[$iteration]->pivot->jumlah) + $jumlah[$iteration];
+            $detail_stok->save();
+            $pdetail->items()->sync($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+        }
+        
+        return redirect('/items/purchases')->with('message', 'Data Pembelian Dengan Code : '.$purchase->kode_pembelian.' Berhasil Diubah');
     }
 
     /**
