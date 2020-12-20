@@ -84,8 +84,8 @@
                 </a>
               </li>
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Stok</h6></li>
-              <li class="nav-item has-treeview {{ (request()->is('*items*') && request()->segment(2) != 'purchases') ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*items*') && request()->segment(2) != 'purchases') ? 'active' : ''}}">
+              <li class="nav-item has-treeview {{ (request()->is('*items*') && request()->segment(2) != 'purchases' && request()->segment(2) != 'mutations') ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*items*') && request()->segment(2) != 'purchases' && request()->segment(2) != 'mutations') ? 'active' : ''}}">
                   <i class="nav-icon fas fa-box"></i>
                   <p>
                     Barang
@@ -141,6 +141,14 @@
                     </a>
                   </li>
                 </ul>
+              </li>
+              <li class="nav-item has-treeview {{ (request()->is('*mutations*')) ? 'menu-open' : ''}}">
+                <a href="{{ url('/items/mutations') }}" class="nav-link {{ (request()->is('*mutations*')) ? 'active' : ''}}">
+                  <i class="nav-icon fas fa-history"></i>
+                  <p>
+                    Mutasi Stok
+                  </p>
+                </a>
               </li>
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Penjualan</h6></li>
               <li class="nav-item has-treeview">

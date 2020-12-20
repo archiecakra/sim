@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StockMutationController;
 use App\Http\Controllers\UnitController;
 
 /*
@@ -32,15 +33,15 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 //Stok Routes
 //Pembelian Barang
-Route::name('purchases')->group(function () {
-    Route::resource('/items/purchases', PurchaseController::class);
-});
+Route::resource('/items/purchases', PurchaseController::class);
+//Mutasi Stok
+Route::resource('/items/mutations', StockMutationController::class)->only([
+    'index'
+]);
 //Barang
-Route::name('items')->group(function () {
-    Route::resource('/items/categories', CategoryController::class);
-    Route::resource('/items/units', UnitController::class);
-    Route::resource('/items', ItemsController::class);
-});
+Route::resource('/items/categories', CategoryController::class);
+Route::resource('/items/units', UnitController::class);
+Route::resource('/items', ItemsController::class);
 
 //Data Pengguna Routes
 Route::get('/users', [UserController::class, 'index']);
