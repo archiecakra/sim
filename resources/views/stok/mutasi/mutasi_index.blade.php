@@ -26,20 +26,18 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Daftar Mutasi Stok</h3>
-            <a href="{{ url('/items/purchases/create') }}" class="btn btn-primary float-right text-white">Tambah Mutasi Stok</a>
           </div>
           <div class="card-body">
             <div class="table-responsive-md">
               <table id="datatable" class="table table-sm bg-light table-bordered table-striped text-center table-hover">
                 <thead>
                   <tr>
-                    <th class="align-middle" scope="col">Tanggal Pembelian</th>
-                    <th class="align-middle" scope="col">Kode Transaksi</th>
-                    <th class="align-middle" scope="col">Supplier</th>
                     <th class="align-middle" scope="col">Barang</th>
-                    <th class="align-middle" scope="col">Total Pembelian</th>
+                    <th class="align-middle" scope="col">Jenis Mutasi</th>
+                    <th class="align-middle" scope="col">Stok Awal</th>
+                    <th class="align-middle" scope="col">Stok Akhir</th>
                     <th class="align-middle" scope="col">Keterangan</th>
-                    <th class="align-middle" scope="col">Aksi</th>
+                    <th class="align-middle" scope="col">Tanggal Pembelian</th>
                   </tr>
                 </thead>
                 <tbody>

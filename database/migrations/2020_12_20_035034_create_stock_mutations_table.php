@@ -15,6 +15,12 @@ class CreateStockMutationsTable extends Migration
     {
         Schema::create('stock_mutations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('item_id');
+            $table->integer('stok_awal')->nullable();
+            $table->integer('stok_mutasi');
+            $table->integer('stok_akhir');
+            $table->string('jenius_mutasi');
+            $table->string('kategori');
             $table->timestamps();
         });
     }

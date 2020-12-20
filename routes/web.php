@@ -36,7 +36,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::resource('/items/purchases', PurchaseController::class);
 //Mutasi Stok
 Route::resource('/items/mutations', StockMutationController::class)->only([
-    'index'
+    'index', 'create', 'store'
 ]);
 //Barang
 Route::resource('/items/categories', CategoryController::class);

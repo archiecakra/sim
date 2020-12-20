@@ -143,12 +143,27 @@
                 </ul>
               </li>
               <li class="nav-item has-treeview {{ (request()->is('*mutations*')) ? 'menu-open' : ''}}">
-                <a href="{{ url('/items/mutations') }}" class="nav-link {{ (request()->is('*mutations*')) ? 'active' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*mutations*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-history"></i>
                   <p>
                     Mutasi Stok
+                    <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('/items/mutations/create') }}" class="nav-link {{ request()->is('*items/mutations/create') ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tambah Mutasi Stok</p>  
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('/items/mutations') }}" class="nav-link {{ request()->is('*items/mutations') ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Kelola Mutasi</p> 
+                    </a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Penjualan</h6></li>
               <li class="nav-item has-treeview">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StockMutation;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class StockMutationController extends Controller
@@ -24,7 +25,8 @@ class StockMutationController extends Controller
      */
     public function create()
     {
-        //
+        $items = Item::all();
+        return view('stok.mutasi.mutasi_create', compact('items'));
     }
 
     /**
