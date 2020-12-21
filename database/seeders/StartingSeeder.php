@@ -28,6 +28,7 @@ class StartingSeeder extends Seeder
                 'username' => 'archiecakra',
                 'email' => 'archiecakra1@gmail.com',
                 'phone' => '082257381817',
+                'role' => 'customer',
                 'password' => Hash::make('12345678')
             ],
             [
@@ -35,6 +36,7 @@ class StartingSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@admin.com',
                 'phone' => '081331818699',
+                'role' => 'admin',
                 'password' => Hash::make('123')
             ]
         ]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -14,9 +15,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view ('relasi.pelanggan.pelanggan_index', );
+        $customers = User::where('role', 'customer')->get();
+        return view ('relasi.pelanggan.pelanggan_index', compact('customers'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view ('relasi.pelanggan.pelanggan_create');
     }
 
     /**
@@ -35,7 +37,24 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'      => 'required|string|max:255',
+            'username'  => 'required|string|alpha_num|max:255',
+            'email'     => 'required|string|email|max:255',
+            'phone'     => 'required|string|numeric|digits_between:9,14',
+            'password'  => 'required|string|min:8|confirmed',
+        ]);
+
+        User::create([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+            'password'  => Hash::make($request->password),
+            'role'      => 'customer',
+        ]);
+
+        return redirect('/customers')->with('message', 'Data Pelanggan Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +76,8 @@ class CustomerController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        // dd($user);
+        return view ('relasi.pelanggan.pelanggan_edit', compact('user'));
     }
 
     /**
@@ -69,7 +89,31 @@ class CustomerController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name'      => 'required|string|max:255',
+            'username'  => 'required|string|alpha_num|max:255',
+            'email'     => 'required|string|email|max:255',
+            'phone'     => 'required|string|numeric|digits_between:9,14',
+        ]);
+
+        User::find($user->id)->update([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+        ]);
+        
+        if ($request->password != NULL) {
+            # code...
+            $request->validate([
+                'password'  => 'required|string|min:8|confirmed',
+            ]);
+            User::find($user->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        return redirect('/customers')->with('message', 'Data '.$user->name.' Berhasil Diubah');
     }
 
     /**
@@ -80,6 +124,7 @@ class CustomerController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect('/customers')->with('message', 'Kategori '.$user->nama.' Berhasil Dihapus');
     }
 }

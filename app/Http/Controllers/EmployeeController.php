@@ -16,7 +16,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = User::where('role', '!=', 'customer')->get();
+        return view ('relasi.pegawai.pegawai_index', compact('employees'));
     }
 
     /**
@@ -26,7 +27,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('data/pengguna/pegawai/pegawai_create');
+        return view('relasi.pegawai.pegawai_create');
     }
 
     /**
@@ -37,35 +38,25 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-            'nama'      => 'required|string|max:255',
+            'name'      => 'required|string|max:255',
+            'role'      => 'required|in:admin,warehouse,owner',
             'username'  => 'required|string|alpha_num|max:255',
             'email'     => 'required|string|email|max:255',
             'phone'     => 'required|string|numeric|digits_between:9,14',
             'password'  => 'required|string|min:8|confirmed',
-            'alamat'    => 'required|string|max:255',
-            'role'      => 'required|in:admin,staff,customer',
         ]);
 
         User::create([
-            'name'      => $request->nama,
+            'name'      => $request->name,
+            'role'      => $request->role,
             'username'  => $request->username,
             'email'     => $request->email,
             'phone'     => $request->phone,
             'password'  => Hash::make($request->password)
         ]);
 
-        $user_id = User::where('phone', $request->phone)->first();
-
-        Userdetail::create([
-            'user_id'   => $user_id->id,
-            'nama'      => $request->nama,
-            'alamat'    => $request->alamat,
-            'role'      => $request->role,
-        ]);
-
-        return redirect('/users')->with('message', 'Data Pegawai Berhasil Ditambahkan');
+        return redirect('/employees')->with('message', 'Data Pegawai '.$request->name.' Berhasil Ditambahkan');
     }
 
     /**
@@ -87,7 +78,7 @@ class EmployeeController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view ('relasi.pegawai.pegawai_edit', compact('user'));
     }
 
     /**
@@ -99,7 +90,33 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name'      => 'required|string|max:255',
+            'role'      => 'required|in:admin,warehouse,owner',
+            'username'  => 'required|string|alpha_num|max:255',
+            'email'     => 'required|string|email|max:255',
+            'phone'     => 'required|string|numeric|digits_between:9,14',
+        ]);
+
+        User::find($user->id)->update([
+            'name'      => $request->name,
+            'role'      => $request->role,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'phone'     => $request->phone,
+        ]);
+        
+        if ($request->password != NULL) {
+            # code...
+            $request->validate([
+                'password'  => 'required|string|min:8|confirmed',
+            ]);
+            User::find($user->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        return redirect('/employees')->with('message', 'Data '.$user->name.' Berhasil Diubah');
     }
 
     /**
@@ -110,6 +127,7 @@ class EmployeeController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect('/employees')->with('message', 'Kategori '.$user->nama.' Berhasil Dihapus');
     }
 }

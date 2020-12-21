@@ -45,8 +45,8 @@ Route::resource('/items', ItemsController::class);
 
 //Data Pengguna Routes
 Route::get('/users', [UserController::class, 'index']);
-Route::resource('employees', EmployeeController::class);
-Route::resource('customers', CustomerController::class);
+Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
+Route::resource('customers', CustomerController::class)->parameters(['customers' => 'user']);
 
 //Data Supplier
 Route::resource('suppliers', SupplierController::class);

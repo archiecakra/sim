@@ -190,8 +190,8 @@
                 </ul>
               </li>
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Relasi</h6></li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item has-treeview {{ (request()->is('*customers*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*customers*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-users"></i>
                   <p>
                     Pelanggan
@@ -200,13 +200,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/customers/create') }}" class="nav-link">
+                    <a href="{{ url('/customers/create') }}" class="nav-link {{ (request()->is('*customers/create')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Pelanggan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/customers') }}" class="nav-link">
+                    <a href="{{ url('/customers') }}" class="nav-link {{ (request()->is('*customers')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pelanggan</p>
                     </a>
@@ -236,8 +236,8 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item has-treeview {{ (request()->is('*employees*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*employees*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-user-tie"></i>
                   <p>
                     Pegawai
@@ -246,13 +246,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/items') }}" class="nav-link">
+                    <a href="{{ url('/employees/create') }}" class="nav-link {{ (request()->is('*employees/create')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Pegawai</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/suppliers') }}" class="nav-link">
+                    <a href="{{ url('/employees') }}" class="nav-link {{ (request()->is('*employees')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pegawai</p>
                     </a>
