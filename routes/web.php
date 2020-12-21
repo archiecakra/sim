@@ -2,17 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\PurchaseController;
+// use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StockMutationController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,14 +44,14 @@ Route::resource('/items/categories', CategoryController::class);
 Route::resource('/items/units', UnitController::class);
 Route::resource('/items', ItemsController::class);
 
-//Data Pengguna Routes
+//Data Relasi
 Route::get('/users', [UserController::class, 'index']);
 Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
 Route::resource('customers', CustomerController::class)->parameters(['customers' => 'user']);
-
-//Data Supplier
 Route::resource('suppliers', SupplierController::class);
+
+//Penjualan
+// Route::resource('/sales', [SalesController::class]);
 
 //Auth Routes
 Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);

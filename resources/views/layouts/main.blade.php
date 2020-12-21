@@ -213,8 +213,8 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item has-treeview {{ (request()->is('*supplier*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*supplier*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-people-carry"></i>
                   <p>
                     Supplier
@@ -223,13 +223,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/suppliers/create') }}" class="nav-link">
+                    <a href="{{ url('/suppliers/create') }}" class="nav-link {{ (request()->is('*suppliers/create')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Supplier</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/suppliers') }}" class="nav-link">
+                    <a href="{{ url('/suppliers') }}" class="nav-link {{ (request()->is('*suppliers')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Supplier</p>
                     </a>
@@ -255,88 +255,6 @@
                     <a href="{{ url('/employees') }}" class="nav-link {{ (request()->is('*employees')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pegawai</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-header text-center"><h6 class="bg-secondary nav-header-title">Original Menu</h6></li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-shopping-cart"></i>
-                  <p>
-                    Transaksi
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                  <a href="{{ url('/transaction/sales') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Transaksi Penjualan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/transaction/purchase') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Transaksi Pembelian</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th-list"></i>
-                  <p>
-                    Data
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/items') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Data Stok Barang</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/suppliers') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Data Supplier</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/users') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Data Pengguna</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-print"></i>
-                  <p>
-                    Laporan
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/laporan/penjualan') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Penjualan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/laporan/pembelian') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Pembelian</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/laporan/gudang') }}" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Gudang</p>
                     </a>
                   </li>
                 </ul>
