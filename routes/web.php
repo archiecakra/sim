@@ -9,7 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\PurchaseController;
-// use App\Http\Controllers\SalesController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockMutationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
@@ -45,13 +45,12 @@ Route::resource('/items/units', UnitController::class);
 Route::resource('/items', ItemsController::class);
 
 //Data Relasi
-Route::get('/users', [UserController::class, 'index']);
 Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
 Route::resource('customers', CustomerController::class)->parameters(['customers' => 'user']);
 Route::resource('suppliers', SupplierController::class);
 
 //Penjualan
-// Route::resource('/sales', [SalesController::class]);
+Route::resource('sales', SaleController::class);
 
 //Auth Routes
 Auth::routes();

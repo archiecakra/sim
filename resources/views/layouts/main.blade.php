@@ -166,8 +166,8 @@
                 </ul>
               </li>
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Penjualan</h6></li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+              <li class="nav-item has-treeview {{ (request()->is('*sales*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*sales*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-shopping-cart"></i>
                   <p>
                     Transaksi Penjualan
@@ -176,15 +176,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                  <a href="{{ url('/transaction/sales') }}" class="nav-link">
+                  <a href="{{ url('/sales/create') }}" class="nav-link {{ request()->is('*sales/create') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Transaksi</p>
+                      <p>Tambah Penjualan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/transaction/purchase') }}" class="nav-link">
+                    <a href="{{ url('/sales') }}" class="nav-link {{ request()->is('*sales') ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Transaksi</p>
+                      <p>Kelola Penjualan</p>
                     </a>
                   </li>
                 </ul>
