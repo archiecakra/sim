@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\PurchaseDetail;
 use App\Models\Supplier;
+use App\Models\StockMutation;
 
 class PurchaseController extends Controller
 {
@@ -19,6 +20,7 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
+        // dd($purchases);
         return view('stok.pembelian.pembelian_index', compact('purchases'));
     }
 
@@ -51,17 +53,29 @@ class PurchaseController extends Controller
         ]);
             
         $purchase = Purchase::latest()->first();
+        // dd($purchase->id);
         $pdetail = PurchaseDetail::create([
             'purchase_id' => $purchase->id,
         ]);
         $items = $request->input('item_id', []);
         $jumlah = $request->input('jumlah', []);
         for ($iteration=0; $iteration < count($items); $iteration++) {
+            
             $pdetail->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
-            $detail_stok = $pdetail->items()->where('id', $items[$iteration])->first();
-            $detail_stok->stok += $jumlah[$iteration];
-            $detail_stok->save();
-            // dd($jumlah[$iteration]);
+
+            $item = Item::find($items[$iteration]);
+
+            StockMutation::create([
+                'item_id' => $items[$iteration],
+                'stok_awal' => $item->stok,
+                'stok_mutasi' => $jumlah[$iteration],
+                'stok_akhir' => $item->stok + $jumlah[$iteration],
+                'jenis_mutasi' => 'penambahan',
+                'keterangan' => 'Pembelian dengan Kode : '.$purchase->kode_pembelian,
+            ]);
+
+            $item->stok += $jumlah[$iteration];
+            $item->save();
         }
         
         return redirect('/items/purchases')->with('message', 'Data Pembelian Berhasil Ditambahkan');

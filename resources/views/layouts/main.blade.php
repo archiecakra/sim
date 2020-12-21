@@ -200,13 +200,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/items') }}" class="nav-link">
+                    <a href="{{ url('/customers/create') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tambah Pelanggan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/suppliers') }}" class="nav-link">
+                    <a href="{{ url('/customers') }}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pelanggan</p>
                     </a>

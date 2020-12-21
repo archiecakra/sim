@@ -19,8 +19,8 @@ class CreateStockMutationsTable extends Migration
             $table->integer('stok_awal')->nullable();
             $table->integer('stok_mutasi');
             $table->integer('stok_akhir');
-            $table->string('jenius_mutasi');
-            $table->string('kategori');
+            $table->string('jenis_mutasi');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

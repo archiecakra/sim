@@ -32,15 +32,31 @@
               <table id="datatable" class="table table-sm bg-light table-bordered table-striped text-center table-hover">
                 <thead>
                   <tr>
+                    <th class="align-middle" scope="col">Tanggal Mutasi</th>
                     <th class="align-middle" scope="col">Barang</th>
                     <th class="align-middle" scope="col">Jenis Mutasi</th>
                     <th class="align-middle" scope="col">Stok Awal</th>
+                    <th class="align-middle" scope="col">Mutasi</th>
                     <th class="align-middle" scope="col">Stok Akhir</th>
                     <th class="align-middle" scope="col">Keterangan</th>
-                    <th class="align-middle" scope="col">Tanggal Pembelian</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($mutations as $mutation)
+                    <tr>
+                      <td>{{ $mutation->created_at }}</td>
+                      <td>{{ $mutation->item->nama }}</td>
+                      <td>{{ $mutation->jenis_mutasi }}</td>
+                      <td>{{ $mutation->stok_awal }}</td>
+                      @if ($mutation->jenis_mutasi == 'penambahan')
+                        <td>{{ '+'.$mutation->stok_mutasi }}</td>
+                      @else
+                        <td>{{ '-'.$mutation->stok_mutasi }}</td>
+                      @endif
+                      <td>{{ $mutation->stok_akhir }}</td>
+                      <td>{{ $mutation->keterangan }}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

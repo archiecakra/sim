@@ -15,7 +15,8 @@ class StockMutationController extends Controller
      */
     public function index()
     {
-        return view('stok.mutasi.mutasi_index');
+        $mutations = StockMutation::all();
+        return view('stok.mutasi.mutasi_index', compact('mutations'));
     }
 
     /**
@@ -37,7 +38,36 @@ class StockMutationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        if ($request->jenis_mutasi == 'penambahan') {
+            # code...
+            $stok_akhir = $request->stok_awal + $request->stok_mutasi;
+            StockMutation::create([
+                'item_id' => $request->item_id,
+                'stok_awal' => $request->stok_awal,
+                'stok_mutasi' => $request->stok_mutasi,
+                'stok_akhir' => $stok_akhir,
+                'jenis_mutasi' => $request->jenis_mutasi,
+                'keterangan' => $request->keterangan,
+            ]);
+            Item::where('id', $request->item_id)->update([
+                'stok' => $stok_akhir,
+            ]);
+        } elseif ($request->jenis_mutasi == 'pengurangan') {
+            # code...
+            $stok_akhir = $request->stok_awal - $request->stok_mutasi;
+            StockMutation::create([
+                'item_id' => $request->item_id,
+                'stok_awal' => $request->stok_awal,
+                'stok_mutasi' => $request->stok_mutasi,
+                'stok_akhir' => $stok_akhir,
+                'jenis_mutasi' => $request->jenis_mutasi,
+                'keterangan' => $request->keterangan,
+            ]);
+            Item::where('id', $request->item_id)->update([
+                'stok' => $stok_akhir,
+            ]);
+        }
     }
 
     /**
