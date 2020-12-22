@@ -38,6 +38,7 @@
                     <th class="align-middle" scope="col">Customer</th>
                     <th class="align-middle" scope="col">Barang</th>
                     <th class="align-middle" scope="col">Total Pembelian</th>
+                    <th class="align-middle" scope="col">Status</th>
                     <th class="align-middle" scope="col">Keterangan</th>
                     <th class="align-middle" scope="col">Aksi</th>
                   </tr>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Sale;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -14,9 +16,9 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        return view('penjualan.penjualan_index');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +26,10 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+        $transaction_code = 'SLS'.sprintf("%04s", Sale::all()->count());
+        $customers = User::where('role', 'customer')->get();
+        $items = Item::all();
+        return view('penjualan.penjualan_create', compact('customers', 'transaction_code', 'items'));
     }
 
     /**

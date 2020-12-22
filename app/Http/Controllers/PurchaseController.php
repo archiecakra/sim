@@ -20,7 +20,6 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
-        // dd($purchases);
         return view('stok.pembelian.pembelian_index', compact('purchases'));
     }
 
