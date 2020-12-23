@@ -52,8 +52,9 @@
                 <label for="item" class="col-sm-2 col-form-label">Tambah Barang</label>
                 <div class="col-sm-7">
                   <select class="select2 form-control" id="item">
+                    <option value="">Silahkan Pilih Barang</option>
                     @foreach ($items as $item)
-                    <option data-harga="{{ $item->harga }}" data-stok="{{ $item->stok }}" value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_jual }}</option>
+                    <option data-harga="{{ $item->harga_jual }}" data-item="{{ $item->nama }}" data-stok="{{ $item->stok }}" value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_jual }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -105,18 +106,42 @@
 
 @section('js')
   <script>
+    // '<div class="input-group input-group-sm">'+
+    //                   '<div class="input-group-prepend">'+
+    //                     '<span class="input-group-text">Rp.</span>'+
+    //                   '</div>'+
+    //                   '<input type="number" class="form-control form-control-sm harga" value="'+ harga +'" disabled>'+
+    //                 '</div>'+
     $('#item').change(function () {
-      var row = ("<tr>"+
-                    "<td>test</td>" +
-                    "<td>test</td>" +
-                    "<td>te</td>" +
-                    "<td>te</td>" +
-                    "<td>ts</td>" +
-                  "</tr>");
       var harga = $(this).find(':selected').data('harga');
       var stok = $(this).find(':selected').data('stok');
+      var item = $(this).find(':selected').data('item');
+      var row = ('<tr class="item-row">'+
+                  '<td>'+ item +'</td>' +
+                  '<td>Rp. '+ harga +' ,-</td>' +
+                  '<td><input type="number" class="form-control form-control-sm jumlah" value="0"></td>' +
+                  '<td>0</td>' +
+                  '<td><button type="button" class="btn btn-danger btn-sm del-row"><i class="fa fa-minus"></i></button></td>' +
+                '</tr>');
+      $('td.dataTables_empty').hide();
       $('#stok-label').val(stok);
       $('#datatable').append(row);
+    });
+
+    $(document).on('click', 'button.del-row', function(){
+      let idx = $('tr.item-row').length;
+      if (idx == 1) {
+        $(this).closest('tr').remove();
+        $('td.dataTables_empty').show();
+      } else {
+        $(this).closest('tr').remove();
+      }
+    });
+
+    $(document).on('keyup', 'input.jumlah', function(){
+      let idx = $(this).index('input.jumlah');
+      alert(idx);
+      $('tr.item-row').eq(idx).children().eq(3).html('cok');
     });
   </script>
 @endsection
