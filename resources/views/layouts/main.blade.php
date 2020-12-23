@@ -322,20 +322,17 @@
   <script type="text/javascript" src="{{ url('/js/datatables.min.js') }}"></script>
   <!-- my custom script -->
   <script>
+    
     $('.alert').delay(1000).fadeOut(1000);
     $('.card').hide();
     $('.card').fadeIn(1000);
-    $(document).ready(function() {
-      $('#datatable').DataTable();
-    } );
+    // $(document).ready(function() {
+    //   var table = $('#datatable').DataTable();
+    // });
+    var table = $('#datatable').DataTable();
     $('.select2').select2({
       theme: 'bootstrap4'
     });
-    // function initSelect2() {
-    //   $('select').select2({
-    //     theme: 'bootstrap4'
-    //   });
-    // }
   </script>
   @yield('js')
   </body>

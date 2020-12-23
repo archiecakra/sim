@@ -53,7 +53,7 @@
                   <select class="select2 form-control" id="item">
                     <option value="">Silahkan Pilih Barang</option>
                     @foreach ($items as $item)
-                    <option data-harga="{{ $item->harga_jual }}" data-item="{{ $item->nama }}" data-stok="{{ $item->stok }}" value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_jual }}</option>
+                    <option data-id="{{ $item->id }}" data-harga="{{ $item->harga_jual }}" data-item="{{ $item->nama }}" data-stok="{{ $item->stok }}" value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_jual }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -125,26 +125,30 @@
       var harga = $(this).find(':selected').data('harga');
       var stok = $(this).find(':selected').data('stok');
       var item = $(this).find(':selected').data('item');
-      var row = ('<tr class="item-row">'+
-                  '<td>'+ item +'</td>' +
-                  '<td>Rp. '+ harga +' ,-</td>' +
-                  '<td><input type="number" class="form-control form-control-sm jumlah" placeholder="0"></td>' +
-                  '<td class="total">0</td>' +
-                  '<td><button type="button" class="btn btn-danger btn-sm del-row"><i class="fa fa-minus"></i></button></td>' +
-                '</tr>');
-      $('td.dataTables_empty').hide();
+      var item_id = $(this).find(':selected').data('id');
+      // var row = ('<tr class="item-row">'+
+      //             '<td>'+ item +'</td>' +
+      //             '<td>Rp. '+ harga +' ,-</td>' +
+      //             '<td><input type="number" class="form-control form-control-sm jumlah" placeholder="0"></td>' +
+      //             '<td class="total">0</td>' +
+      //             '<td><button type="button" class="btn btn-danger btn-sm del-row"><i class="fa fa-minus"></i></button></td>' +
+      //           '</tr>');
+      var new_row = table.row.add([
+        '<input name="item_id[]" type="hidden" value="'+item_id+'">'+item,
+        'Rp. '+ harga +' ,-',
+        '<input name="jumlah[]" type="number" class="form-control form-control-sm jumlah" placeholder="0">',
+        '<td class="total">0</td>',
+        '<td><button type="button" class="btn btn-danger btn-sm del-row"><i class="fa fa-minus"></i></button></td>'
+      ]).draw( true ).node();
+      $(new_row).addClass('item-row');
+      $(new_row).find('td').eq(3).addClass('total');
+      // $('td.dataTables_empty').hide();
       $('#stok-label').val(stok);
-      $('#datatable').append(row);
+      // $('#datatable').append(row);
     });
 
     $(document).on('click', 'button.del-row', function(){
-      let idx = $('tr.item-row').length;
-      if (idx == 1) {
-        $(this).closest('tr').remove();
-        $('td.dataTables_empty').show();
-      } else {
-        $(this).closest('tr').remove();
-      }
+      var row = table.row($(this).parents('tr')).remove().draw();
 
       var sum = 0;
       $('.total').each(function() {
