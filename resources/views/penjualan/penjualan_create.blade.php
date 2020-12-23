@@ -1,11 +1,10 @@
 @extends('layouts/main')
 
-@section('title', 'Data Pegawai')
+@section('title', 'Data Penjualan')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-<li class="breadcrumb-item"><a href="#">Pegawai</a></li>
-<li class="breadcrumb-item"><a href="#">Tambah Pegawai</a></li>
+<li class="breadcrumb-item"><a href="#">Tambah Penjualan</a></li>
 @endsection
 
 @section('content')
@@ -18,7 +17,7 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Pegawai</h3>
+            <h3 class="card-title">Penjualan</h3>
           </div>
           <form method="POST" action="{{ url('/sales') }}">
             <div class="card-body">
@@ -84,6 +83,16 @@
                         </tbody>
                       </table>
                     </div>
+                    <div class="card-footer">
+                      <div class="float-right">
+                        <div class="input-group input-group-sm mb-2">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Total Bayar</span><span class="input-group-text">Rp. </span>
+                          </div>
+                          <input id="total_bayar" name="total_bayar" min="0" type="number" class="form-control" value="0" readonly>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -119,8 +128,8 @@
       var row = ('<tr class="item-row">'+
                   '<td>'+ item +'</td>' +
                   '<td>Rp. '+ harga +' ,-</td>' +
-                  '<td><input type="number" class="form-control form-control-sm jumlah" value="0"></td>' +
-                  '<td>0</td>' +
+                  '<td><input type="number" class="form-control form-control-sm jumlah" placeholder="0"></td>' +
+                  '<td class="total">0</td>' +
                   '<td><button type="button" class="btn btn-danger btn-sm del-row"><i class="fa fa-minus"></i></button></td>' +
                 '</tr>');
       $('td.dataTables_empty').hide();
@@ -136,12 +145,28 @@
       } else {
         $(this).closest('tr').remove();
       }
+
+      var sum = 0;
+      $('.total').each(function() {
+        var total_row = parseInt($(this).text().replace(/[^0-9]/g, ''));
+        parseInt(sum += total_row);
+      });
+      $('#total_bayar').val(sum);
     });
 
     $(document).on('keyup', 'input.jumlah', function(){
+      var sum = 0;
       let idx = $(this).index('input.jumlah');
-      alert(idx);
-      $('tr.item-row').eq(idx).children().eq(3).html('cok');
+      var jumlah = $(this).val();
+      var harga = $(this).parent().prev().text();
+      harga = harga.replace(/[^0-9]/g, '');
+      var row_total = parseInt(jumlah*harga);
+      $('tr.item-row').eq(idx).children().eq(3).html('Rp. '+ row_total +' ,-');
+      $('.total').each(function() {
+        var total_row = parseInt($(this).text().replace(/[^0-9]/g, ''));
+        parseInt(sum += total_row);
+      });
+      $('#total_bayar').val(sum);
     });
   </script>
 @endsection
