@@ -36,15 +36,39 @@
                     <th class="align-middle" scope="col">Tanggal Penjualan</th>
                     <th class="align-middle" scope="col">Kode Transaksi</th>
                     <th class="align-middle" scope="col">Customer</th>
-                    <th class="align-middle" scope="col">Barang</th>
-                    <th class="align-middle" scope="col">Total Pembelian</th>
+                    <th class="align-middle" scope="col">Transaksi</th>
+                    <th class="align-middle" scope="col">Total Bayar</th>
                     <th class="align-middle" scope="col">Status</th>
                     <th class="align-middle" scope="col">Keterangan</th>
                     <th class="align-middle" scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
+                  @foreach ($sales as $sale)
+                    <tr>
+                      <td class="align-middle" scope="row">{{ $sale->created_at }}</td>
+                      <td class="align-middle">{{ $sale->kode_transaksi }}</td>
+                      <td class="align-middle">{{ $sale->user->name }}</td>
+                      <td class="align-middle text-left">
+                        <ul>
+                          @foreach ($sale->items as $item)
+                            <li>{{ $item->nama.' @Rp.'.$item->harga_beli.' x '.$item->pivot->jumlah.' '.$item->unit->nama }}</li>
+                          @endforeach
+                        </ul>
+                      </td>
+                      <td class="align-middle">{{ 'Rp. '.$sale->total_bayar.',-' }}</td>
+                      <td class="align-middle">{{ $sale->status }}</td>
+                      <td class="align-middle">{{ $sale->keterangan }}</td>
+                      <td class="align-middle">
+                        <a href="{{ url('/sales/'.$sale->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a>
+                        <form style="all: unset;" action="{{ url('/sales/'.$sale->id) }}" method="POST">
+                          @method('delete')
+                          @csrf
+                          <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash"></i></button>
+                        </form>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

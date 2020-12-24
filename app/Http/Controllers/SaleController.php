@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Sale;
+use App\Models\StockMutation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,9 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('penjualan.penjualan_index');
+        $sales = Sale::with('user', 'items')->get();
+        // dd($sale);
+        return view('penjualan.penjualan_index', compact('sales'));
     }
     
     /**
@@ -40,7 +43,43 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $sale = Sale::create([
+            'kode_transaksi' => $request->kode_transaksi,
+            'status' => $request->status,
+            'user_id' => $request->user_id,
+            'total_bayar' => $request->total_bayar,
+            'keterangan' => $request->keterangan,
+        ]);
+        $items = $request->input('item_id', []);
+        $jumlah = $request->input('jumlah', []);
+
+        if (in_array($request->status, array('Lunas','Bayar Di Tempat'))) {
+            # code...
+            for ($iteration=0; $iteration < count($items); $iteration++) {
+            
+                $sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+    
+                $item = Item::find($items[$iteration]);
+    
+                StockMutation::create([
+                    'item_id' => $items[$iteration],
+                    'stok_awal' => $item->stok,
+                    'stok_mutasi' => $jumlah[$iteration],
+                    'stok_akhir' => $item->stok - $jumlah[$iteration],
+                    'jenis_mutasi' => 'pengurangan',
+                    'keterangan' => 'Penjualan dengan Kode : '.$request->kode_transaksi,
+                ]);
+    
+                $item->stok -= $jumlah[$iteration];
+                $item->save();
+            }
+        } else {
+            # code...
+            for ($iteration=0; $iteration < count($items); $iteration++) {
+                $sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+            }
+        }
     }
 
     /**

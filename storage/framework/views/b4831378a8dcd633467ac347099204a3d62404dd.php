@@ -1,13 +1,13 @@
-@extends('layouts/main')
 
-@section('title', 'Data Penjualan')
 
-@section('breadcrumb')
+<?php $__env->startSection('title', 'Data Penjualan'); ?>
+
+<?php $__env->startSection('breadcrumb'); ?>
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 <li class="breadcrumb-item"><a href="#">Tambah Penjualan</a></li>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Main content -->
 <section class="content">
 
@@ -19,13 +19,13 @@
           <div class="card-header">
             <h3 class="card-title">Penjualan</h3>
           </div>
-          <form method="POST" action="{{ url('/sales') }}">
+          <form method="POST" action="<?php echo e(url('/sales')); ?>">
             <div class="card-body">
-              @csrf
+              <?php echo csrf_field(); ?>
               <div class="form-group row">
                 <label for="kode_transaksi" class="col-sm-2 col-form-label">Kode Transaksi</label>
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" value="{{ $transaction_code }}" name="kode_transaksi" id="kode_transaksi" readonly>
+                  <input type="text" class="form-control" value="<?php echo e($transaction_code); ?>" name="kode_transaksi" id="kode_transaksi" readonly>
                 </div>
               </div>
               <div class="form-group row">
@@ -37,20 +37,27 @@
               <div class="form-group row">
                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" value="{{ date('d-m-Y') }}" id="tanggal" disabled>
+                  <input type="text" class="form-control" value="<?php echo e(date('d-m-Y')); ?>" id="tanggal" disabled>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="user_id" class="col-sm-2 col-form-label">Nama Pelanggan</label>
                 <div class="col-sm-4">
                   <select class="form-control select2" name="user_id" id="user_id">
-                    @foreach ($customers as $customer)
-                      <option value="{{ $customer->id }}">{{ $customer->name }}</option>
-                    @endforeach
+                    <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <option value="<?php echo e($customer->id); ?>"><?php echo e($customer->name); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
-                  @error('user_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
+                  <?php $__errorArgs = ['user_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                  <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
               </div>
               <div class="form-group row">
@@ -58,9 +65,9 @@
                 <div class="col-sm-7">
                   <select class="select2 form-control" id="item">
                     <option value="">Silahkan Pilih Barang</option>
-                    @foreach ($items as $item)
-                    <option data-id="{{ $item->id }}" data-harga="{{ $item->harga_jual }}" data-item="{{ $item->nama }}" data-stok="{{ $item->stok }}">{{ $item->nama.' @'.$item->harga_jual }}</option>
-                    @endforeach
+                    <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option data-id="<?php echo e($item->id); ?>" data-harga="<?php echo e($item->harga_jual); ?>" data-item="<?php echo e($item->nama); ?>" data-stok="<?php echo e($item->stok); ?>"><?php echo e($item->nama.' @'.$item->harga_jual); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
                 </div>
                 <div class="input-group col-sm-3">
@@ -105,15 +112,22 @@
               <div class="form-group">
                 <label for="keterangan">Keterangan</label>
                 <textarea class="form-control" name="keterangan" id="keterangan" rows="3" placeholder="Silahkan isi keterangan jika perlu...."></textarea>
-                @error('keterangan')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                <?php $__errorArgs = ['keterangan'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                  <div class="invalid-feedback"><?php echo e($message); ?></div>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
               </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
               <button type="submit" class="btn btn-md btn-primary float-right">Simpan</button>
-              <a href="{{ url('/employees') }}" class="btn btn-md btn-secondary">Kembali</a>
+              <a href="<?php echo e(url('/employees')); ?>" class="btn btn-md btn-secondary">Kembali</a>
             </div>
           </form>
           <!-- /.card-footer-->
@@ -124,9 +138,9 @@
   </div>
 </section>
 <!-- /.content -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
   <script>
     // '<div class="input-group input-group-sm">'+
     //                   '<div class="input-group-prepend">'+
@@ -184,4 +198,5 @@
       $('#total_bayar').val(sum);
     });
   </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts/main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\sim\resources\views/penjualan/penjualan_create.blade.php ENDPATH**/ ?>
