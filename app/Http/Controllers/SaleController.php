@@ -101,7 +101,11 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        $sales = Sale::with('user', 'items')->find($sale->id);
+        // dd($sales);
+        $customers = User::where('role', 'customer')->get();
+        $items = Item::all();
+        return view('penjualan.penjualan_edit', compact('customers', 'sales', 'items'));
     }
 
     /**

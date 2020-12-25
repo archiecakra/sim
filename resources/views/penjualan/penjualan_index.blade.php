@@ -60,6 +60,10 @@
                       <td class="align-middle">{{ $sale->status }}</td>
                       <td class="align-middle">{{ $sale->keterangan }}</td>
                       <td class="align-middle">
+                        @if (in_array($sale->status, array('Lunas','Bayar Di Tempat')))
+                            
+                        @else
+                        @endif
                         <a href="{{ url('/sales/'.$sale->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a>
                         <form style="all: unset;" action="{{ url('/sales/'.$sale->id) }}" method="POST">
                           @method('delete')
