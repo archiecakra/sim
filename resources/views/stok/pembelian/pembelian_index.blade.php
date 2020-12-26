@@ -58,7 +58,7 @@
                       <td class="align-middle">{{ 'Rp. '.$purchase->total_bayar.' ,-' }}</td>
                       <td class="align-middle text-left">{{ $purchase->keterangan }}</td>
                       <td class="align-middle">
-                        <a href="{{ url('/items/purchases/'.$purchase->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a>
+                        {{-- <a href="{{ url('/items/purchases/'.$purchase->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a> --}}
                         <form style="all: unset;" action="{{ url('/items/categories/'.$purchase->id) }}" method="POST">
                           @method('delete')
                           @csrf

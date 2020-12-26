@@ -51,7 +51,7 @@ class ItemsController extends Controller
             'unit_id' => 'required|numeric',
             'harga_jual' => 'required|numeric',
             'harga_beli' => 'required|numeric',
-            'stok' => 'required|numeric',
+            // 'stok' => 'required|numeric',
             'gambar' => 'required|image'
         ]);
 
@@ -63,7 +63,7 @@ class ItemsController extends Controller
             'unit_id' => $request->unit_id,
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
-            'stok' => $request->stok,
+            'stok' => 0,
             'gambar' => $request->gambar->storeAs('gambar', $namaGambar)
         ]);
 
