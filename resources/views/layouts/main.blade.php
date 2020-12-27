@@ -83,6 +83,7 @@
                   </p>
                 </a>
               </li>
+              @if (in_array(Auth::user()->role, array('warehouse','owner')))   
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Stok</h6></li>
               <li class="nav-item has-treeview {{ (request()->is('*items*') && request()->segment(2) != 'purchases' && request()->segment(2) != 'mutations') ? 'menu-open' : ''}}">
                 <a href="#" class="nav-link {{ (request()->is('*items*') && request()->segment(2) != 'purchases' && request()->segment(2) != 'mutations') ? 'active' : ''}}">
@@ -165,6 +166,8 @@
                   </li>
                 </ul>
               </li>
+              @endif
+              @if (in_array(Auth::user()->role, array('admin','owner')))
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Penjualan</h6></li>
               <li class="nav-item has-treeview {{ (request()->is('*sales*')) ? 'menu-open' : ''}}">
                 <a href="#" class="nav-link {{ (request()->is('*sales*')) ? 'active' : ''}}">
@@ -189,6 +192,8 @@
                   </li>
                 </ul>
               </li>
+              @endif
+              @if (in_array(Auth::user()->role, array('admin','owner'))) 
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Relasi</h6></li>
               <li class="nav-item has-treeview {{ (request()->is('*customers*')) ? 'menu-open' : ''}}">
                 <a href="#" class="nav-link {{ (request()->is('*customers*')) ? 'active' : ''}}">
@@ -259,6 +264,7 @@
                   </li>
                 </ul>
               </li>
+              @endif
             </ul>
           </nav>
           <!-- /.sidebar-menu -->
