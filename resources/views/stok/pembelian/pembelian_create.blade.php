@@ -1,10 +1,10 @@
 @extends('layouts/main')
 
-@section('title', 'Transaksi Pembelian Barang')
+@section('title', 'Pembelian barang')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-<li class="breadcrumb-item">Transaksi Pembelian</a></li>
+<li class="breadcrumb-item"><a href="#">Tambah Pembelian</a></li>
 @endsection
 
 @section('content')
@@ -13,108 +13,106 @@
 
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-10">
+      <div class="col-sm">
         <!-- Default box -->
-        <form action="{{ url('/items/purchases') }}" method="POST">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Tambah Transaksi Pembelian</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                  <i class="fas fa-minus"></i></button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                  <i class="fas fa-times"></i></button>
-              </div>
-            </div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tambah Pembelian Barang</h3>
+          </div>
+          <form method="POST" action="{{ url('/items/purchases') }}">
             <div class="card-body">
-                @csrf
-                <div class="form-group">
-                  <label for="supplier_id">Nama Supplier</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-laptop"></i></span>
-                    </div>
-                    <select class="custom-select custom-select-md" name="supplier_id" id="supplier_id">
-                      <option value="">--- Pilih Supplier ---</option>
+              @csrf
+              <div class="form-group row">
+                <label for="kode_pembelian" class="col-sm-2 col-form-label">Kode Pembelian</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" value="{{ $transaction_code }}" name="kode_pembelian" id="kode_pembelian" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" value="{{ date('d-m-Y') }}" id="tanggal" disabled>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="supplier_id" class="col-sm-2 col-form-label">Supplier</label>
+                <div class="col-sm-4">
+                  <select class="form-control select2" name="supplier_id" id="supplier_id">
+                    <option value="">--- Pilih Supplier ---</option>
                       @foreach ($suppliers as $supplier)
                       <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option>
                       @endforeach
-                    </select>
-                    @error('supplier_id')
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
+                  </select>
+                  @error('supplier_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
-                <div class="card">
-                  <div class="card-header">
-                    <label for="">Detail Pembelian</label>
-                    <button id="add_row" class="btn btn-primary float-right btn-sm"><i class="fa fa-plus"></i></button>
-                    <button id='delete_row' class="float-right btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
+              </div>
+              <div class="form-group row">
+                <label for="item" class="col-sm-2 col-form-label">Tambah Barang</label>
+                <div class="col-sm-7">
+                  <select class="select2 form-control" id="item">
+                    <option value="">Silahkan Pilih Barang</option>
+                    @foreach ($items as $item)
+                    <option data-id="{{ $item->id }}" data-harga="{{ $item->harga_jual }}" data-item="{{ $item->nama }}" data-stok="{{ $item->stok }}">{{ $item->nama.' @'.$item->harga_jual }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="input-group col-sm-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Stok</span>
                   </div>
-                  <div class="card-body table-responsive">
-                    <table class="table table-bordered table-md tb bg-light table-striped text-center table-hover" id="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">Barang</th>
-                          <th scope="col">Jumlah</th>
-                          <th scope="col">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr id="item0">
-                          <td class="align-middle">
-                            <select class="form-control form-control-sm item" name="item_id[]">
-                              <option value="">--- Pilih Barang ---</option>
-                              @foreach ($items as $item)
-                              <option data-harga="{{ $item->harga_beli }}" value="{{ $item->id }}">{{ $item->nama.' @'.$item->harga_beli.' /'.$item->unit->nama }}</option>
-                              @endforeach
-                            </select>
-                          </td>
-                          <td class="align-middle">
-                            <input type="number" oninput="validity.valid||(value='');" min="0" class="form-control form-control-sm jumlah @error('jumlah') is-invalid @enderror" name="jumlah[]" placeholder="1" disabled>
-                          </td>
-                          <td class="align-middle">
-                            <div class="input-group input-group-sm">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text">Rp.</span>
-                              </div>
-                              <input type="number" class="form-control form-control-sm total" placeholder="0" value="0" disabled>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr id="item1"><td colspan="3">Belum ada data, Silahkan tambah baris....</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="card-footer">
-                    <button id="simpan" type="button" class="btn btn-success btn-sm">Simpan</button>
-                    <div id="grand-total" class="float-right">
-                      <div class="input-group input-group-sm mb-2">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Total Pembelian</span><span class="input-group-text">Rp. </span>
+                  <input id="stok-label" value="" type="number" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm">
+                  <div class="card">
+                    <div class="card-body table-responsive">
+                      <table id="datatable" class="table table-sm bg-light table-striped text-center table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Barang</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col">Jumlah</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="card-footer">
+                      <div class="float-right">
+                        <div class="input-group input-group-sm mb-2">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">Total Bayar</span><span class="input-group-text">Rp. </span>
+                          </div>
+                          <input id="total_bayar" name="total_bayar" min="0" type="number" class="form-control" value="0" readonly>
                         </div>
-                        <input id="total_bayar" name="total_bayar" min="0" type="number" class="form-control" value="0" readonly>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="keterangan">Keterangan Pembelian</label>
-                  <textarea class="form-control" name="keterangan" id="keterangan" rows="3" placeholder="Silahkan isi keterangan pembelian jika perlu...."></textarea>
-                  @error('keterangan')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
+              </div>
+              <div class="form-group">
+                <label for="keterangan">Keterangan</label>
+                <textarea class="form-control" name="keterangan" id="keterangan" rows="3" placeholder="Silahkan isi keterangan jika perlu...."></textarea>
+                @error('keterangan')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-              <a class="btn btn-secondary btn-md" href="{{ url('/items/purchases/') }}">Kembali</a>
-              <button id="submit" type="submit" class="btn btn-primary btn-md float-right" disabled>Submit</button>
+              <button type="submit" class="btn btn-md btn-primary float-right">Simpan</button>
+              <a href="{{ url('/employees') }}" class="btn btn-md btn-secondary">Kembali</a>
             </div>
-            <!-- /.card-footer-->
-          </div>
-        </form>
+          </form>
+          <!-- /.card-footer-->
+        </div>
         <!-- /.card -->
       </div>
     </div>
@@ -124,62 +122,49 @@
 @endsection
 
 @section('js')
-<script> 
-  var jumlah = '';
-  var harga = '';
-  let row_number = 1;
-
-  $('#item0').hide();
-  
-  $("#add_row").click(function(e){
-    e.preventDefault();
-    let new_row_number = row_number - 1;
-    var clone = $('#item0').children().clone(true,true);
-    $('#item' + row_number).html('').append(clone);
-    $('#table').append('<tr id="item' + (row_number + 1) + '"></tr>');
-    row_number++;
-    $('input.jumlah').eq(row_number-1).attr('disabled', true);
-    $('select.item').eq(row_number-1).select2();
-  });
-
-  $("#delete_row").click(function(e){
-    e.preventDefault();
-    if(row_number > 1){
-      $("#item" + (row_number - 1)).html('');
-      $("#item"+row_number).remove();
-      row_number--;
-      if (row_number == 1) {
-        $("#item"+row_number).html('<td colspan="3">Belum ada data, Silahkan tambah baris....</td>');
-      }
-    }
-  });
-
-  $(document).on('change', 'select.item', function(){
-    let idx = $(this).index('select.item');
-    window.harga = $(this).find(':selected').data('harga');
-    $('.jumlah').eq(idx).removeAttr('disabled');
-    $('.total').eq(idx).val(jumlah*harga);
-  });
-
-  $(document).on('change', 'input.jumlah', function(){
-    let idx = $(this).index('input.jumlah');
-    window.jumlah = $(this).val();
-    $('.total').eq(idx).val(jumlah*harga);
-  });
-  
-  $('#simpan').click(function () {
-    var sum = 0;
-    $('.total').each(function() {
-        var total = parseInt($(this).val());
-        parseInt(sum += total);
-        $('#total_bayar').val(sum);
+  <script>
+    $('#item').change(function () {
+      var harga = $(this).find(':selected').data('harga');
+      var stok = $(this).find(':selected').data('stok');
+      var item = $(this).find(':selected').data('item');
+      var item_id = $(this).find(':selected').data('id');
+      var new_row = table.row.add([
+        '<input name="item_id[]" type="hidden" value="'+item_id+'">'+item,
+        'Rp. '+ harga +' ,-',
+        '<input name="jumlah[]" data-stok="'+ stok +'" type="number" class="form-control form-control-sm jumlah" placeholder="0">',
+        '0',
+        '<button type="button" class="btn btn-danger btn-sm del-row"><i class="fa fa-minus"></i></button>'
+      ]).draw( true ).node();
+      $(new_row).addClass('item-row');
+      $(new_row).find('td').eq(3).addClass('total');
+      $('#stok-label').val(stok);
     });
-    $('#submit').removeAttr('disabled');
-  });
 
-  $('form').submit(function () {
-    $("#item0").remove();
-    return true;
-  });
-</script>
+    $(document).on('click', 'button.del-row', function(){
+      var row = table.row($(this).parents('tr')).remove().draw();
+
+      var sum = 0;
+      $('.total').each(function() {
+        var total_row = parseInt($(this).text().replace(/[^0-9]/g, ''));
+        parseInt(sum += total_row);
+      });
+      $('#total_bayar').val(sum);
+    });
+
+    $(document).on('keyup', 'input.jumlah', function(){
+      var sum = 0;
+      let idx = $(this).index('input.jumlah');
+      var jumlah = $(this).val();
+
+      var harga = $(this).parent().prev().text();
+      harga = harga.replace(/[^0-9]/g, '');
+      var row_total = parseInt(jumlah*harga);
+      $('tr.item-row').eq(idx).children().eq(3).html('Rp. '+ row_total +' ,-');
+      $('.total').each(function() {
+        var total_row = parseInt($(this).text().replace(/[^0-9]/g, ''));
+        parseInt(sum += total_row);
+      });
+      $('#total_bayar').val(sum);
+    });
+  </script>
 @endsection

@@ -30,9 +30,10 @@ class PurchaseController extends Controller
      */
     public function create()
     {
+        $transaction_code = 'PCS'.sprintf("%04s", Purchase::all()->count());
         $suppliers = Supplier::all();
         $items = Item::all();
-        return view('stok.pembelian.pembelian_create', compact('suppliers', 'items'));
+        return view('stok.pembelian.pembelian_create', compact('suppliers', 'items', 'transaction_code'));
     }
 
     /**
@@ -45,7 +46,7 @@ class PurchaseController extends Controller
     {
         $count = Purchase::all()->count();
         Purchase::create([
-            'kode_pembelian' => 'PRC'.sprintf("%04s", $count++),
+            'kode_pembelian' => $request->kode_pembelian,
             'supplier_id' => $request->supplier_id,
             'total_bayar' => $request->total_bayar,
             'keterangan' => $request->keterangan,
