@@ -80,6 +80,8 @@ class SaleController extends Controller
                 $sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
             }
         }
+
+        return redirect('/sales')->with('message', 'Penjualan Dengan Code : '.$request->kode_transaksi.' Berhasil Dibuat');
     }
 
     /**

@@ -16,7 +16,7 @@
         <!-- small card -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
+            <h3>{{ $sales }}</h3>
 
             <p>Penjualan</p>
           </div>
@@ -33,7 +33,7 @@
         <!-- small card -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>20</h3>
+            <h3>{{ $purchases }}</h3>
 
             <p>Pembelian</p>
           </div>
@@ -50,7 +50,7 @@
         <!-- small card -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>44</h3>
+            <h3>{{ $items }}</h3>
 
             <p>Barang</p>
           </div>
@@ -67,7 +67,7 @@
         <!-- small card -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>65</h3>
+            <h3>{{ $customers }}</h3>
 
             <p>Pelanggan</p>
           </div>
@@ -98,7 +98,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table class="table" id="datatable">
+            <table class="table">
               <thead>
               <tr>
                 <th>Tanggal</th>
@@ -108,7 +108,14 @@
               </tr>
               </thead>
               <tbody>
-
+                @foreach ($latest_sale as $sale)
+                  <tr>
+                    <td>{{ $sale->created_at->format('j F Y') }}</td>
+                    <td>{{ $sale->kode_transaksi }}</td>
+                    <td>{{ $sale->status }}</td>
+                    <td>{{ 'Rp. '.$sale->total_bayar.' ,-' }}</td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
             {{-- <div class="table-responsive">
@@ -116,10 +123,6 @@
             <!-- /.table-responsive -->
           </div>
           <!-- /.card-body -->
-          <div class="card-footer clearfix">
-            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-          </div>
           <!-- /.card-footer -->
         </div>
       </div>
@@ -140,41 +143,31 @@
           <!-- /.card-header -->
           <div class="card-body p-0">
             <ul class="products-list product-list-in-card pl-2 pr-2">
-              <li class="item">
-                <div class="">
-                  <a href="javascript:void(0)" class="product-title">Samsung TV
-                    <span class="btn btn-danger btn-md float-right">-10</span></a>
-                  <span class="product-description">
-                    2020-12-24 10:36:23
-                  </span>
-                </div>
-              </li>
-              <li class="item">
-                <div class="">
-                  <a href="javascript:void(0)" class="product-title">Samsung TV
-                    <span class="btn btn-success btn-md float-right">+20</span></a>
-                  <span class="product-description">
-                    2020-12-24 10:36:23
-                  </span>
-                </div>
-              </li>
-              <li class="item">
-                <div class="">
-                  <a href="javascript:void(0)" class="product-title">Samsung TV
-                    <span class="btn btn-danger btn-md float-right">-10</span></a>
-                  <span class="product-description">
-                    2020-12-24 10:36:23
-                  </span>
-                </div>
-              </li>
-              
+              @foreach ($item_mutations as $mutation)
+                <li class="item">
+                  <div class="">
+                    <a href="javascript:void(0)" class="product-title">{{ $mutation->item->nama }}
+                      @if ($mutation->jenis_mutasi == 'penambahan')
+                        <span class="btn btn-success btn-md float-right">
+                          <td>{{ '+'.$mutation->stok_mutasi }}</td>
+                        </span>
+                      @else
+                        <span class="btn btn-danger btn-md float-right">
+                          <td>{{ '-'.$mutation->stok_mutasi }}</td>
+                        </span>
+                      @endif
+                    </a>
+                    <span class="product-description">
+                      {{ $mutation->created_at->format('j F Y') }}
+                    </span>
+                  </div>
+                </li>
+              @endforeach
               <!-- /.item -->
             </ul>
           </div>
           <!-- /.card-body -->
-          <div class="card-footer text-center">
-            <a href="javascript:void(0)" class="uppercase">View All Products</a>
-          </div>
+
           <!-- /.card-footer -->
         </div>
       </div>
