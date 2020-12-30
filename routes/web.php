@@ -52,5 +52,8 @@ Route::resource('suppliers', SupplierController::class);
 //Penjualan
 Route::resource('sales', SaleController::class);
 
+//Customer routes
+Route::resource('shop', ShopController::class);
+
 //Auth Routes
 Auth::routes();
