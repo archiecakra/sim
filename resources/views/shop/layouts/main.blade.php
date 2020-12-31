@@ -32,22 +32,31 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
         </ul>
-        
-        <ul class="nav navbar-nav ml-auto">
-          <a class="btn btn-danger btn-sm" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-          </a>
-
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-          </form>
-        </ul>
 
         <!-- SEARCH FORM -->
+        <form class="form-inline">
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
 
         <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Messages Dropdown Menu -->
+          <a class="nav-link" href="#">
+            <i class="fas fa-clipboard-list"></i>
+          </a>
+          <!-- Notifications Dropdown Menu -->
+          <a class="nav-link" href="#">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge badge-warning navbar-badge">15</span>
+          </a>
+        </ul>
       </nav>
       <!-- /.navbar -->
 
@@ -56,7 +65,7 @@
         <!-- Brand Logo -->
         <a href="{{ url('/') }}" class="brand-link">
           <img src="{{ url('gambar/site_assets/site_logo.png') }}" alt="Mentari Logo" class="brand-image">
-          <span class="brand-text font-weight-light">SIM Mentari</span>
+          <span class="brand-text font-weight-light">Mentari Katalog</span>
         </a>
 
         <!-- Sidebar -->
@@ -69,204 +78,21 @@
             <div class="info">
               <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
+            <div class="info">
+              <a class="btn btn-danger btn-sm" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+          </form>
+            </div>
           </div>
 
           <!-- Sidebar Menu -->
-          <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-              <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ (request()->is('*dashboard')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-list-alt"></i>
-                  <p>
-                    Dashboard
-                  </p>
-                </a>
-              </li>
-              @if (in_array(Auth::user()->role, array('warehouse','admin','owner')))   
-              <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Stok</h6></li>
-              <li class="nav-item has-treeview {{ (request()->is('*items*') && request()->segment(2) != 'purchases' && request()->segment(2) != 'mutations') ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*items*') && request()->segment(2) != 'purchases' && request()->segment(2) != 'mutations') ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-box"></i>
-                  <p>
-                    Barang
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/items/create') }}" class="nav-link {{ request()->is('*items/create') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Barang</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/items') }}" class="nav-link {{ request()->is('*items') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Barang</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/items/categories') }}" class="nav-link {{ request()->is('*items/categories') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Kategori</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/items/units') }}" class="nav-link {{ request()->is('*items/units') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Satuan</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item has-treeview {{ (request()->is('*purchases*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*purchases*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-gifts"></i>
-                  <p>
-                    Pembelian Barang
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/items/purchases/create') }}" class="nav-link {{ request()->is('*items/purchases/create') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Pembelian</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/items/purchases') }}" class="nav-link {{ request()->is('*items/purchases') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Pembelian</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item has-treeview {{ (request()->is('*mutations*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*mutations*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-history"></i>
-                  <p>
-                    Mutasi Stok
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/items/mutations/create') }}" class="nav-link {{ request()->is('*items/mutations/create') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Mutasi Stok</p>  
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/items/mutations') }}" class="nav-link {{ request()->is('*items/mutations') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Mutasi</p> 
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              @endif
-              @if (in_array(Auth::user()->role, array('admin','owner')))
-              <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Penjualan</h6></li>
-              <li class="nav-item has-treeview {{ (request()->is('*sales*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*sales*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-shopping-cart"></i>
-                  <p>
-                    Transaksi Penjualan
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                  <a href="{{ url('/sales/create') }}" class="nav-link {{ request()->is('*sales/create') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Penjualan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/sales') }}" class="nav-link {{ request()->is('*sales') ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Penjualan</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              @endif
-              @if (in_array(Auth::user()->role, array('admin','owner'))) 
-              <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Relasi</h6></li>
-              <li class="nav-item has-treeview {{ (request()->is('*customers*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*customers*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                    Pelanggan
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/customers/create') }}" class="nav-link {{ (request()->is('*customers/create')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Pelanggan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/customers') }}" class="nav-link {{ (request()->is('*customers')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Pelanggan</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item has-treeview {{ (request()->is('*supplier*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*supplier*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-people-carry"></i>
-                  <p>
-                    Supplier
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/suppliers/create') }}" class="nav-link {{ (request()->is('*suppliers/create')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Supplier</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/suppliers') }}" class="nav-link {{ (request()->is('*suppliers')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Supplier</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item has-treeview {{ (request()->is('*employees*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*employees*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-user-tie"></i>
-                  <p>
-                    Pegawai
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/employees/create') }}" class="nav-link {{ (request()->is('*employees/create')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Pegawai</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/employees') }}" class="nav-link {{ (request()->is('*employees')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Pegawai</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              @endif
-            </ul>
-          </nav>
+          @yield('sidebar')
           <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->

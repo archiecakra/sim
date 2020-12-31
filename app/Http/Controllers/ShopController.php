@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Category;
+use App\Models\Item;
+use App\Models\Unit;
+
 class ShopController extends Controller
 {
     /**
@@ -13,7 +17,9 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view ('shop.layouts.main');
+        $categories = Category::all();
+        $items = Item::all();
+        return view ('shop.landing', compact('categories', 'items'));
     }
 
     /**
@@ -45,7 +51,10 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
+        // $categories = Category::all();
+        $item = Item::find($id);
+        // dd($items);
+        return view ('shop.item', compact('item'));
     }
 
     /**

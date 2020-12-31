@@ -54,7 +54,7 @@ Route::resource('suppliers', SupplierController::class);
 Route::resource('sales', SaleController::class);
 
 //Customer routes
-Route::resource('shop', ShopController::class);
+Route::resource('shop', ShopController::class)->parameters(['shop.show' => 'user']);
 
 //Auth Routes
 Auth::routes();
