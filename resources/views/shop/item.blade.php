@@ -42,30 +42,33 @@
               </tr>
             </table>
 
-            <div class="bg-gray py-2 px-3 mt-4">
-              {{-- <input type="number" class="form-control" placeholder="Masukkan Jumlah Barang"> --}}
-              <div class="input-group mb-3">
-                <input type="number" id="jumlah" placeholder="Masukkan Jumlah Barang" class="form-control">
-                <div class="input-group-append">
-                  <span class="input-group-text">{{ $item->unit->nama }}</span>
+            <form action="{{ url('/shop') }}" method="POST">
+              @csrf
+              <div class="bg-gray py-2 px-3 mt-4">
+                <div class="input-group mb-3">
+                  <input type="hidden" name="item_id" value="{{ $item->id }}">
+                  <input type="number" id="jumlah" name="jumlah" placeholder="Masukkan Jumlah Barang" class="form-control">
+                  <div class="input-group-append">
+                    <span class="input-group-text">{{ $item->unit->nama }}</span>
+                  </div>
                 </div>
+                <br>
+                <h2 class="mb-0">
+                  Total
+                </h2>
+                <h4 class="mt-0">
+                  <small>Rp. 0</small>
+                </h4>
               </div>
-              <br>
-              <h2 class="mb-0">
-                Total
-              </h2>
-              <h4 class="mt-0">
-                <small>Rp. 0</small>
-              </h4>
-            </div>
 
-            <div class="mt-4 text-center">
-              <div class="btn btn-primary btn-lg btn-flat">
-                <i class="fas fa-cart-plus fa-lg mr-2"></i> 
-                Masukkan Keranjang
+              <div class="mt-4 text-center">
+                <button type="submit" class="btn btn-primary btn-lg btn-flat text-light">
+                  <i class="fas fa-cart-plus fa-lg mr-2"></i> 
+                  Masukkan Keranjang
+                </button>
+                
               </div>
-              
-            </div>
+            </form>
 
           </div>
         </div>
@@ -75,6 +78,9 @@
     <!-- /.card -->
 
   </section>
+  <a id="back-to-top" href="{{ url('/shop') }}" class="btn btn-success back-to-top" role="button" aria-label="Scroll to top">
+    <i class="fas fa-home"></i>
+  </a>
 <!-- /.content -->
 @endsection
 

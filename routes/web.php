@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
@@ -54,7 +55,8 @@ Route::resource('suppliers', SupplierController::class);
 Route::resource('sales', SaleController::class);
 
 //Customer routes
-Route::resource('shop', ShopController::class)->parameters(['shop.show' => 'user']);
+Route::resource('shop', ShopController::class);
+Route::resource('cart', CartController::class);
 
 //Auth Routes
 Auth::routes();
