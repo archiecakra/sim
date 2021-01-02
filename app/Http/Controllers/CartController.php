@@ -66,6 +66,9 @@ class CartController extends Controller
             $sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
         }
         Cart::where('user_id', Auth::user()->id)->delete();
+
+        $request->session()->flash('message', 'Silahkan Berikan Struk ke Kasir.');
+        return response()->json(['response'=>'200']);
     }
 
     /**

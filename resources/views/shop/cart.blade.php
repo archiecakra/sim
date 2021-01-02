@@ -78,7 +78,13 @@
       type      : 'POST',
       url       : '{{ url("/cart") }}',
       dataType  : 'json',
-      data      : {"_token": "{{ csrf_token() }}", item_id:item_id, jumlah:jumlah, total_bayar:total_bayar}
+      data      : {"_token": "{{ csrf_token() }}", item_id:item_id, jumlah:jumlah, total_bayar:total_bayar},
+      success   : function () {
+        window.location.href = '{{ url("/orders") }}';
+      },
+      error     : function () {
+        console.log('error');
+      }
     });
   });
 </script>

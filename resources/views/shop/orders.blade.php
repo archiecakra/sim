@@ -10,11 +10,22 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
+        @if (session('message'))
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>{{ session('message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endif
         @foreach ($orders as $order)
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="card collapsed-card">
+            <div class="card @if($loop->first) @else collapsed-card @endif">
               <div class="card-header" data-card-widget="collapse">
-                <h3 class="card-title">( {{ $order->kode_transaksi }} ) Pesanan ke {{ $loop->remaining+1 }}</h3>
+                <h3 class="card-title">
+                  ({{ $order->kode_transaksi }})Pesanan {{ $loop->remaining+1 }} 
+                  <span class="badge @if($order->status == 'Belum Dibayar') badge-danger @else badge-success @endif">{{ $order->status }}</span>
+                </h3>
     
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -44,7 +55,8 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <a href="{{ url('/orders/'.$order->id) }}" class="btn btn-sm btn-primary">Lihat Struk</a>
+                <a href="{{ url('/orders/'.$order->id) }}" class="btn btn-sm btn-primary">Struk</a>
+                <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
                 <p class="float-right">Total Belanja : Rp. {{ $order->total_bayar }}</p>
               </div>
               <!-- /.card-footer -->
