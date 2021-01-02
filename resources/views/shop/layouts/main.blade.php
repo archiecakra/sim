@@ -6,6 +6,8 @@
     <title>@yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- csrf token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ url('/css/fa.all.min.css') }}">
     <!-- overlayScrollbars -->
@@ -52,16 +54,16 @@
             <i class="fas fa-clipboard-list"></i>
           </a>
           <!-- Notifications Dropdown Menu -->
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{ url('/cart') }}">
             <i class="fas fa-shopping-cart"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
+            <span class="badge badge-warning navbar-badge">{{ $cart_count }}</span>
           </a>
         </ul>
       </nav>
       <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <aside class="main-sidebar sidebar-light-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ url('/') }}" class="brand-link">
           <img src="{{ url('gambar/site_assets/site_logo.png') }}" alt="Mentari Logo" class="brand-image">

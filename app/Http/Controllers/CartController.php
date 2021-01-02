@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Cart;
 use App\Models\Item;
+use App\Models\Sale;
+use App\Models\StockMutation;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+
+use Auth;
 
 class CartController extends Controller
 {
@@ -18,9 +22,10 @@ class CartController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $items = Item::all();
-        $cart = Cart::where('user_id', Auth::user()->id)->first();
-        return view ('shop.cart', compact('categories', 'items', 'cart'));
+        // $items = Item::all();
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        $cart_count = Cart::where('user_id', Auth::user()->id)->count();
+        return view ('shop.cart', compact('categories', 'carts', 'cart_count'));
     }
 
     /**
@@ -41,7 +46,26 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'item_id' => 'required|numeric',
+            'jumlah' => 'required|numeric',
+        ]);
+        
+        $kode_transaksi = 'SLS'.sprintf("%04s", Sale::all()->count());
+        $sale = Sale::create([
+            'kode_transaksi' => $kode_transaksi,
+            'status' => 'Belum Dibayar',
+            'user_id' => Auth::user()->id,
+            'total_bayar' => $request->total_bayar,
+            'keterangan' => 'Pembelian atas nama '.Auth::user()->name,
+        ]);
+        $items = $request->input('item_id', []);
+        $jumlah = $request->input('jumlah', []);
+        for ($iteration=0; $iteration < count($items); $iteration++) {
+            $sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+        }
+        Cart::where('user_id', Auth::user()->id)->delete();
     }
 
     /**

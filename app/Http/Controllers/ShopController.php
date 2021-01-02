@@ -22,7 +22,9 @@ class ShopController extends Controller
     {
         $categories = Category::all();
         $items = Item::all();
-        return view ('shop.landing', compact('categories', 'items'));
+        $cart_count = Cart::where('user_id', Auth::user()->id)->count();
+        // dd($cart_count);
+        return view ('shop.landing', compact('categories', 'items', 'cart_count'));
     }
 
     /**
@@ -47,7 +49,7 @@ class ShopController extends Controller
         // dd($cart->first()->jumlah);
         if ($cart->count() == 1) {
             # code...
-            Cart::where('user_id', Auth::user()->id)->where('item_id', $request->item_id)->update([
+            $cart->update([
                 'jumlah' => $request->jumlah + $cart->first()->jumlah
             ]);
         } else {
@@ -58,6 +60,7 @@ class ShopController extends Controller
                 'jumlah' => $request->jumlah
             ]);
         }
+        return redirect('/cart')->with('message', 'Barang Sudah Dimasukkan Keranjang!');
     }
 
     /**
@@ -69,9 +72,10 @@ class ShopController extends Controller
     public function show($id)
     {
         // $categories = Category::all();
+        $cart_count = Cart::where('user_id', Auth::user()->id)->count();
         $item = Item::find($id);
         // dd($items);
-        return view ('shop.item', compact('item'));
+        return view ('shop.item', compact('item', 'cart_count'));
     }
 
     /**
