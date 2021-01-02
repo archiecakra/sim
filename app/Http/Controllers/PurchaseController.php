@@ -163,6 +163,8 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        Purchase::find($purchase->id)->items()->detach();
+        Purchase::destroy($purchase->id);
+        return redirect('/items/purchases')->with('message', 'Pembelian Berhasil Dihapus');
     }
 }

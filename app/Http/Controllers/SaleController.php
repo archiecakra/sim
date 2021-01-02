@@ -119,7 +119,45 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        //
+        // dd($request);
+        $this_sale = Sale::find($sale->id);
+        $this_sale->items()->detach();
+        $this_sale->update([
+            'status' => $request->status,
+            'total_bayar' => $request->total_bayar,
+            'keterangan' => $request->keterangan,
+        ]);
+        $items = $request->input('item_id', []);
+        $jumlah = $request->input('jumlah', []);
+
+        if (in_array($request->status, array('Lunas','Bayar Di Tempat'))) {
+            # code...
+            for ($iteration=0; $iteration < count($items); $iteration++) {
+            
+                $this_sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+    
+                $item = Item::find($items[$iteration]);
+    
+                StockMutation::create([
+                    'item_id' => $items[$iteration],
+                    'stok_awal' => $item->stok,
+                    'stok_mutasi' => $jumlah[$iteration],
+                    'stok_akhir' => $item->stok - $jumlah[$iteration],
+                    'jenis_mutasi' => 'pengurangan',
+                    'keterangan' => 'Penjualan dengan Kode : '.$request->kode_transaksi,
+                ]);
+    
+                $item->stok -= $jumlah[$iteration];
+                $item->save();
+            }
+        } else {
+            # code...
+            for ($iteration=0; $iteration < count($items); $iteration++) {
+                $this_sale->items()->attach($items[$iteration], ['jumlah' => $jumlah[$iteration]]);
+            }
+        }
+
+        return redirect('/sales')->with('message', 'Penjualan Dengan Kode : '.$request->kode_transaksi.' Berhasil Diubah');
     }
 
     /**
@@ -130,6 +168,8 @@ class SaleController extends Controller
      */
     public function destroy(Sale $sale)
     {
-        //
+        Sale::find($sale->id)->items()->detach();
+        Sale::destroy($sale->id);
+        return redirect('/sales')->with('message', 'Transaksi Berhasil Dihapus');
     }
 }
