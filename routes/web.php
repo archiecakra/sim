@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemsController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShopController;
@@ -57,6 +58,7 @@ Route::resource('sales', SaleController::class);
 //Customer routes
 Route::resource('shop', ShopController::class);
 Route::resource('cart', CartController::class);
+Route::resource('orders', OrderController::class);
 
 //Auth Routes
 Auth::routes();

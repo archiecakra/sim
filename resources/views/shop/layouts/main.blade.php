@@ -50,7 +50,7 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <!-- Messages Dropdown Menu -->
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{{ url('/orders') }}">
             <i class="fas fa-clipboard-list"></i>
           </a>
           <!-- Notifications Dropdown Menu -->
@@ -63,7 +63,7 @@
       <!-- /.navbar -->
 
       <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-light-primary elevation-4">
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ url('/') }}" class="brand-link">
           <img src="{{ url('gambar/site_assets/site_logo.png') }}" alt="Mentari Logo" class="brand-image">

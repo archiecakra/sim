@@ -48,8 +48,8 @@ class CartController extends Controller
     {
         // dd($request);
         $request->validate([
-            'item_id' => 'required|numeric',
-            'jumlah' => 'required|numeric',
+            'item_id' => 'required',
+            'jumlah' => 'required',
         ]);
         
         $kode_transaksi = 'SLS'.sprintf("%04s", Sale::all()->count());
