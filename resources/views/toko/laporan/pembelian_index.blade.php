@@ -31,12 +31,12 @@
                 {{-- <input type="password" class="form-control" id="inputPassword4" placeholder="Password"> --}}
                 <form style="all: unset;" action="{{ url('/reports/purchase') }}" method="POST">
                   @csrf
-                <select name="supplier_id" class="form-control select2" name="supplier_id" id="supplier_id">
-                      <option value="">Semua</option>
-                      @foreach ($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option> 
-                      @endforeach
-                    </select>
+                  <select name="supplier_id" class="form-control select2" name="supplier_id" id="supplier_id">
+                    <option value="">Semua</option>
+                    @foreach ($suppliers as $supplier)
+                      <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option> 
+                    @endforeach
+                  </select>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputEmail4">Jenis Laporan</label>
@@ -56,8 +56,14 @@
                   <div class="col-md-2" style="margin-top: 15px;">
                     <div class="btn-group" role="group">
                       <button type="submit" class="btn btn-primary btn-md">Filter</button>
-                    </form>
-                      <button type="button" class="btn btn-success btn-md">Print</button>
+                </form>
+                      <form id="print" action="{{ url('/reports/purchase/print') }}" method="POST">
+                        @csrf
+                        <input type="hidden" id="supplier_print" name="supplier_id" value="">
+                        <input type="hidden" id="jenis_print" name="jenis" value="">
+                        <input type="hidden" id="tanggal_print" name="tanggal" value="">
+                        <button type="submit" class="btn btn-success btn-md">Print</button>
+                      </form>
                     </div>
                   </div>
                   </div>
@@ -70,7 +76,7 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Daftar Transaksi Pembelian</h3>
-            <a href="{{ url('/items/purchases/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a>
+            {{-- <a href="{{ url('/items/purchases/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a> --}}
           </div>
           <div class="card-body">
             <div class="table-responsive-md">
@@ -83,7 +89,7 @@
                     <th class="align-middle" scope="col">Barang</th>
                     <th class="align-middle" scope="col">Total Pembelian</th>
                     <th class="align-middle" scope="col">Keterangan</th>
-                    <th class="align-middle" scope="col">Aksi</th>
+                    {{-- <th class="align-middle" scope="col">Aksi</th> --}}
                   </tr>
                 </thead>
                 <tbody>
@@ -99,16 +105,15 @@
                           @endforeach
                         </ul>
                       </td>
-                      <td class="align-middle">{{ 'Rp. '.$purchase->total_bayar.' ,-' }}</td>
+                      <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($purchase->total_bayar, 2).' ,-' }}</td>
                       <td class="align-middle text-left">{{ $purchase->keterangan }}</td>
-                      <td class="align-middle">
-                        {{-- <a href="{{ url('/items/purchases/'.$purchase->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a> --}}
+                      {{-- <td class="align-middle">
                         <form style="all: unset;" action="{{ url('/items/categories/'.$purchase->id) }}" method="POST">
                           @method('delete')
                           @csrf
                           <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash"></i></button>
                         </form>
-                      </td>
+                      </td> --}}
                     </tr>
                   @endforeach
                 </tbody>
@@ -130,6 +135,16 @@
 
 @section('js')
   <script>
+    $('form#print').submit(function () {
+      var supplier_id = $('select#supplier_id option:selected').val();
+      var jenis = $('#jenis option:selected').val();
+      var tanggal = $('input#tanggal').val();
+      $('input#supplier_print').val(supplier_id);
+      $('input#jenis_print').val(jenis);
+      $('input#tanggal_print').val(tanggal);
+      // alert(supplier_id+jenis+tanggal);
+    });
+
     $('select#jenis').change(function () {
       var selected = $('#jenis option:selected').val();
       $('#tanggal').datetimepicker('destroy');

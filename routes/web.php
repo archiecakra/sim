@@ -58,6 +58,8 @@ Route::resource('customers', CustomerController::class)->parameters(['customers'
 Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
 Route::get('/reports/purchase', [ReportController::class, 'purchase']);
 Route::post('/reports/purchase', [ReportController::class, 'purchase']);
+Route::get('/reports/purchase/print', [ReportController::class, 'purchase_print']);
+Route::post('/reports/purchase/print', [ReportController::class, 'purchase_print']);
 Route::get('/reports/sale', [ReportController::class, 'sale']);
 Route::get('/reports/stock', [ReportController::class, 'stock']);
 
