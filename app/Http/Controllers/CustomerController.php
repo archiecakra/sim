@@ -16,7 +16,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = User::where('role', 'customer')->get();
-        return view ('relasi.pelanggan.pelanggan_index', compact('customers'));
+        return view ('penjualan.pelanggan.pelanggan_index', compact('customers'));
     }
     
     /**
@@ -26,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view ('relasi.pelanggan.pelanggan_create');
+        return view ('penjualan.pelanggan.pelanggan_create');
     }
 
     /**
@@ -77,7 +77,7 @@ class CustomerController extends Controller
     public function edit(User $user)
     {
         // dd($user);
-        return view ('relasi.pelanggan.pelanggan_edit', compact('user'));
+        return view ('penjualan.pelanggan.pelanggan_edit', compact('user'));
     }
 
     /**

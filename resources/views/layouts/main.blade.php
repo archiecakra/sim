@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url('/css/select2-bootstrap4.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
+    <!-- Tempus dominus datepicker -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/tempusdominus-bootstrap-4.css') }}">
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
   <!-- Site wrapper -->
@@ -166,6 +168,29 @@
                   </li>
                 </ul>
               </li>
+              <li class="nav-item has-treeview {{ (request()->is('*supplier*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*supplier*')) ? 'active' : ''}}">
+                  <i class="nav-icon fas fa-people-carry"></i>
+                  <p>
+                    Supplier
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('/suppliers/create') }}" class="nav-link {{ (request()->is('*suppliers/create')) ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tambah Supplier</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('/suppliers') }}" class="nav-link {{ (request()->is('*suppliers')) ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Kelola Supplier</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
               @endif
               @if (in_array(Auth::user()->role, array('admin','owner')))
               <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Penjualan</h6></li>
@@ -192,9 +217,6 @@
                   </li>
                 </ul>
               </li>
-              @endif
-              @if (in_array(Auth::user()->role, array('admin','owner'))) 
-              <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Relasi</h6></li>
               <li class="nav-item has-treeview {{ (request()->is('*customers*')) ? 'menu-open' : ''}}">
                 <a href="#" class="nav-link {{ (request()->is('*customers*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-users"></i>
@@ -218,29 +240,9 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview {{ (request()->is('*supplier*')) ? 'menu-open' : ''}}">
-                <a href="#" class="nav-link {{ (request()->is('*supplier*')) ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-people-carry"></i>
-                  <p>
-                    Supplier
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('/suppliers/create') }}" class="nav-link {{ (request()->is('*suppliers/create')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tambah Supplier</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('/suppliers') }}" class="nav-link {{ (request()->is('*suppliers')) ? 'active' : ''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Kelola Supplier</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              @endif
+              @if (in_array(Auth::user()->role, array('admin','owner'))) 
+              <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Manajemen Toko</h6></li>
               <li class="nav-item has-treeview {{ (request()->is('*employees*')) ? 'menu-open' : ''}}">
                 <a href="#" class="nav-link {{ (request()->is('*employees*')) ? 'active' : ''}}">
                   <i class="nav-icon fas fa-user-tie"></i>
@@ -260,6 +262,35 @@
                     <a href="{{ url('/employees') }}" class="nav-link {{ (request()->is('*employees')) ? 'active' : ''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Kelola Pegawai</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item has-treeview {{ (request()->is('*reports*')) ? 'menu-open' : ''}}">
+                <a href="#" class="nav-link {{ (request()->is('*reports*')) ? 'active' : ''}}">
+                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <p>
+                    Laporan
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('/reports/purchase') }}" class="nav-link {{ (request()->is('*reports/purchase')) ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Laporan Pembelian</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('/reports/sale') }}" class="nav-link {{ (request()->is('*reports/sale')) ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Laporan Penjualan</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('/reports/stock') }}" class="nav-link {{ (request()->is('*reports/stock')) ? 'active' : ''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Laporan Stok</p>
                     </a>
                   </li>
                 </ul>
@@ -326,6 +357,9 @@
   <script src="{{ url('/js/select2.full.min.js') }}"></script>
   <!-- datatables -->
   <script type="text/javascript" src="{{ url('/js/datatables.min.js') }}"></script>
+  <!-- tempusdominus -->
+  <script type="text/javascript" src="{{ url('/js/moment.js') }}"></script>
+  <script type="text/javascript" src="{{ url('/js/tempusdominus-bootstrap-4.js') }}"></script>
   <!-- my custom script -->
   <script>
     

@@ -17,7 +17,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = User::where('role', '!=', 'customer')->get();
-        return view ('relasi.pegawai.pegawai_index', compact('employees'));
+        return view ('toko.pegawai.pegawai_index', compact('employees'));
     }
 
     /**
@@ -27,7 +27,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('relasi.pegawai.pegawai_create');
+        return view('toko.pegawai.pegawai_create');
     }
 
     /**
@@ -78,7 +78,7 @@ class EmployeeController extends Controller
      */
     public function edit(User $user)
     {
-        return view ('relasi.pegawai.pegawai_edit', compact('user'));
+        return view ('toko.pegawai.pegawai_edit', compact('user'));
     }
 
     /**

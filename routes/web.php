@@ -11,6 +11,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockMutationController;
@@ -46,14 +47,19 @@ Route::resource('/items/mutations', StockMutationController::class)->only([
 Route::resource('/items/categories', CategoryController::class);
 Route::resource('/items/units', UnitController::class);
 Route::resource('/items', ItemsController::class);
-
-//Data Relasi
-Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
-Route::resource('customers', CustomerController::class)->parameters(['customers' => 'user']);
 Route::resource('suppliers', SupplierController::class);
+
 
 //Penjualan
 Route::resource('sales', SaleController::class);
+Route::resource('customers', CustomerController::class)->parameters(['customers' => 'user']);
+
+//Data Toko
+Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
+Route::get('/reports/purchase', [ReportController::class, 'purchase']);
+Route::post('/reports/purchase', [ReportController::class, 'purchase']);
+Route::get('/reports/sale', [ReportController::class, 'sale']);
+Route::get('/reports/stock', [ReportController::class, 'stock']);
 
 //Customer routes
 Route::resource('shop', ShopController::class);

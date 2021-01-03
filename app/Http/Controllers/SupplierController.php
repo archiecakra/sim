@@ -15,7 +15,7 @@ class SupplierController extends Controller
     public function index()
     {
         $suppliers = Supplier::all();
-        return view('relasi.supplier.supplier_index', ['suppliers' => $suppliers]);
+        return view('stok.supplier.supplier_index', ['suppliers' => $suppliers]);
     }
 
     /**
@@ -25,7 +25,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('relasi.supplier.supplier_create');
+        return view('stok.supplier.supplier_create');
     }
 
     /**
@@ -66,7 +66,7 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        return view('relasi.supplier.supplier_edit', ['supplier' => $supplier]);
+        return view('stok.supplier.supplier_edit', ['supplier' => $supplier]);
     }
 
     /**
