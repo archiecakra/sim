@@ -80,9 +80,6 @@
   <script>
     $(document).on('change', 'select#item_id', function(){
       var awal = $(this).find(':selected').data('stok');
-      // let idx = $(this).index('select.item');
-      // window.harga = $(this).find(':selected').data('harga');
-      // $('.jumlah').eq(idx).removeAttr('disabled');
       $('#stok_awal').val(awal);
     });
   </script>

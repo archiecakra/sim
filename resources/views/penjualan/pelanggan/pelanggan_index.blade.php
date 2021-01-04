@@ -26,7 +26,7 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Daftar Pelanggan</h3>
-            <a href="{{ url('/items/categories/create') }}" class="btn btn-primary float-right text-white">Tambah Pelanggan</a>
+            <a href="{{ url('/customers/create') }}" class="btn btn-primary float-right text-white">Tambah Pelanggan</a>
           </div>
           <div class="card-body">
             <div class="table-responsive-md">
