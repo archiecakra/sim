@@ -38,8 +38,8 @@
                     <th class="align-middle" scope="col">#</th>
                     <th class="align-middle" scope="col">Nama Barang</th>
                     <th class="align-middle" scope="col">Kategori</th>
-                    <th class="align-middle" scope="col">Harga Jual</th>
                     <th class="align-middle" scope="col">Harga Beli</th>
+                    <th class="align-middle" scope="col">Harga Jual</th>
                     <th class="align-middle" scope="col">Stok</th>
                     <th class="align-middle" scope="col">Satuan</th>
                     <th class="align-middle" scope="col" style="width: 15%;">Gambar</th>
