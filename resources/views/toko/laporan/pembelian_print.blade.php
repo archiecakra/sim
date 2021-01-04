@@ -36,8 +36,8 @@
       <div class="col-sm-6 invoice-col">
         <address>
           <strong>Toko Mentari Alat Tulis Grosir.</strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
+          Pasar Paing Stand No.16-17<br>
+          Jl. Zamhuri No.31, Rungkut Kidul<br>
           Telepon: (+62) 318-432-447<br>
           Email: mentarigrosir@gmail.com
         </address>
