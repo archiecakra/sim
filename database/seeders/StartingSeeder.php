@@ -65,7 +65,13 @@ class StartingSeeder extends Seeder
         }
 
         $suppliers =([
-            ['nama' => 'CV. Artha Mandiri'], ['nama' => 'PT. Mandiri Prima'], ['nama' => 'PT. Bangun Sejahtera'], ['nama' => 'PT. Digi'],
+            ['nama' => 'CV. Artha Mandiri'], 
+            ['nama' => 'PT. Mandiri Prima'], 
+            ['nama' => 'PT. Bangun Sejahtera'], 
+            ['nama' => 'PT. Digital Utama'],
+            ['nama' => 'Toko Buku Salo'],
+            ['nama' => 'Toko Buku Uranus'],
+            ['nama' => 'Togamas Margorejo'],
         ]);
 
         foreach ($suppliers as $supplier) {
@@ -100,6 +106,24 @@ class StartingSeeder extends Seeder
                 'harga_jual' => '11000',
                 'stok' => '31',
                 'gambar' => 'gambar/Bolpoint Faster 13mm Hitam.png',
+            ],
+            [
+                'nama' => 'Pilot 20mm Hitam',
+                'category_id' => '3',
+                'unit_id' => '2',
+                'harga_beli' => '10000',
+                'harga_jual' => '12500',
+                'stok' => '30',
+                'gambar' => 'gambar/Bolpoint Faster 13mm Hitam.png',
+            ],
+            [
+                'nama' => 'Buku Tulis kiky 58 Lembar',
+                'category_id' => '1',
+                'unit_id' => '2',
+                'harga_beli' => '35000',
+                'harga_jual' => '40000',
+                'stok' => '25',
+                'gambar' => 'gambar/Buku Tulis Sidu 58 Lembar.png',
             ],
         ]);
         
