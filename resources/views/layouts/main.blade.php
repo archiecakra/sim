@@ -22,6 +22,8 @@
     <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
     <!-- Tempus dominus datepicker -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/tempusdominus-bootstrap-4.css') }}">
+    <!-- Chart js -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/chart.css') }}">
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
   <!-- Site wrapper -->
@@ -360,6 +362,8 @@
   <!-- tempusdominus -->
   <script type="text/javascript" src="{{ url('/js/moment.js') }}"></script>
   <script type="text/javascript" src="{{ url('/js/tempusdominus-bootstrap-4.js') }}"></script>
+  <!-- Chart js -->
+  <script type="text/javascript" src="{{ url('/js/chart.js') }}"></script>
   <!-- my custom script -->
   <script>
     
