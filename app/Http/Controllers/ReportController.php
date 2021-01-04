@@ -127,7 +127,7 @@ class ReportController extends Controller
 
         }
         $suppliers = Supplier::all();
-        return view('toko.laporan.pembelian_print', compact('purchases', 'suppliers'));
+        return view('toko.laporan.pembelian_print', compact('purchases', 'suppliers', 'request'));
     }
 
     public function sale()

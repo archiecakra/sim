@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Invoice Print</title>
+  <title>Laporan Pembelian</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 -->
@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="page-header">
-          Laporan Pembelian Barang
+          Laporan {{ $request->jenis }} Pembelian Barang
           <small class="float-right">Tanggal: {{ date('d-m-Y H:i:s') }}</small>
         </h2>
       </div>
@@ -44,11 +44,11 @@
       </div>
       <!-- /.col -->
       <div class="col-sm-6 invoice-col">
-        <b>Invoice #007612</b><br>
+        <b>Periode {{ $request->jenis }} {{ $request->tanggal }}</b><br>
         <br>
-        <b>Order ID:</b> 4F3S8J<br>
-        <b>Payment Due:</b> 2/22/2014<br>
-        <b>Account:</b> 968-34567
+        <b>Supplier :</b> @if ($request->supplier_id==NULL) Semua @else {{ $suppliers->find($request->supplier_id)->nama }} @endif<br>
+        <b>Jumlah Barang :</b> <span id="total_item"></span><br>
+        <b>Jumlah Transaksi :</b> {{ $purchases->count() }}
       </div>
       <!-- /.col -->
     </div>
@@ -57,7 +57,7 @@
     <!-- Table row -->
     <div class="row">
       <div class="col-12 table-responsive">
-        <table class="table table-striped table-sm">
+        <table id="table" class="table table-striped table-sm">
           <thead>
             <tr>
               <th>Tanggal</th>
@@ -73,7 +73,7 @@
           <tbody>
             @foreach ($purchases as $purchase)
               @foreach ($purchase->purchaseDetail->items as $item)    
-                <tr>
+                <tr class="item">
                   @if ($loop->first) 
                     <td class="align-middle" rowspan="{{ $purchase->purchaseDetail->items->count() }}">{{ $purchase->created_at }}</td>
                     <td class="align-middle" rowspan="{{ $purchase->purchaseDetail->items->count() }}">{{ $purchase->kode_pembelian }}</td>
@@ -85,7 +85,7 @@
                   <td class="align-middle text-center">{{ $item->pivot->jumlah }}</td>
                   <td class="align-middle">{{ $item->unit->nama }}</td>
                   <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->harga_beli).' ,-' }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($purchase->total_bayar).' ,-' }}</td>
+                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->pivot->jumlah*$item->harga_beli).' ,-' }}</td>
                 </tr>
               @endforeach
             @endforeach
@@ -99,38 +99,17 @@
     <div class="row">
       <!-- accepted payments column -->
       <div class="col-6">
-        <p class="lead">Payment Methods:</p>
-        <img src="../../dist/img/credit/visa.png" alt="Visa">
-        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-        <img src="../../dist/img/credit/american-express.png" alt="American Express">
-        <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
-          jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-        </p>
+        
       </div>
       <!-- /.col -->
       <div class="col-6">
-        <p class="lead">Amount Due 2/22/2014</p>
+        <p class="lead">Total Pembelian {{ $request->jenis }} ,-</p>
 
         <div class="table-responsive">
           <table class="table">
             <tr>
-              <th style="width:50%">Subtotal:</th>
-              <td>$250.30</td>
-            </tr>
-            <tr>
-              <th>Tax (9.3%)</th>
-              <td>$10.34</td>
-            </tr>
-            <tr>
-              <th>Shipping:</th>
-              <td>$5.80</td>
-            </tr>
-            <tr>
               <th>Total:</th>
-              <td>$265.24</td>
+              <td id="total_pembelian"></td>
             </tr>
           </table>
         </div>
@@ -142,8 +121,24 @@
   <!-- /.content -->
 </div>
 <!-- ./wrapper -->
+<!-- jQuery -->
+<script src="{{ url('/js/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url('/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url('/js/adminlte.min.js') }}"></script>
 
 <script type="text/javascript"> 
+  var total = 0;
+  var total_item = $('#table tr').length;
+  $('span#total_item').text(total_item-1);
+
+  $('.item').each(function () {
+    var subtotal = parseInt($(this).children().last().text().replace(/[^0-9]/g, ''));
+    total += subtotal;
+    $('#total_pembelian').text('Rp. '+total);
+  });
+  
   window.addEventListener("load", window.print());
 </script>
 </body>
