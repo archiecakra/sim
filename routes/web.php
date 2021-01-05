@@ -11,7 +11,10 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Reports\PurchaseReportController;
+use App\Http\Controllers\Reports\SaleReportController;
+use App\Http\Controllers\Reports\StockReportController;
+use App\Http\Controllers\Reports\FinanceReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockMutationController;
@@ -56,12 +59,27 @@ Route::resource('customers', CustomerController::class)->parameters(['customers'
 
 //Data Toko
 Route::resource('employees', EmployeeController::class)->parameters(['employees' => 'user']);
-Route::get('/reports/purchase', [ReportController::class, 'purchase']);
-Route::post('/reports/purchase', [ReportController::class, 'purchase']);
-Route::get('/reports/purchase/print', [ReportController::class, 'purchase_print']);
-Route::post('/reports/purchase/print', [ReportController::class, 'purchase_print']);
-Route::get('/reports/sale', [ReportController::class, 'sale']);
-Route::get('/reports/stock', [ReportController::class, 'stock']);
+
+Route::get('/reports/purchase', [PurchaseReportController::class, 'purchase']);
+Route::post('/reports/purchase', [PurchaseReportController::class, 'purchase']);
+Route::get('/reports/purchase/print', [PurchaseReportController::class, 'purchase_print']);
+Route::post('/reports/purchase/print', [PurchaseReportController::class, 'purchase_print']);
+
+Route::get('/reports/sale', [SaleReportController::class, 'sale']);
+Route::post('/reports/sale', [SaleReportController::class, 'sale']);
+Route::get('/reports/sale/print', [SaleReportController::class, 'sale_print']);
+Route::post('/reports/sale/print', [SaleReportController::class, 'sale_print']);
+
+Route::get('/reports/stock', [StockReportController::class, 'stock']);
+Route::post('/reports/stock', [StockReportController::class, 'stock']);
+Route::get('/reports/stock/print', [StockReportController::class, 'stock_print']);
+Route::post('/reports/stock/print', [StockReportController::class, 'stock_print']);
+
+Route::get('/reports/finance', [FinanceReportController::class, 'finance']);
+Route::post('/reports/finance', [FinanceReportController::class, 'finance']);
+Route::get('/reports/finance/print', [FinanceReportController::class, 'finance_print']);
+Route::post('/reports/finance/print', [FinanceReportController::class, 'finance_print']);
+//Data Toko
 
 //Customer routes
 Route::resource('shop', ShopController::class);

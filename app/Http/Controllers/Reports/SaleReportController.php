@@ -1,19 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
-use App\Models\Item;
-use App\Models\Purchase;
-use App\Models\PurchaseDetail;
-use App\Models\Supplier;
-use App\Models\StockMutation;
-
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ReportController extends Controller
+class SaleReportController extends Controller
 {
-    public function purchase(Request $request)
+    public function sale(Request $request)
     {
         // dd($request);
         if ($request->tanggal==NULL) {
@@ -79,7 +73,7 @@ class ReportController extends Controller
             // $chart_labels = Carbon::parse(key($chart_data))->format('F');
             // echo key($chart_data);
         }
-        $chart = new ReportController;
+        $chart = new PurchaseReportController;
         $chart->labels = (array_keys($chart_data));
         // $chart->labels = (Carbon::parse()->format('F'));
         $chart->datasets = (array_values($chart_data));
@@ -87,7 +81,7 @@ class ReportController extends Controller
         return view('toko.laporan.pembelian_index', compact('purchases', 'suppliers', 'chart'));
     }
 
-    public function purchase_print(Request $request)
+    public function sale_print(Request $request)
     {
         # code...
         // dd($usermcount);
@@ -145,18 +139,5 @@ class ReportController extends Controller
         }
         $suppliers = Supplier::all();
         return view('toko.laporan.pembelian_print', compact('purchases', 'suppliers', 'request'));
-    }
-
-    public function sale()
-    {
-        $sales = Sale::with('user', 'items')->get();
-        // dd($sale);
-        return view('penjualan.penjualan_index', compact('sales'));
-    }
-    
-    public function stock()
-    {
-        $mutations = StockMutation::all();
-        return view('stok.mutasi.mutasi_index', compact('mutations'));
     }
 }
