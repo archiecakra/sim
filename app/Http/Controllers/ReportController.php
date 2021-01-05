@@ -69,30 +69,28 @@ class ReportController extends Controller
 
         }
         $suppliers = Supplier::all();
-        return view('toko.laporan.pembelian_index', compact('purchases', 'suppliers'));
+
+        $data = Purchase::get()->groupBy(function($d) {
+            return Carbon::parse($d->created_at)->format('F');
+        });
+        $chart_data = [];
+        foreach ($data as $key => $value) {
+            $chart_data[$key] = count($value);
+            // $chart_labels = Carbon::parse(key($chart_data))->format('F');
+            // echo key($chart_data);
+        }
+        $chart = new ReportController;
+        $chart->labels = (array_keys($chart_data));
+        // $chart->labels = (Carbon::parse()->format('F'));
+        $chart->datasets = (array_values($chart_data));
+        // var_dump(json_encode($chart->datasets));
+        return view('toko.laporan.pembelian_index', compact('purchases', 'suppliers', 'chart'));
     }
 
     public function purchase_print(Request $request)
     {
         # code...
-        $date = Purchase::get()->groupBy(function($d) {
-            return Carbon::parse($d->created_at)->format('m');
-        });
-
-        $usermcount = [];
-        $userArr = [];
-
-        foreach ($date as $key => $value) {
-            $usermcount[(int)$key] = count($value);
-        }
-        for($i = 1; $i <= 12; $i++){
-            if(!empty($usermcount[$i])){
-                $userArr[$i] = $usermcount[$i];    
-            }else{
-                $userArr[$i] = 0;    
-            }
-        }
-        dd($usermcount);
+        // dd($usermcount);
         if ($request->tanggal==NULL) {
             # code...
             $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();

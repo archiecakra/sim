@@ -25,6 +25,13 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-body">
+            <canvas id="monthly-chart"></canvas>
+          </div>
+        </div>
+        <!-- Default box -->
+        <!-- Default box -->
+        <div class="card">
+          <div class="card-body">
             <div class="form-row align-items-center">
               <div class="form-group col-md-4">
                 <label for="supplier_id">Supplier</label>
@@ -135,6 +142,30 @@
 
 @section('js')
   <script>
+    var ctx = $('#monthly-chart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: @json($chart->labels),
+        datasets: [
+          {
+            label: 'Penjualan Perbulan',
+            data: @json($chart->datasets),
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
     $('form#print').submit(function () {
       var supplier_id = $('select#supplier_id option:selected').val();
       var jenis = $('#jenis option:selected').val();
