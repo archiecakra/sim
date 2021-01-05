@@ -1,36 +1,41 @@
 <?php
 
 namespace App\Http\Controllers\Reports;
-
 use App\Http\Controllers\Controller;
+
+use App\Models\Item;
+use App\Models\Sale;
+use App\Models\StockMutation;
+use App\Models\User;
+
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SaleReportController extends Controller
 {
     public function sale(Request $request)
     {
-        // dd($request);
         if ($request->tanggal==NULL) {
             # code...
-            $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
+            $sales = Sale::with('user', 'items')->where('status', 'Lunas')->orderBy("created_at", "desc")->get();
         } else {
             # code...
-            if ($request->supplier_id==NULL) {
+            if ($request->user_id==NULL) {
                 # code...
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Bulanan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Tahunan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                         
                     default:
@@ -42,17 +47,17 @@ class SaleReportController extends Controller
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->where('user_id', $request->user_id)->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Bulanan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->where('user_id', $request->user_id)->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Tahunan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->where('user_id', $request->user_id)->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                         
                     default:
@@ -62,50 +67,44 @@ class SaleReportController extends Controller
             }
 
         }
-        $suppliers = Supplier::all();
+        $users = User::where('role', 'customer')->get();
 
-        $data = Purchase::get()->groupBy(function($d) {
+        $data = Sale::where('status', 'Lunas')->get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('F');
         });
         $chart_data = [];
         foreach ($data as $key => $value) {
             $chart_data[$key] = count($value);
-            // $chart_labels = Carbon::parse(key($chart_data))->format('F');
-            // echo key($chart_data);
         }
-        $chart = new PurchaseReportController;
+        $chart = new SaleReportController;
         $chart->labels = (array_keys($chart_data));
-        // $chart->labels = (Carbon::parse()->format('F'));
         $chart->datasets = (array_values($chart_data));
-        // var_dump(json_encode($chart->datasets));
-        return view('toko.laporan.pembelian_index', compact('purchases', 'suppliers', 'chart'));
+        return view('toko.laporan.penjualan_index', compact('sales', 'users', 'chart', 'request'));
     }
 
     public function sale_print(Request $request)
     {
-        # code...
-        // dd($usermcount);
         if ($request->tanggal==NULL) {
             # code...
-            $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
+            $sales = Sale::with('user', 'items')->where('status', 'Lunas')->orderBy("created_at", "desc")->get();
         } else {
             # code...
-            if ($request->supplier_id==NULL) {
+            if ($request->user_id==NULL) {
                 # code...
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Bulanan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Tahunan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                         
                     default:
@@ -117,17 +116,17 @@ class SaleReportController extends Controller
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->where('user_id', $request->user_id)->whereDate('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Bulanan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->where('user_id', $request->user_id)->whereMonth('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                     
                     case 'Tahunan':
                         # code...
-                        $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
+                        $sales = Sale::with('user', 'items')->where('status', 'Lunas')->where('user_id', $request->user_id)->whereYear('created_at', $request->tanggal)->orderBy("created_at", "desc")->get();
                         break;
                         
                     default:
@@ -137,7 +136,7 @@ class SaleReportController extends Controller
             }
 
         }
-        $suppliers = Supplier::all();
-        return view('toko.laporan.pembelian_print', compact('purchases', 'suppliers', 'request'));
+        $users = User::where('role', 'customer')->get();
+        return view('toko.laporan.penjualan_print', compact('sales', 'users', 'request'));
     }
 }
