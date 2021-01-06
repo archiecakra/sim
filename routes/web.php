@@ -14,7 +14,6 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Reports\PurchaseReportController;
 use App\Http\Controllers\Reports\SaleReportController;
 use App\Http\Controllers\Reports\StockReportController;
-use App\Http\Controllers\Reports\FinanceReportController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\StockMutationController;
@@ -74,11 +73,6 @@ Route::get('/reports/stock', [StockReportController::class, 'stock']);
 Route::post('/reports/stock', [StockReportController::class, 'stock']);
 Route::get('/reports/stock/print', [StockReportController::class, 'stock_print']);
 Route::post('/reports/stock/print', [StockReportController::class, 'stock_print']);
-
-Route::get('/reports/finance', [FinanceReportController::class, 'finance']);
-Route::post('/reports/finance', [FinanceReportController::class, 'finance']);
-Route::get('/reports/finance/print', [FinanceReportController::class, 'finance_print']);
-Route::post('/reports/finance/print', [FinanceReportController::class, 'finance_print']);
 //Data Toko
 
 //Customer routes
