@@ -13,8 +13,6 @@ class StockReportController extends Controller
 {
     public function stock(Request $request)
     {
-        // $mutations = StockMutation::with('item')->groupBy('item_id')->get();
-        // dd($mutations);
         if ($request->tanggal==NULL) {
             # code...
             $mutations = StockMutation::with('item')->get();
@@ -25,7 +23,7 @@ class StockReportController extends Controller
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $mutations = StockMutation::with('item')->whereDate('created_at', $request->tanggal)->get();
+                        $mutations = StockMutation::with('item')->whereDate('created_at', $request->tanggal)->orderBy('item_id')->get();
                         break;
                     
                     case 'Bulanan':
@@ -97,7 +95,63 @@ class StockReportController extends Controller
         return view('toko.laporan.mutasi_index', compact('mutations', 'items', 'request', 'chart'));
     }
 
-    public function sale_print(Request $request)
+    public function stock_print(Request $request)
     {
+        if ($request->tanggal==NULL) {
+            # code...
+            $mutations = StockMutation::with('item')->orderBy('item_id')->get();
+            // dd($mutations);
+        } else {
+            # code...
+            if ($request->item_id==NULL) {
+                # code...
+                switch ($request->jenis) {
+                    case 'Harian':
+                        # code...
+                        $mutations = StockMutation::with('item')->whereDate('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        break;
+                    
+                    case 'Bulanan':
+                        # code...
+                        $mutations = StockMutation::with('item')->whereMonth('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        break;
+                    
+                    case 'Tahunan':
+                        # code...
+                        $mutations = StockMutation::with('item')->whereYear('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        break;
+                        
+                    default:
+                        # code...
+                        break;
+                }
+            } else {
+                # code...
+                switch ($request->jenis) {
+                    case 'Harian':
+                        # code...
+                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereDate('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        break;
+                    
+                    case 'Bulanan':
+                        # code...
+                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereMonth('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        break;
+                    
+                    case 'Tahunan':
+                        # code...
+                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereYear('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        break;
+                        
+                    default:
+                        # code...
+                        break;
+                }
+            }
+
+        }
+        $items = Item::all();
+
+        return view('toko.laporan.mutasi_print', compact('mutations', 'items', 'request'));
     }
 }

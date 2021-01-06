@@ -176,7 +176,7 @@
         datasets: [
           {
             label: 'Barang Keluar',
-            backgroundColor: 'rgba(60, 141, 188, 0.9)',
+            backgroundColor: 'rgba(210, 214, 222, 1)',
             data: @json($chart->keluar_datasets),
             borderWidth: 1
           },

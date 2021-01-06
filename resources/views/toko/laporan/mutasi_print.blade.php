@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Laporan Penjualan</title>
+  <title>Laporan Mutasi Stok</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 -->
@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="page-header">
-          Laporan {{ $request->jenis }} Penjualan Barang
+          Laporan {{ $request->jenis }} Mutasi Stok
           <small class="float-right">Tanggal: {{ date('d-m-Y H:i:s') }}</small>
         </h2>
       </div>
@@ -46,9 +46,9 @@
       <div class="col-sm-6 invoice-col">
         <b>Periode {{ $request->jenis }} {{ $request->tanggal }}</b><br>
         <br>
-        <b>Pelanggan :</b> @if ($request->user_id==NULL) Semua @else {{ $users->find($request->user_id)->nama }} @endif<br>
-        <b>Barang Terjual :</b> <span id="total_item"></span><br>
-        <b>Jumlah Transaksi :</b> {{ $sales->count() }}
+        <b>Barang :</b> @if ($request->item_id==NULL) Semua Barang @else {{ $items->find($request->item_id)->nama }} @endif<br>
+        <b>Barang Masuk :</b> {{ $mutations->where('jenis_mutasi', 'penambahan')->sum('stok_mutasi') }}<br>
+        <b>Barang Keluar :</b> {{ $mutations->where('jenis_mutasi', 'pengurangan')->count() }}
       </div>
       <!-- /.col -->
     </div>
@@ -61,56 +61,31 @@
           <thead>
             <tr>
               <th>Tanggal</th>
-              <th>Kode Pembelian</th>
-              <th>Supplier</th>
               <th>Barang</th>
-              <th>Jumlah</th>
-              <th>Unit</th>
-              <th>Harga Satuan</th>
-              <th>Total</th>
+              <th>Stok Awal</th>
+              <th>Masuk (Beli)</th>
+              <th>Out (Jual)</th>
+              <th>Stok Akhir</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($sales as $sale)
-              @foreach ($sale->items as $item)    
-                <tr class="item">
-                  @if ($loop->first) 
-                    <td class="align-middle" rowspan="{{ $sale->items->count() }}">{{ $sale->created_at }}</td>
-                    <td class="align-middle" rowspan="{{ $sale->items->count() }}">{{ $sale->kode_transaksi }}</td>
-                    <td class="align-middle text-left" rowspan="{{ $sale->items->count() }}">{{ $sale->user->name }}</td>
-                  @endif
-                  <td class="align-middle text-left">{{ $item->nama }}</td>
-                  <td class="align-middle text-center qty">{{ $item->pivot->jumlah }}</td>
-                  <td class="align-middle">{{ $item->unit->nama }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->harga_beli) }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->pivot->jumlah*$item->harga_beli) }}</td>
-                </tr>
-              @endforeach
+            @foreach ($mutations as $mutation)
+              <tr>
+                <td>{{ $mutation->created_at->format('j F Y') }}</td>
+                <td>{{ $mutation->item->nama }}</td>
+                <td>{{ $mutation->stok_awal }}</td>
+                @if ($mutation->jenis_mutasi=='penambahan')
+                  <td>{{ $mutation->stok_mutasi }}</td>
+                  <td>0</td>
+                @else
+                  <td>0</td>
+                  <td>{{ $mutation->stok_mutasi }}</td>
+                @endif
+                <td>{{ $mutation->stok_akhir }}</td>
+              </tr>
             @endforeach
           </tbody>
         </table>
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-      <!-- accepted payments column -->
-      <div class="col-6">
-        
-      </div>
-      <!-- /.col -->
-      <div class="col-6">
-        <p class="lead">Total Pembelian {{ $request->jenis }}</p>
-
-        <div class="table-responsive">
-          <table class="table">
-            <tr>
-              <th>Total:</th>
-              <td id="total_pembelian"></td>
-            </tr>
-          </table>
-        </div>
       </div>
       <!-- /.col -->
     </div>
