@@ -41,12 +41,12 @@
                     </div>    
                 @endforeach --}}
               @foreach ($items as $item)
-                <div class="col-6">
+                <div class="col-6 d-flex align-items-stretch">
                   <div class="card">
     
                     <!-- Card image -->
-                    <img class="card-img-top" src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="Produk">
-                    {{-- <img class="card-img-top" src="https://via.placeholder.com/150?text={{ $item->nama }}" alt="Produk"> --}}
+                    {{-- <img class="card-img-top" src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="Produk"> --}}
+                    <img class="card-img-top" src="https://via.placeholder.com/150?text={{ $item->nama }}" alt="Produk">
                   
                     <!-- Card content -->
                     <div class="card-body">
