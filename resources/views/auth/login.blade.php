@@ -73,7 +73,9 @@
       </form>
       <br>
       <p class="mb-0">
-        <a href="{{ route('register') }}" class="text-center">Belum Punya Akun? Daftar Disini</a>
+        @if ($agent->isMobile())
+          <a href="{{ route('register') }}" class="text-center">Belum Punya Akun? Daftar Disini</a>
+        @endif
       </p>
     </div>
     <!-- /.login-card-body -->
