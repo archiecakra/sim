@@ -14,6 +14,11 @@
     padding-top: 15px;
 }
 
+body#background {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 /* form#cart{
     all: unset !important;
 } */
