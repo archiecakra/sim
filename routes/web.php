@@ -34,7 +34,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', [LoginController::class, 'showLoginForm']);
 
 //Dashboard Route
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 //Stok Routes
 //Pembelian Barang
