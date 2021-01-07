@@ -36,7 +36,7 @@
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline" action="{{ url('/shop') }}" method="POST">
+        <form class="form-inline" action="{{ url('/shop/search') }}" method="POST">
           @csrf
           <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search" aria-label="Search">

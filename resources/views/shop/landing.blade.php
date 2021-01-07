@@ -42,7 +42,7 @@
             <div class="row text-sm">
               @foreach ($items as $item)
                 <div class="col-6 d-flex align-items-stretch">
-                  <div class="card">
+                  <div class="card w-100">
     
                     <!-- Card image -->
                     {{-- <img class="card-img-top" src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="Produk"> --}}
