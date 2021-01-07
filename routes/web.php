@@ -77,6 +77,7 @@ Route::post('/reports/stock/print', [StockReportController::class, 'stock_print'
 
 //Customer routes
 Route::resource('shop', ShopController::class);
+Route::post('/shop', [ShopController::class, 'index']);
 Route::resource('cart', CartController::class);
 Route::resource('orders', OrderController::class);
 

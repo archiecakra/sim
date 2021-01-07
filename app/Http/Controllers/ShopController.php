@@ -18,14 +18,30 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // dd($request);
         $categories = Category::all();
-        $items = Item::all();
         $cart_count = Cart::where('user_id', Auth::user()->id)->count();
-        // dd($cart_count);
-        return view ('shop.landing', compact('categories', 'items', 'cart_count'));
+        if (is_null($request)) {
+            # code...
+            $items = Item::all();
+            return view ('shop.landing', compact('categories', 'items', 'cart_count'));
+        } else {
+            # code...
+            $items = Item::where('nama', 'like', '%'.$request->search.'%')->get();
+            return view ('shop.landing', compact('categories', 'items', 'cart_count', 'request'));
+        }
     }
+
+    // public function search(Request $request)
+    // {
+    //     # code...
+    //     $categories = Category::all();
+    //     $items = Item::where('nama', 'like', '%'.$request->search.'%')->get();
+    //     $cart_count = Cart::where('user_id', Auth::user()->id)->count();
+    //     return view ('shop.landing', compact('categories', 'items', 'cart_count', 'request'));
+    // }
 
     /**
      * Show the form for creating a new resource.
