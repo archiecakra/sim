@@ -11,23 +11,24 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
       <li class="nav-header text-center nav-header-top"><h6 class="bg-secondary nav-header-title">Filter</h6></li>
-      <form action="">
+      <form action="{{ url('/shop/filter') }}" method="POST">
+        @csrf
         <div class="form-group">            
           <label class="text-white" for="">Kategori</label>
-          <select name="" class="form-control form-control-sm select2" id="">
+          <select name="kategori" class="form-control form-control-sm select2" id="">
             <option value="">Pilih Kategori</option>
             @foreach ($categories as $category)
-            <option value="">{{ $category->nama }}</option>
+            <option value="{{ $category->id }}">{{ $category->nama }}</option>
             @endforeach
           </select>
         </div>
         <label class="text-white" for="">Batas Harga(Rp)</label>
         <div class="form-row">
           <div class="col">
-            <input class="form-control form-control-sm" type="number" placeholder="Min">
+            <input name="min" class="form-control form-control-sm" type="number" placeholder="Min">
           </div>
           <div class="col">
-            <input class="form-control form-control-sm" type="number" placeholder="Max">
+            <input name="max" class="form-control form-control-sm" type="number" placeholder="Max">
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block btn-sm" style="margin-top: 20px;">Apply</button>

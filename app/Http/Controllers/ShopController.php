@@ -23,7 +23,7 @@ class ShopController extends Controller
         // dd($request);
         $categories = Category::all();
         $cart_count = Cart::where('user_id', Auth::user()->id)->count();
-        if (is_null($request)) {
+        if (is_null($request->search)) {
             # code...
             $items = Item::all();
             return view ('shop.landing', compact('categories', 'items', 'cart_count'));
