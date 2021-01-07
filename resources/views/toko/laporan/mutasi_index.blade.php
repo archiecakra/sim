@@ -1,10 +1,10 @@
 @extends('layouts/main')
 
-@section('title', 'Transaksi Pembelian Barang')
+@section('title', 'Laporan Stok Barang')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-<li class="breadcrumb-item">Transaksi Pembelian</a></li>
+<li class="breadcrumb-item">Laporan Stok</a></li>
 @endsection
 
 @section('content')
@@ -23,9 +23,20 @@
           </div>
         @endif
         <!-- Default box -->
-        <div class="card">
-          <div class="card-body">
-            <canvas id="monthly-chart"></canvas>
+        <div class="row">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <canvas id="monthly-chart-in"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <canvas id="monthly-chart-out"></canvas>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Default box -->
@@ -34,39 +45,36 @@
           <div class="card-body">
             <div class="form-row align-items-center">
               <div class="form-group col-md-4">
-                <label for="supplier_id">Supplier</label>
-                {{-- <input type="password" class="form-control" id="inputPassword4" placeholder="Password"> --}}
-                <form style="all: unset;" action="{{ url('/reports/purchase') }}" method="POST">
+                <label for="item_id">Barang</label>
+                <form style="all: unset;" action="{{ url('/reports/stock') }}" method="POST">
                   @csrf
-                  <select name="supplier_id" class="form-control select2" name="supplier_id" id="supplier_id">
-                    <option value="">Semua</option>
-                    @foreach ($suppliers as $supplier)
-                      <option value="{{ $supplier->id }}">{{ $supplier->nama }}</option> 
+                  <select name="item_id" class="form-control select2" name="item_id" id="item_id">
+                    <option value="">Semua Barang</option>
+                    @foreach ($items as $item)
+                      <option value="{{ $item->id }}" @if ($request->item_id == $item->id) selected @endif>{{ $item->nama }}</option> 
                     @endforeach
                   </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="inputEmail4">Jenis Laporan</label>
-                    {{-- <input type="email" class="form-control" id="inputEmail4" placeholder="Email"> --}}
+                    <label for="jenis">Jenis Laporan</label>
                     <select name="jenis" class="form-control" id="jenis">
                       <option value="">Pilih Jenis Laporan</option>
-                      <option value="Harian">Harian</option>
-                      <option value="Bulanan">Bulanan</option>
-                      <option value="Tahunan">Tahunan</option>
+                      <option value="Harian" @if ($request->jenis=="Harian") selected @endif>Harian</option>
+                      <option value="Bulanan" @if ($request->jenis=="Bulanan") selected @endif>Bulanan</option>
+                      <option value="Tahunan" @if ($request->jenis=="Tahunan") selected @endif>Tahunan</option>
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="inputPassword4">Pilih Tanggal/Bulan/Tahun</label>
-                    {{-- <input type="password" class="form-control" id="inputPassword4" placeholder="Password"> --}}
-                    <input type="text" name="tanggal" class="form-control datetimepicker-input" id="tanggal" data-toggle="datetimepicker" data-target="#tanggal" autocomplete="off" disabled>
+                    <label for="tanggal">Pilih Tanggal/Bulan/Tahun</label>
+                    <input value="{{ $request->tanggal }}" type="text" name="tanggal" class="form-control datetimepicker-input" id="tanggal" data-toggle="datetimepicker" data-target="#tanggal" autocomplete="off" disabled>
                   </div>
                   <div class="col-md-2" style="margin-top: 15px;">
                     <div class="btn-group" role="group">
                       <button type="submit" class="btn btn-primary btn-md">Filter</button>
                 </form>
-                      <form id="print" action="{{ url('/reports/purchase/print') }}" method="POST">
+                      <form id="print" action="{{ url('/reports/stock/print') }}" method="POST">
                         @csrf
-                        <input type="hidden" id="supplier_print" name="supplier_id" value="">
+                        <input type="hidden" id="user_print" name="item_id" value="">
                         <input type="hidden" id="jenis_print" name="jenis" value="">
                         <input type="hidden" id="tanggal_print" name="tanggal" value="">
                         <button type="submit" class="btn btn-success btn-md">Print</button>
@@ -82,45 +90,36 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Daftar Transaksi Pembelian</h3>
-            {{-- <a href="{{ url('/items/purchases/create') }}" class="btn btn-primary float-right text-white">Tambah Transaksi Pembelian</a> --}}
+            <h3 class="card-title">Daftar Mutasi Stok</h3>
           </div>
           <div class="card-body">
             <div class="table-responsive-md">
               <table id="datatable" class="table table-sm bg-light table-bordered table-striped text-center table-hover">
                 <thead>
                   <tr>
-                    <th class="align-middle" scope="col">Tanggal Pembelian</th>
-                    <th class="align-middle" scope="col">Kode Transaksi</th>
-                    <th class="align-middle" scope="col">Supplier</th>
+                    <th class="align-middle" scope="col">Tanggal Mutasi</th>
                     <th class="align-middle" scope="col">Barang</th>
-                    <th class="align-middle" scope="col">Total Pembelian</th>
+                    <th class="align-middle" scope="col">Jenis Mutasi</th>
+                    <th class="align-middle" scope="col">Stok Awal</th>
+                    <th class="align-middle" scope="col">Mutasi</th>
+                    <th class="align-middle" scope="col">Stok Akhir</th>
                     <th class="align-middle" scope="col">Keterangan</th>
-                    {{-- <th class="align-middle" scope="col">Aksi</th> --}}
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($purchases as $purchase)
+                  @foreach ($mutations as $mutation)
                     <tr>
-                      <td class="align-middle">{{ $purchase->created_at }}</td>
-                      <td class="align-middle">{{ $purchase->kode_pembelian }}</td>
-                      <td class="align-middle text-left">{{ $purchase->supplier->nama }}</td>
-                      <td class="align-middle text-left">
-                        <ul class="product-list">
-                          @foreach ($purchase->purchaseDetail->items as $item)
-                            <li>{{ $item->nama.' @Rp.'.$item->harga_beli.' x '.$item->pivot->jumlah.' '.$item->unit->nama }}</li>
-                          @endforeach
-                        </ul>
-                      </td>
-                      <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($purchase->total_bayar, 2).' ,-' }}</td>
-                      <td class="align-middle text-left">{{ $purchase->keterangan }}</td>
-                      {{-- <td class="align-middle">
-                        <form style="all: unset;" action="{{ url('/items/categories/'.$purchase->id) }}" method="POST">
-                          @method('delete')
-                          @csrf
-                          <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash"></i></button>
-                        </form>
-                      </td> --}}
+                      <td class="align-middle" scope="row">{{ $mutation->created_at->format('j F Y') }}</td>
+                      <td class="align-middle text-left">{{ $mutation->item->nama }}</td>
+                      <td class="align-middle text-left">{{ $mutation->jenis_mutasi }}</td>
+                      <td class="align-middle text-left">{{ $mutation->stok_awal }}</td>
+                      @if ($mutation->jenis_mutasi == 'penambahan')
+                        <td>{{ '+'.$mutation->stok_mutasi }}</td>
+                      @else
+                        <td>{{ '-'.$mutation->stok_mutasi }}</td>
+                      @endif
+                      <td class="align-middle text-left">{{ $mutation->stok_akhir }}</td>
+                      <td class="align-middle text-left">{{ $mutation->keterangan }}</td>
                     </tr>
                   @endforeach
                 </tbody>
@@ -142,17 +141,19 @@
 
 @section('js')
   <script>
-    var ctx = $('#monthly-chart');
+    var ctx = $('#monthly-chart-in');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: @json($chart->labels),
+        labels: @json($chart->masuk_labels),
         datasets: [
           {
-            label: 'Penjualan Perbulan',
-            data: @json($chart->datasets),
+            label: 'Barang Masuk',
+            backgroundColor: 'rgba(60, 141, 188, 0.9)',
+            data: @json($chart->masuk_datasets),
             borderWidth: 1
-          }
+          },
+
         ]
       },
       options: {
@@ -160,8 +161,34 @@
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              stepSize: 1,
-              suggestedMax: 10
+              stepSize: 5,
+              suggestedMax: 100
+            }
+          }]
+        }
+      }
+    });
+    var ctx2 = $('#monthly-chart-out');
+    var myChart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: @json($chart->keluar_labels),
+        datasets: [
+          {
+            label: 'Barang Keluar',
+            backgroundColor: 'rgba(210, 214, 222, 1)',
+            data: @json($chart->keluar_datasets),
+            borderWidth: 1
+          },
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 5,
+              suggestedMax: 100
             }
           }]
         }
@@ -169,13 +196,12 @@
     });
 
     $('form#print').submit(function () {
-      var supplier_id = $('select#supplier_id option:selected').val();
+      var item_id = $('select#item_id option:selected').val();
       var jenis = $('#jenis option:selected').val();
       var tanggal = $('input#tanggal').val();
-      $('input#supplier_print').val(supplier_id);
+      $('input#user_print').val(item_id);
       $('input#jenis_print').val(jenis);
       $('input#tanggal_print').val(tanggal);
-      // alert(supplier_id+jenis+tanggal);
     });
 
     $('select#jenis').change(function () {

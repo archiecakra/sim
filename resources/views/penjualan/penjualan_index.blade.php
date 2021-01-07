@@ -46,7 +46,7 @@
                 <tbody>
                   @foreach ($sales as $sale)
                     <tr>
-                      <td class="align-middle" scope="row">{{ $sale->created_at }}</td>
+                      <td class="align-middle" scope="row">{{ $sale->created_at->format('j F Y') }}</td>
                       <td class="align-middle">{{ $sale->kode_transaksi }}</td>
                       <td class="align-middle">{{ $sale->user->name }}</td>
                       <td class="align-middle text-left">
@@ -56,15 +56,15 @@
                           @endforeach
                         </ul>
                       </td>
-                      <td class="align-middle">{{ 'Rp. '.$sale->total_bayar.',-' }}</td>
+                      <td class="align-middle text-nowrap">{{ 'Rp. '.$sale->total_bayar.',-' }}</td>
                       <td class="align-middle">{{ $sale->status }}</td>
                       <td class="align-middle">{{ $sale->keterangan }}</td>
                       <td class="align-middle">
-                        @if (in_array($sale->status, array('Lunas','Bayar Di Tempat')))
-                            
+                        @if ($sale->status == 'Lunas')
+                          
                         @else
+                          <a href="{{ url('/sales/'.$sale->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a>
                         @endif
-                        <a href="{{ url('/sales/'.$sale->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a>
                         <form style="all: unset;" action="{{ url('/sales/'.$sale->id) }}" method="POST">
                           @method('delete')
                           @csrf

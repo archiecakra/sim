@@ -31,7 +31,7 @@
               <div class="form-group row">
                 <label for="Status" class="col-sm-2 col-form-label">Status Transaksi</label>
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" value="Bayar Di Tempat" name="status" id="Status" readonly>
+                  <input type="text" class="form-control" value="Lunas" name="status" id="Status" readonly>
                 </div>
               </div>
               <div class="form-group row">

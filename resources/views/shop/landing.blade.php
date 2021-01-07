@@ -31,9 +31,8 @@
                         <span class="info-box-icon bg-info"><img src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="..." class="img-thumbnail"></span>
             
                         <div class="info-box-content">
-                            <span class="info-box-text">{{ $item->nama }}</span>
+                            <span class="info-box-text font-weight-bold">{{ $item->nama }}</span>
                             <span class="info-box-text">Rp. {{ $item->harga_jual }} / {{ $item->unit->nama }}</span>
-                            <span class="info-box-number">Stok : {{ $item->stok }}</span>
                             <a href="{{ url('/shop/'.$item->id) }}" class="btn btn-primary btn-xs">Lihat Produk</a>
                         </div>
                         <!-- /.info-box-content -->
