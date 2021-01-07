@@ -51,7 +51,6 @@ class ItemsController extends Controller
             'unit_id' => 'required|numeric',
             'harga_jual' => 'required|numeric',
             'harga_beli' => 'required|numeric',
-            // 'stok' => 'required|numeric',
             'gambar' => 'required|image'
         ]);
 
@@ -64,7 +63,7 @@ class ItemsController extends Controller
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
             'stok' => 0,
-            'gambar' => $request->gambar->storeAs('gambar', $namaGambar)
+            'gambar' => $request->gambar->store('items_img','items_img')
         ]);
 
         return redirect('/items')->with('message', 'Data Barang Berhasil Ditambahkan');
@@ -105,7 +104,7 @@ class ItemsController extends Controller
     {
         if ($request->hasFile('gambar')) {
             $namaGambar = $request->nama.'.'.$request->gambar->extension();
-            $gambar = $request->gambar->storeAs('gambar', $namaGambar);
+            $gambar = $request->gambar->store('','items_img');
         } else {
             $gambar = $item->gambar;
         }

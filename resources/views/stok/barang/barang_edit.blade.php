@@ -124,7 +124,8 @@
       </div>
       <div class="col-3">
         <div class="card">
-          <img class="card-img-top" src="{{ url('/'.$item->gambar) }}" alt="Card image cap">
+          {{-- <img class="card-img-top" src="{{ url('/'.$item->gambar) }}" alt="Card image cap"> --}}
+          <img class="card-img-top" id="gambar-preview" src="{{ url('/img/items_img/'.$item->gambar) }}" alt="Card image cap">
           <div class="card-body">
             <p class="card-text">Tinjauan Gambar Barang</p>
           </div>
@@ -134,4 +135,24 @@
   </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+<script>
+  function readUrl(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#gambar-preview').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('#gambar').change(function () {
+    readUrl(this);
+  })
+</script>
 @endsection
