@@ -24,8 +24,8 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                @foreach ($items as $item)
+            <div class="row text-sm">
+                {{-- @foreach ($items as $item)
                     <div class="col-md-3 col-sm-6 col-12">
                         <div class="info-box">
                         <span class="info-box-icon bg-info"><img src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="..." class="img-thumbnail"></span>
@@ -39,7 +39,29 @@
                         </div>
                         <!-- /.info-box -->
                     </div>    
-                @endforeach
+                @endforeach --}}
+              @foreach ($items as $item)
+                <div class="col-6">
+                  <div class="card">
+    
+                    <!-- Card image -->
+                    <img class="card-img-top" src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="Produk">
+                    {{-- <img class="card-img-top" src="https://via.placeholder.com/150?text={{ $item->nama }}" alt="Produk"> --}}
+                  
+                    <!-- Card content -->
+                    <div class="card-body">
+                  
+                      <!-- Title -->
+                      <h6 class="card-title">{{ $item->nama }}</h6><br>
+                      <!-- Text -->
+                      <span class="info-box-text">Rp. {{ number_format($item->harga_jual, 2) }} / {{ $item->unit->nama }}</span>
+                      <!-- Button -->
+                    </div>
+                    <a href="{{ url('/shop/'.$item->id) }}" class="btn btn-primary btn-block rounded-0">Lihat barang</a>
+                  
+                  </div>
+                </div>
+              @endforeach
             </div>
         </div>
     </section>
