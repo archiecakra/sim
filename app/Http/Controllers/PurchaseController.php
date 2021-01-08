@@ -32,7 +32,7 @@ class PurchaseController extends Controller
     {
         $transaction_code = 'PCS'.sprintf("%04s", Purchase::all()->count());
         $suppliers = Supplier::all();
-        $items = Item::all();
+        $items = Item::orderBy('nama')->get();
         return view('stok.pembelian.pembelian_create', compact('suppliers', 'items', 'transaction_code'));
     }
 

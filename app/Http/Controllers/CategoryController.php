@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('nama')->get();
         return view('stok.barang.kategori.kategori_index', compact('categories'));
     }
 

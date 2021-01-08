@@ -92,3 +92,10 @@
 </section>
 <!-- /.content -->
 @endsection
+
+@section('js')
+  <script>
+    var table = $('#datatable').DataTable({
+    });
+  </script>
+@endsection

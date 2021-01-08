@@ -14,7 +14,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $units = Unit::all();
+        $units = Unit::orderBy('nama')->get();
         return view('stok.barang.satuan.satuan_index', compact('units'));
     }
 

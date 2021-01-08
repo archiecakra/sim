@@ -21,7 +21,7 @@ class ItemsController extends Controller
 
     public function index()
     {
-        $items = Item::all();
+        $items = Item::orderBy('nama')->get();
         return view('stok/barang/barang_index', ['items' => $items]);
     }
 

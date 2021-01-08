@@ -68,6 +68,8 @@ class StockMutationController extends Controller
                 'stok' => $stok_akhir,
             ]);
         }
+
+        return redirect('/items/mutations')->with('message', 'Stok Berhasil Dikoreksi');
     }
 
     /**

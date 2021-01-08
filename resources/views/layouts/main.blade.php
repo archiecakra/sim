@@ -373,7 +373,7 @@
     // $(document).ready(function() {
     //   var table = $('#datatable').DataTable();
     // });
-    var table = $('#datatable').DataTable();
+    // var table = $('#datatable').DataTable();
     $('.select2').select2({
       theme: 'bootstrap4'
     });

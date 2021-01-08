@@ -45,7 +45,7 @@
                 <tbody>
                   @foreach ($purchases as $purchase)
                     <tr>
-                      <td class="align-middle">{{ $purchase->created_at }}</td>
+                      <td class="align-middle">{{ $purchase->created_at->format('Y-m-d') }}</td>
                       <td class="align-middle">{{ $purchase->kode_pembelian }}</td>
                       <td class="align-middle text-left">{{ $purchase->supplier->nama }}</td>
                       <td class="align-middle text-left">
@@ -55,7 +55,7 @@
                           @endforeach
                         </ul>
                       </td>
-                      <td class="align-middle">{{ 'Rp. '.$purchase->total_bayar.' ,-' }}</td>
+                      <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($purchase->total_bayar).' ,-' }}</td>
                       <td class="align-middle text-left">{{ $purchase->keterangan }}</td>
                       <td class="align-middle">
                         {{-- <a href="{{ url('/items/purchases/'.$purchase->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a> --}}
@@ -82,4 +82,12 @@
   </div>
 </section>
 <!-- /.content -->
+@endsection
+
+@section('js')
+  <script>
+    var table = $('#datatable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+  </script>
 @endsection

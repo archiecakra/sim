@@ -123,6 +123,9 @@
 
 @section('js')
   <script>
+    var table = $('#datatable').DataTable({
+      "ordering": false
+    });
     $('#item').change(function () {
       var harga = $(this).find(':selected').data('harga');
       var stok = $(this).find(':selected').data('stok');

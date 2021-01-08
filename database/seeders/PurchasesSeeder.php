@@ -32,7 +32,7 @@ class PurchasesSeeder extends Seeder
                 'supplier_id' => 2,
                 'total_bayar' => 186000,
                 'keterangan' => 'Restok Bolpoint',
-                'created_at' => '2020-11-04 11:41:50'
+                'created_at' => '2020-11-04 11:00:50'
             ],
             [
                 'kode_pembelian' => 'PCS0002',
@@ -53,7 +53,7 @@ class PurchasesSeeder extends Seeder
                 'supplier_id' => 5,
                 'total_bayar' => 894000,
                 'keterangan' => 'Restok Buku',
-                'created_at' => '2020-12-04 11:41:50'
+                'created_at' => '2020-12-04 12:41:50'
             ],
         ]);
 

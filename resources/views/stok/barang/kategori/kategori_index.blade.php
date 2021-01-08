@@ -30,11 +30,6 @@
             <a href="{{ url('/items/categories/create') }}" class="btn btn-primary float-right text-white">Tambah Kategori</a>
           </div>
           <div class="card-body">
-            {{-- <div class="list-group">
-              @foreach ($categories as $category)    
-              <a href="{{ url('/items/categories/'.$category->id.'/edit') }}" class="list-group-item list-group-item-action list-group-item-light font-weight-light">{{ $category->nama }}<button class="btn btn-danger float-right btn-sm">Delete</button></a>
-              @endforeach
-            </div> --}}
             <ul class="list-group">
               @foreach ($categories as $category)
               <li class="list-group-item list-group-item-action list-group-item-light">{{ $category->nama }}
