@@ -46,8 +46,8 @@
                   <div class="card w-100">
     
                     <!-- Card image -->
-                    {{-- <img class="card-img-top" src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="Produk"> --}}
-                    <img class="card-img-top" src="https://via.placeholder.com/150?text={{ $item->nama }}" alt="Produk">
+                    <img class="card-img-top" src="{{ url('/img/items_img/'.$item->gambar) }}" alt="Produk">
+                    {{-- <img class="card-img-top" src="https://via.placeholder.com/150?text={{ $item->nama }}" alt="Produk"> --}}
                   
                     <!-- Card content -->
                     <div class="card-body">

@@ -1,12 +1,12 @@
 @extends('layouts/main')
 
-@section('title', 'Data Supplier')
+@section('title', 'Ubah Data Kategori')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 <li class="breadcrumb-item"><a href="#">Barang</a></li>
 <li class="breadcrumb-item"><a href="#">Kategori</a></li>
-<li class="breadcrumb-item"><a href="#">Edit Kategori</a></li>
+<li class="breadcrumb-item">Edit Kategori</li>
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
                 <label for="nama">Nama Kategori</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <span class="input-group-text"><i class="fas fa-th-list"></i></span>
                   </div>
                   <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Buku" value="{{ $category->nama }}">
                   @error('nama')
