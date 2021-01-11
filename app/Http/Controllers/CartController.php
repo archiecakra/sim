@@ -102,7 +102,11 @@ class CartController extends Controller
      */
     public function update(Request $request, Cart $cart)
     {
-        //
+        Cart::where('id', $cart->id)
+            ->update([
+                'jumlah' => $request->jumlah,
+            ]);
+        return response()->json(['response'=>'200']);
     }
 
     /**
@@ -113,6 +117,7 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        Cart::destroy($cart->id);
+        return redirect('/cart')->with('message', 'Barang Dihapus');
     }
 }
