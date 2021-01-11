@@ -23,9 +23,20 @@
           </div>
         @endif
         <!-- Default box -->
-        <div class="card">
-          <div class="card-body">
-            <canvas id="monthly-chart"></canvas>
+        <div class="row">
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <canvas id="monthly-sales"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <canvas id="monthly-sales-nominal"></canvas>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Default box -->
@@ -130,15 +141,16 @@
 
 @section('js')
   <script>
-    var ctx = $('#monthly-chart');
+    var ctx = $('#monthly-sales');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: @json($chart->labels),
         datasets: [
           {
-            label: 'Penjualan Perbulan',
+            label: 'Jumlah Penjualan Perbulan',
             data: @json($chart->datasets),
+            backgroundColor: 'rgba(39, 10, 228, 0.9)',
             borderWidth: 1
           }
         ]
@@ -150,6 +162,33 @@
               beginAtZero: true,
               stepSize: 1,
               suggestedMax: 10
+            }
+          }]
+        }
+      }
+    });
+
+    var ctx2 = $('#monthly-sales-nominal');
+    var myChart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: @json($chart->labels2),
+        datasets: [
+          {
+            label: 'Jumlah Nominal Penjualan Perbulan (Rp.)',
+            data: @json($chart->datasets2),
+            backgroundColor: 'rgba(103, 230, 30, 0.9)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 100000,
+              suggestedMax: 1500000
             }
           }]
         }

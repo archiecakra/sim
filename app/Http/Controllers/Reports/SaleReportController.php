@@ -17,7 +17,13 @@ class SaleReportController extends Controller
     {
         if ($request->tanggal==NULL) {
             # code...
-            $sales = Sale::with('user', 'items')->where('status', 'Lunas')->orderBy("created_at", "desc")->get();
+            if ($request->user_id==NULL) {
+                # code...
+                $sales = Sale::with('user', 'items')->where('status', 'Lunas')->orderBy("created_at", "desc")->get();
+            } else {
+                # code...
+                $sales = Sale::with('user', 'items')->where('user_id', $request->user_id)->where('status', 'Lunas')->orderBy("created_at", "desc")->get();
+            }
         } else {
             # code...
             if ($request->user_id==NULL) {
@@ -72,13 +78,24 @@ class SaleReportController extends Controller
         $data = Sale::where('status', 'Lunas')->get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('F');
         });
+        $data2 = Sale::get()->groupBy(function($d) {
+            return Carbon::parse($d->created_at)->format('F');
+        })->map(function ($row) {
+            return $row->sum('total_bayar');
+        });
         $chart_data = [];
+        $chart_data2 = [];
         foreach ($data as $key => $value) {
             $chart_data[$key] = count($value);
+        }
+        foreach ($data2 as $key2 => $value2) {
+            $chart_data2[$key2] = $value2;
         }
         $chart = new SaleReportController;
         $chart->labels = (array_keys($chart_data));
         $chart->datasets = (array_values($chart_data));
+        $chart->labels2 = (array_keys($chart_data2));
+        $chart->datasets2 = (array_values($chart_data2));
         return view('toko.laporan.penjualan_index', compact('sales', 'users', 'chart', 'request'));
     }
 
