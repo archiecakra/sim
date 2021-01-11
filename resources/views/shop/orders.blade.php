@@ -10,17 +10,19 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        @if (session('message'))
-          <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <strong>{{ session('message') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        @endif
+        <div class="col-12">
+          @if (session('message'))
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+              <strong>{{ session('message') }}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+        </div>
         @foreach ($orders as $order)
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="card @if($loop->first) @else collapsed-card @endif">
+            <div class="card @if($loop->first && $order->status == 'Belum Dibayar') @else collapsed-card @endif">
               <div class="card-header" data-card-widget="collapse">
                 <h3 class="card-title">
                   ({{ $order->kode_transaksi }})Pesanan {{ $loop->remaining+1 }} 
@@ -55,8 +57,15 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <a href="{{ url('/orders/'.$order->id) }}" class="btn btn-sm btn-primary">Struk</a>
-                <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
+                <a href="{{ url('/orders/'.$order->id) }}" class="btn btn-md btn-primary">Struk</a>
+                @if ($order->status == 'Lunas')    
+                @else
+                <form action="{{ url('/orders/'.$order->id) }}" style="all: unset;" method="POST">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" style="margin-left: 10px;" class="btn btn-md btn-danger"><i class="fa fa-trash-alt"></i></button>
+                </form>
+                @endif
                 <p class="float-right">Total Belanja : Rp. {{ $order->total_bayar }}</p>
               </div>
               <!-- /.card-footer -->

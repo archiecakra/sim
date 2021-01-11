@@ -93,6 +93,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Sale::find($id)->items()->detach();
+        Sale::destroy($id);
+        return redirect('/orders')->with('message', 'Pesanan Berhasil Dihapus');
     }
 }

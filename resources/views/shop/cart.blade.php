@@ -33,12 +33,14 @@
                     <div class="col-6 align-middle">
                       <span class="info-box-text harga ">Rp. {{ $cart->item->harga_jual }} / {{ $cart->item->unit->nama }}</span>
                     </div>
-                    <div class="col-6">
-                      
+                    <div class="col-6 text-center">
+                      @if ($cart->item->stok<=10)
+                        <span class="text-danger">Stok Tinggal {{ $cart->item->stok }}!</span>
+                      @endif
+                      <input type="hidden" class="stok" value="{{ $cart->item->stok }}">
                     </div>
                   </div>
                   <span class="info-box-text"><span>Subtotal : Rp. </span><span class="subtotal">0</span></span>
-                  {{-- <input type="hidden" name="jumlah[]" value="{{ $cart->jumlah }}"> --}}
                   {{-- <span class="info-box-number">Jumlah Barang :</span> --}}
                   <div class="row">
                     <div class="col-6">
@@ -103,20 +105,26 @@
     var jumlah_item = parseInt($("input[name='jumlah[]']").eq(index).val());
     jumlah_item += 1;
     var cart_id = $(this).data('id');
-    $("input[name='jumlah[]']").eq(index).val(jumlah_item);
-    $.ajax({
-      type      : 'PATCH',
-      url       : '{{ url("/cart/") }}/'+cart_id,
-      dataType  : 'json',
-      data      : {"_token": "{{ csrf_token() }}", jumlah:jumlah_item},
-      success   : function () {
-        console.log('success');
-        hitung();
-      },
-      error     : function () {
-        console.log('error');
-      }
-    });
+    var stok = parseInt($('.stok').eq(index).val());
+    // alert(stok);
+    if (jumlah_item>stok) {
+      $("input[name='jumlah[]']").eq(index).val(stok);
+    } else {
+      $("input[name='jumlah[]']").eq(index).val(jumlah_item);
+      $.ajax({
+        type      : 'PATCH',
+        url       : '{{ url("/cart/") }}/'+cart_id,
+        dataType  : 'json',
+        data      : {"_token": "{{ csrf_token() }}", jumlah:jumlah_item},
+        success   : function () {
+          console.log('success');
+          hitung();
+        },
+        error     : function () {
+          console.log('error');
+        }
+      });
+    }
   });
 
   $("button.minus").click(function () {
