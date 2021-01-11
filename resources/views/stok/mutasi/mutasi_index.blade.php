@@ -44,7 +44,7 @@
                 <tbody>
                   @foreach ($mutations as $mutation)
                     <tr>
-                      <td>{{ $mutation->created_at->format('Y-m-d') }}</td>
+                      <td>{{ $mutation->created_at }}</td>
                       <td>{{ $mutation->item->nama }}</td>
                       <td>{{ $mutation->jenis_mutasi }}</td>
                       <td>{{ $mutation->stok_awal }}</td>

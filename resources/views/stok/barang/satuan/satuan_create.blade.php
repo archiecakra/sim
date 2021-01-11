@@ -1,6 +1,6 @@
 @extends('layouts/main')
 
-@section('title', 'Data Supplier')
+@section('title', 'Data Satuan')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>

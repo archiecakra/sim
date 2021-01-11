@@ -10,16 +10,16 @@
 </head>
 <body>
 
-  <div class="container-fluid">
+  <div class="container-fluid text-sm">
     <div class="row">
       <div class="col text-center">
-        <img src="{{ url('gambar/site_assets/site_logo.png') }}" alt="Mentari Logo" class="img-fluid" style="max-width: 70%;">
+        <img src="{{ url('img/sites_img/site_logo.png') }}" alt="Mentari Logo" class="img-fluid" style="max-width: 70%;">
         <ul class="list-unstyled">
           <li class="font-weight-bold">Toko Mentari Grosir</li>
           <li>Pasar Paing Stand No. 16</li>
           <li>Jl. Zamhuri No. 31, Rungkut Kidul</li>
         </ul>
-        <table class="text-left text-sm">
+        <table class="text-left">
           <tr>
             <td>Nama Pelanggan</td>
             <td>:</td>
@@ -51,12 +51,12 @@
               <td class="">{{ $item->pivot->jumlah }}</td>
               <td class="">{{ $item->unit->nama }}</td>
               <td class="">{{ $item->nama }}</td>
-              <td class="">{{ $item->harga_jual*$item->pivot->jumlah }}</td>
+              <td class="">{{ number_format($item->harga_jual*$item->pivot->jumlah, 2) }}</td>
             </tr>
             @endforeach
             <tr>
               <td colspan="3">TOTAL BELANJA</td>
-              <td class="">Rp. {{ $order->total_bayar }}</td>
+              <td class="">Rp. {{ number_format($order->total_bayar, 2) }}</td>
             </tr>
           </tbody>
         </table>

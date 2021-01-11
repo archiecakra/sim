@@ -123,7 +123,7 @@
       </div>
       <div class="col-3">
         <div class="card">
-          <img class="card-img-top" id="gambar-preview" src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" alt="Card image cap">
+          <img class="card-img-top" id="gambar-preview" src="https://via.placeholder.com/350?text=Preview+Gambar" alt="Card image cap">
           <div class="card-body">
             <p class="card-text">Tinjauan Gambar Barang</p>
           </div>

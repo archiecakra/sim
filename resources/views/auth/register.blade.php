@@ -17,7 +17,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="{{ url('/css/googlefont.css') }}" rel="stylesheet">
 </head>
-<body id="background" class="hold-transition register-page" style='background-image: url({{ url("/sites_img/login.jpg") }})'>
+<body id="background" class="hold-transition register-page" style='background-image: url({{ url("/img/sites_img/login.jpg") }})'>
 <div class="register-box">
   <div class="register-logo">
     <a href="#" class="text-white display-5"><b>Mentari</b> <br>Alat Tulis Grosir</a>

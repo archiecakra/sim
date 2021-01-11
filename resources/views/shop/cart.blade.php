@@ -24,7 +24,7 @@
           @foreach ($carts as $cart)
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box">
-                <span class="info-box-icon bg-info"><img src="{{ url('/gambar/Buku Tulis Sidu 58 Lembar.jpeg') }}" alt="..." class="img-thumbnail"></span>
+                <span class="info-box-icon bg-info"><img src="{{ url('/img/items_img/'.$cart->item->gambar) }}" alt="..." class="img-thumbnail"></span>
     
                 <div class="info-box-content">
                   <input type="hidden" name="item_id[]" value="{{ $cart->item->id }}">

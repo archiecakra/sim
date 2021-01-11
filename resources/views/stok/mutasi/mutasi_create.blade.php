@@ -4,9 +4,8 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-<li class="breadcrumb-item"><a href="#">Barang</a></li>
-<li class="breadcrumb-item"><a href="#">Kategori</a></li>
-<li class="breadcrumb-item"><a href="#">Tambah Kategori</a></li>
+<li class="breadcrumb-item"><a href="#">Mutasi Stok</a></li>
+<li class="breadcrumb-item">Tambah Mutasi Stok</li>
 @endsection
 
 @section('content')
@@ -19,7 +18,7 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Mutasi Stok</h3>
+            <h3 class="card-title">Koreksi Stok Barang</h3>
           </div>
           <form method="POST" action="{{ url('/items/mutations') }}">
             <div class="card-body">

@@ -113,7 +113,7 @@
             <!-- /.card-body -->
             <div class="card-footer">
               <button type="submit" class="btn btn-md btn-primary float-right">Simpan</button>
-              <a href="{{ url('/employees') }}" class="btn btn-md btn-secondary">Kembali</a>
+              <a href="{{ url('/sales') }}" class="btn btn-md btn-secondary">Kembali</a>
             </div>
           </form>
           <!-- /.card-footer-->
@@ -128,12 +128,9 @@
 
 @section('js')
   <script>
-    // '<div class="input-group input-group-sm">'+
-    //                   '<div class="input-group-prepend">'+
-    //                     '<span class="input-group-text">Rp.</span>'+
-    //                   '</div>'+
-    //                   '<input type="number" class="form-control form-control-sm harga" value="'+ harga +'" disabled>'+
-    //                 '</div>'+
+    var table = $('#datatable').DataTable({
+      "ordering": false
+    });
     $('#item').change(function () {
       var harga = $(this).find(':selected').data('harga');
       var stok = $(this).find(':selected').data('stok');

@@ -150,7 +150,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 30,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0000',
-            'created_at' => '2020-10-04 11:50:50'
+            'created_at' => '2020-10-04 11:52:50'
         ]);
 
         StockMutation::create([
@@ -170,7 +170,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 76,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0002',
-            'created_at' => '2020-11-04 11:41:50'
+            'created_at' => '2020-11-04 11:43:50'
         ]);
 
         StockMutation::create([
@@ -180,7 +180,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 55,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0002',
-            'created_at' => '2020-11-04 11:41:50'
+            'created_at' => '2020-11-04 11:45:50'
         ]);
 
         StockMutation::create([
@@ -190,7 +190,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 55,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0003',
-            'created_at' => '2020-12-03 11:41:50'
+            'created_at' => '2020-12-03 11:47:50'
         ]);
 
         StockMutation::create([
@@ -200,7 +200,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 32,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0004',
-            'created_at' => '2020-12-04 11:41:50'
+            'created_at' => '2020-12-04 11:49:50'
         ]);
 
         StockMutation::create([
@@ -210,7 +210,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 40,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0004',
-            'created_at' => '2020-12-04 11:41:50'
+            'created_at' => '2020-12-04 11:53:50'
         ]);
 
         StockMutation::create([
@@ -220,7 +220,7 @@ class PurchasesSeeder extends Seeder
             'stok_akhir' => 65,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0004',
-            'created_at' => '2020-12-04 11:41:50'
+            'created_at' => '2020-12-04 11:55:50'
         ]);
 
         Item::find(1)->update(['stok' => 32]);
