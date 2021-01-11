@@ -19,7 +19,13 @@ class PurchaseReportController extends Controller
         // dd($request);
         if ($request->tanggal==NULL) {
             # code...
-            $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
+            if ($request->supplier_id==NULL) {
+                # code...
+                $purchases = Purchase::with('purchaseDetail.items')->orderBy("created_at", "desc")->get();
+            } else {
+                # code...
+                $purchases = Purchase::with('purchaseDetail.items')->where('supplier_id', $request->supplier_id)->orderBy("created_at", "desc")->get();
+            }
         } else {
             # code...
             if ($request->supplier_id==NULL) {
@@ -74,17 +80,24 @@ class PurchaseReportController extends Controller
         $data = Purchase::get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('F');
         });
+        $data2 = Purchase::get()->groupBy(function($d) {
+            return Carbon::parse($d->created_at)->format('F');
+        })->map(function ($row) {
+            return $row->sum('total_bayar');
+        });
         $chart_data = [];
+        $chart_data2 = [];
         foreach ($data as $key => $value) {
             $chart_data[$key] = count($value);
-            // $chart_labels = Carbon::parse(key($chart_data))->format('F');
-            // echo key($chart_data);
+        }
+        foreach ($data2 as $key2 => $value2) {
+            $chart_data2[$key2] = $value2;
         }
         $chart = new PurchaseReportController;
         $chart->labels = (array_keys($chart_data));
-        // $chart->labels = (Carbon::parse()->format('F'));
         $chart->datasets = (array_values($chart_data));
-        // var_dump(json_encode($chart->datasets));
+        $chart->labels2 = (array_keys($chart_data2));
+        $chart->datasets2 = (array_values($chart_data2));
         return view('toko.laporan.pembelian_index', compact('purchases', 'suppliers', 'chart'));
     }
 
