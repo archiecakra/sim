@@ -8,11 +8,14 @@ use App\Models\Item;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StockReportController extends Controller
 {
     public function stock(Request $request)
     {
+        $stock = Item::with('mutation')->get();
+        dump($stock->mutation);
         if ($request->tanggal==NULL) {
             # code...
             $mutations = StockMutation::with('item')->get();

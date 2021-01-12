@@ -24,4 +24,15 @@ class Item extends Model
     {
         return $this->belongsToMany(PurchaseDetail::class)->withPivot(['jumlah']);
     }
+
+    public function sale()
+    {
+        # code...
+        return $this->belongsToMany(Sale::class)->withPivot(['jumlah']);
+    }
+
+    public function mutation()
+    {
+        return $this->hasMany(StockMutation::class);
+    }
 }

@@ -15,6 +15,7 @@ class SaleReportController extends Controller
 {
     public function sale(Request $request)
     {
+        dump($request);
         if ($request->tanggal==NULL) {
             # code...
             if ($request->user_id==NULL) {
@@ -96,7 +97,10 @@ class SaleReportController extends Controller
         $chart->datasets = (array_values($chart_data));
         $chart->labels2 = (array_keys($chart_data2));
         $chart->datasets2 = (array_values($chart_data2));
-        return view('toko.laporan.penjualan_index', compact('sales', 'users', 'chart', 'request'));
+
+        $items = Item::with('sale')->get();
+
+        return view('toko.laporan.penjualan_index', compact('sales', 'users', 'chart', 'request', 'items'));
     }
 
     public function sale_print(Request $request)
@@ -155,5 +159,13 @@ class SaleReportController extends Controller
         }
         $users = User::where('role', 'customer')->get();
         return view('toko.laporan.penjualan_print', compact('sales', 'users', 'request'));
+    }
+    
+    public function sale_item_print(Request $request)
+    {
+        # code...
+        // if ($request->tanggal==NULL) {
+        //     # code...
+        // }
     }
 }
