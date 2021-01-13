@@ -135,9 +135,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 1,
-            'stok_awal' => 12,
+            'stok_awal' => 0,
             'stok_mutasi' => 10,
-            'stok_akhir' => 22,
+            'stok_akhir' => 10,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0000',
             'created_at' => '2020-10-04 11:50:50'
@@ -145,9 +145,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 2,
-            'stok_awal' => 20,
+            'stok_awal' => 0,
             'stok_mutasi' => 10,
-            'stok_akhir' => 30,
+            'stok_akhir' => 10,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0000',
             'created_at' => '2020-10-04 11:52:50'
@@ -155,9 +155,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 3,
-            'stok_awal' => 31,
+            'stok_awal' => 0,
             'stok_mutasi' => 20,
-            'stok_akhir' => 51,
+            'stok_akhir' => 20,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0001',
             'created_at' => '2020-11-04 11:41:50'
@@ -165,9 +165,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 3,
-            'stok_awal' => 51,
+            'stok_awal' => 20,
             'stok_mutasi' => 25,
-            'stok_akhir' => 76,
+            'stok_akhir' => 45,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0002',
             'created_at' => '2020-11-04 11:43:50'
@@ -175,9 +175,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 4,
-            'stok_awal' => 30,
+            'stok_awal' => 0,
             'stok_mutasi' => 25,
-            'stok_akhir' => 55,
+            'stok_akhir' => 25,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0002',
             'created_at' => '2020-11-04 11:45:50'
@@ -185,9 +185,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 5,
-            'stok_awal' => 25,
+            'stok_awal' => 0,
             'stok_mutasi' => 30,
-            'stok_akhir' => 55,
+            'stok_akhir' => 30,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0003',
             'created_at' => '2020-12-03 11:47:50'
@@ -195,9 +195,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 1,
-            'stok_awal' => 22,
+            'stok_awal' => 10,
             'stok_mutasi' => 10,
-            'stok_akhir' => 32,
+            'stok_akhir' => 20,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0004',
             'created_at' => '2020-12-04 11:49:50'
@@ -205,9 +205,9 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 2,
-            'stok_awal' => 30,
+            'stok_awal' => 10,
             'stok_mutasi' => 10,
-            'stok_akhir' => 40,
+            'stok_akhir' => 20,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0004',
             'created_at' => '2020-12-04 11:53:50'
@@ -215,18 +215,18 @@ class PurchasesSeeder extends Seeder
 
         StockMutation::create([
             'item_id' => 5,
-            'stok_awal' => 55,
+            'stok_awal' => 30,
             'stok_mutasi' => 10,
-            'stok_akhir' => 65,
+            'stok_akhir' => 40,
             'jenis_mutasi' => 'penambahan',
             'keterangan' => 'Pembelian dengan Kode : PCS0004',
             'created_at' => '2020-12-04 11:55:50'
         ]);
 
-        Item::find(1)->update(['stok' => 32]);
-        Item::find(2)->update(['stok' => 40]);
-        Item::find(3)->update(['stok' => 76]);
-        Item::find(4)->update(['stok' => 55]);
-        Item::find(5)->update(['stok' => 65]);
+        Item::find(1)->update(['stok' => 20]);
+        Item::find(2)->update(['stok' => 20]);
+        Item::find(3)->update(['stok' => 45]);
+        Item::find(4)->update(['stok' => 25]);
+        Item::find(5)->update(['stok' => 40]);
     }
 }
