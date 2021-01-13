@@ -15,10 +15,16 @@ class StockReportController extends Controller
     public function stock(Request $request)
     {
         $stock = Item::with('mutation')->get();
-        dump($stock);
+        // dump($stock);
         if ($request->tanggal==NULL) {
             # code...
-            $mutations = StockMutation::with('item')->get();
+            if ($request->item_id==NULL) {
+                # code...
+                $mutations = StockMutation::with('item')->orderBy('created_at', 'desc')->get();
+            } else {
+                # code...
+                $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->orderBy('created_at', 'desc')->get();
+            }
         } else {
             # code...
             if ($request->item_id==NULL) {
@@ -26,17 +32,17 @@ class StockReportController extends Controller
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $mutations = StockMutation::with('item')->whereDate('created_at', $request->tanggal)->orderBy('item_id')->get();
+                        $mutations = StockMutation::with('item')->whereDate('created_at', $request->tanggal)->orderBy('created_at', 'desc')->get();
                         break;
                     
                     case 'Bulanan':
                         # code...
-                        $mutations = StockMutation::with('item')->whereMonth('created_at', $request->tanggal)->get();
+                        $mutations = StockMutation::with('item')->whereMonth('created_at', $request->tanggal)->orderBy('created_at', 'desc')->get();
                         break;
                     
                     case 'Tahunan':
                         # code...
-                        $mutations = StockMutation::with('item')->whereYear('created_at', $request->tanggal)->get();
+                        $mutations = StockMutation::with('item')->whereYear('created_at', $request->tanggal)->orderBy('created_at', 'desc')->get();
                         break;
                         
                     default:
@@ -48,17 +54,17 @@ class StockReportController extends Controller
                 switch ($request->jenis) {
                     case 'Harian':
                         # code...
-                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereDate('created_at', $request->tanggal)->get();
+                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereDate('created_at', $request->tanggal)->orderBy('created_at', 'desc')->get();
                         break;
                     
                     case 'Bulanan':
                         # code...
-                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereMonth('created_at', $request->tanggal)->get();
+                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereMonth('created_at', $request->tanggal)->orderBy('created_at', 'desc')->get();
                         break;
                     
                     case 'Tahunan':
                         # code...
-                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereYear('created_at', $request->tanggal)->get();
+                        $mutations = StockMutation::with('item')->where('item_id', $request->item_id)->whereYear('created_at', $request->tanggal)->orderBy('created_at', 'desc')->get();
                         break;
                         
                     default:
@@ -161,32 +167,38 @@ class StockReportController extends Controller
     public function stock_item_print(Request $request)
     {
         # code...
-        // dd(
-        //     Item::with('mutation')->whereHas('mutation', function($q){
-        //         $q->whereYear('created_at', 2021);
-        //     })->get()
-        // );
+        // dd($request);
         switch ($request->jenis2) {
             case 'Harian':
                 # code...
-                $items = Item::with('mutation')->whereDate('created_at', $request->tanggal2)->get();
+                $items = Item::with(['mutation' => function($query) use ($request) {
+                            $query->whereDate('created_at', $request->tanggal2);
+                        }])->whereHas('mutation', function($q) use ($request) {
+                            $q->whereDate('created_at', $request->tanggal2);
+                        })->get();
                 break;
             
             case 'Bulanan':
                 # code...
-                $items = Item::with('mutation')->whereMonth('created_at', $request->tanggal2)->get();
+                $items = Item::with(['mutation' => function($query) use ($request) {
+                    $query->whereMonth('created_at', $request->tanggal2);
+                }])->whereHas('mutation', function($q) use ($request) {
+                    $q->whereMonth('created_at', $request->tanggal2);
+                })->get();
                 break;
             
             case 'Tahunan':
                 # code...
-                $items = Item::with('mutation')->whereYear('created_at', $request->tanggal2)->get();
+                $items = Item::with(['mutation' => function($query) use ($request) {
+                    $query->whereYear('created_at', $request->tanggal2);
+                }])->whereHas('mutation', function($q) use ($request){
+                    $q->whereYear('created_at', $request->tanggal2);
+                })->get();
                 break;
                 
             default:
                 # code...
-                $items = Item::with('mutation')->whereHas('mutation', function($q){
-                            $q->whereYear('created_at', 2021);
-                        })->get();
+                $items = Item::with('mutation')->get();
                 break;
         }
         return view('toko.laporan.mutasi_item_print', compact('items', 'request'));

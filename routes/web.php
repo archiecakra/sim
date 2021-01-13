@@ -68,6 +68,7 @@ Route::get('/reports/sale', [SaleReportController::class, 'sale']);
 Route::post('/reports/sale', [SaleReportController::class, 'sale']);
 Route::get('/reports/sale/print', [SaleReportController::class, 'sale_print']);
 Route::post('/reports/sale/print', [SaleReportController::class, 'sale_print']);
+Route::post('/reports/sale/item_print', [SaleReportController::class, 'sale_item_print']);
 
 Route::get('/reports/stock', [StockReportController::class, 'stock']);
 Route::post('/reports/stock', [StockReportController::class, 'stock']);

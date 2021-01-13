@@ -201,6 +201,11 @@
     var table = $('#barang').DataTable({
       order: [[ 4, "asc" ]]
     });
+
+    var table2 = $('#datatable').DataTable( {
+      "order": []
+    });
+
     var ctx = $('#monthly-chart-in');
     var myChart = new Chart(ctx, {
       type: 'bar',

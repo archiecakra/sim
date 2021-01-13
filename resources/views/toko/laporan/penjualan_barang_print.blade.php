@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="page-header">
-          Laporan {{ $request->jenis }} Penjualan Barang
+          Laporan {{ $request->jenis2 }} Penjualan Barang
           <small class="float-right">Tanggal: {{ date('d-m-Y H:i:s') }}</small>
         </h2>
       </div>
@@ -44,11 +44,10 @@
       </div>
       <!-- /.col -->
       <div class="col-sm-6 invoice-col">
-        <b>Periode {{ $request->jenis }} {{ $request->tanggal }}</b><br>
+        <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
         <br>
-        <b>Pelanggan :</b> @if ($request->user_id==NULL) Semua @else {{ $users->find($request->user_id)->nama }} @endif<br>
-        <b>Barang Terjual :</b> <span id="total_item"></span><br>
-        <b>Jumlah Transaksi :</b> {{ $sales->count() }}
+        {{-- <b>Barang Terjual :</b> <span id="total_item"></span><br> --}}
+        {{-- <b>Jumlah Transaksi :</b> {{ $sales->count() }} --}}
       </div>
       <!-- /.col -->
     </div>
@@ -59,33 +58,23 @@
       <div class="col-12 table-responsive">
         <table id="table" class="table table-striped table-sm">
           <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>Kode Penjualan</th>
-              <th>Supplier</th>
-              <th>Barang</th>
-              <th>Jumlah</th>
-              <th>Unit</th>
-              <th>Harga Satuan</th>
-              <th>Total</th>
+            <tr class="text-center">
+              <th class="align-middle" scope="col">Barang</th>
+              <th class="align-middle" scope="col">Harga (Rp.)</th>
+              <th class="align-middle" scope="col">Jumlah Terjual</th>
+              <th class="align-middle" scope="col">Satuan</th>
+              <th class="align-middle" scope="col">Total Penjualan (Rp.)</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($sales as $sale)
-              @foreach ($sale->items as $item)    
-                <tr class="item">
-                  @if ($loop->first) 
-                    <td class="align-middle" rowspan="{{ $sale->items->count() }}">{{ $sale->created_at }}</td>
-                    <td class="align-middle" rowspan="{{ $sale->items->count() }}">{{ $sale->kode_transaksi }}</td>
-                    <td class="align-middle text-left" rowspan="{{ $sale->items->count() }}">{{ $sale->user->name }}</td>
-                  @endif
-                  <td class="align-middle text-left">{{ $item->nama }}</td>
-                  <td class="align-middle text-center qty">{{ $item->pivot->jumlah }}</td>
-                  <td class="align-middle">{{ $item->unit->nama }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->harga_beli) }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->pivot->jumlah*$item->harga_beli) }}</td>
-                </tr>
-              @endforeach
+            @foreach ($items as $item)
+              <tr class="text-center">
+                <td class="align-middle" scope="row">{{ $item->nama }}</td>
+                <td class="align-middle">{{ number_format($item->harga_jual) }}</td>
+                <td class="align-middle jumlah">{{ $item->sale->sum('pivot.jumlah') }}</td>
+                <td class="align-middle">{{ $item->unit->nama }}</td>
+                <td class="align-middle text-right total">{{ number_format($item->sale->sum('pivot.jumlah')*$item->harga_jual) }}</td>
+              </tr>
             @endforeach
           </tbody>
         </table>
@@ -101,13 +90,17 @@
       </div>
       <!-- /.col -->
       <div class="col-6">
-        <p class="lead">Total Penjualan {{ $request->jenis }}</p>
+        <p class="lead">Total Penjualan {{ $request->jenis2 }}</p>
 
         <div class="table-responsive">
           <table class="table">
             <tr>
+              <th>Barang Terjual:</th>
+              <td class="text-right" id="total_item"></td>
+            </tr>
+            <tr>
               <th>Total:</th>
-              <td id="total_pembelian"></td>
+              <td class="text-right" id="total_pembelian"></td>
             </tr>
           </table>
         </div>
@@ -127,15 +120,25 @@
 <script src="{{ url('/js/adminlte.min.js') }}"></script>
 
 <script type="text/javascript"> 
+  // var table = $('#table').DataTable({
+  //   // order: [[ 1, "desc" ]]
+  // });
+
   var total = 0;
   var total_item = 0;
-  $('td.qty').each(function () {
-    var qty = parseInt($(this).text());
-    $('span#total_item').text(total_item+=qty);
+  $('td.jumlah').each(function () {
+    var jumlah = parseInt($(this).text());
+    $('span#total_item').text(total_item+=jumlah);
   });
 
-  $('.item').each(function () {
-    var subtotal = parseInt($(this).children().last().text().replace(/[^0-9]/g, ''));
+  $('td.jumlah').each(function () {
+    var jumlah = parseInt($(this).text());
+    $('#total_item').text(total_item+=jumlah);
+  });
+
+  $('.total').each(function () {
+    var subtotal = parseInt($(this).text().replace(/[^0-9]/g, ''));
+    // alert(subtotal);
     total += subtotal;
     $('#total_pembelian').text('Rp. '+total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
   });

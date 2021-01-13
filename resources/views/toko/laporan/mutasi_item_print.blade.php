@@ -45,7 +45,7 @@
       <!-- /.col -->
       <div class="col-sm-6 invoice-col">
         @isset($request->jenis2)
-        <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
+          <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
         @endisset
       </div>
       <!-- /.col -->
@@ -70,7 +70,7 @@
               <tr>
                 <td class="align-middle" scope="row">{{ $item->nama }}</td>
                 <td class="align-middle">{{ $item->mutation[0]->stok_awal }}</td>
-                <td class="align-middle masuk">{{ $item->mutation->whereYear('created_at', 2021)->where('jenis_mutasi', 'penambahan')->sum('stok_mutasi') }}</td>
+                <td class="align-middle masuk">{{ $item->mutation->where('jenis_mutasi', 'penambahan')->sum('stok_mutasi') }}</td>
                 <td class="align-middle keluar">{{ $item->mutation->where('jenis_mutasi', 'pengurangan')->sum('stok_mutasi') }}</td>
                 <td class="align-middle stok">{{ $item->stok }}</td>
               </tr>

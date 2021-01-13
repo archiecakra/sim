@@ -46,7 +46,7 @@
             <h3 class="card-title">Penjualan Per Barang</h3>
           </div>
           <div class="card-body">
-            <form action="{{ url('/reports/sale') }}" method="POST">
+            <form action="{{ url('/reports/sale/item_print') }}" method="POST">
               @csrf
               <div class="form-row">
                 <div class="form-group col-md-3">

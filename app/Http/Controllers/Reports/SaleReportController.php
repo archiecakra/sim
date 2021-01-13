@@ -15,7 +15,6 @@ class SaleReportController extends Controller
 {
     public function sale(Request $request)
     {
-        dump($request);
         if ($request->tanggal==NULL) {
             # code...
             if ($request->user_id==NULL) {
@@ -98,7 +97,9 @@ class SaleReportController extends Controller
         $chart->labels2 = (array_keys($chart_data2));
         $chart->datasets2 = (array_values($chart_data2));
 
-        $items = Item::with('sale')->get();
+        $items = Item::with(['sale' => function($query) use($request) {
+            $query->where('status', 'Lunas');
+        } ])->get();
 
         return view('toko.laporan.penjualan_index', compact('sales', 'users', 'chart', 'request', 'items'));
     }
@@ -163,9 +164,57 @@ class SaleReportController extends Controller
     
     public function sale_item_print(Request $request)
     {
-        # code...
-        // if ($request->tanggal==NULL) {
-        //     # code...
-        // }
+        // dd(
+        //     $items = Item::with(['sale' => function($query) use ($request) {
+        //         $query->whereYear('created_at', 2021);
+        //         $query->where('status', 'Lunas');
+        //     }])->whereHas('sale', function($q) use ($request) {
+        //         $q->whereYear('created_at', 2021);
+        //     })->get()
+        // );
+        switch ($request->jenis2) {
+            case 'Harian':
+                # code...
+                $items = Item::with(['sale' => function($query) use ($request) {
+                            $query->whereDate('created_at', $request->tanggal2);
+                            $query->where('status', 'Lunas');
+                        }])->whereHas('sale', function($q) use ($request) {
+                            $q->whereDate('created_at', $request->tanggal2);
+                            $q->where('status', 'Lunas');
+                        })->get();
+                break;
+            
+            case 'Bulanan':
+                # code...
+                $items = Item::with(['sale' => function($query) use ($request) {
+                            $query->whereMonth('created_at', $request->tanggal2);
+                            $query->where('status', 'Lunas');
+                        }])->whereHas('sale', function($q) use ($request) {
+                            $q->whereMonth('created_at', $request->tanggal2);
+                            $q->where('status', 'Lunas');
+                        })->get();
+                break;
+            
+            case 'Tahunan':
+                # code...
+                $items = Item::with(['sale' => function($query) use ($request) {
+                            $query->whereYear('created_at', $request->tanggal2);
+                            $query->where('status', 'Lunas');
+                        }])->whereHas('sale', function($q) use ($request) {
+                            $q->whereYear('created_at', $request->tanggal2);
+                            $q->where('status', 'Lunas');
+                        })->get();
+                break;
+                
+            default:
+                # code...
+                $items = Item::with(['sale' => function($query) use($request) {
+                    $query->where('status', 'Lunas');
+                } ])->whereHas('sale', function($q) use ($request) {
+                    $q->where('status', 'Lunas');
+                })->get();
+                break;
+        }
+        return view('toko.laporan.penjualan_barang_print', compact('items', 'request'));
     }
 }
