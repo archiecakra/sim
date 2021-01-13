@@ -73,6 +73,7 @@ Route::get('/reports/stock', [StockReportController::class, 'stock']);
 Route::post('/reports/stock', [StockReportController::class, 'stock']);
 Route::get('/reports/stock/print', [StockReportController::class, 'stock_print']);
 Route::post('/reports/stock/print', [StockReportController::class, 'stock_print']);
+Route::post('/reports/stock/item_print', [StockReportController::class, 'stock_item_print']);
 //Data Toko
 
 //Customer routes

@@ -45,7 +45,7 @@
             <h3 class="card-title">Kartu Stock</h3>
           </div>
           <div class="card-body">
-            <form action="{{ url('/reports/sale') }}" method="POST">
+            <form action="{{ url('/reports/stock/item_print') }}" method="POST">
               @csrf
               <div class="form-row">
                 <div class="form-group col-md-3">
@@ -252,6 +252,43 @@
             }
           }]
         }
+      }
+    });
+
+    $('select#jenis2').change(function () {
+      var selected = $('#jenis2 option:selected').val();
+      $('#tanggal2').datetimepicker('destroy');
+      $('#tanggal2').val('');
+      // alert(selected);
+      switch (selected) {
+        case 'Harian':
+          $('#tanggal2').prop('disabled', false);
+          $('#tanggal2').datetimepicker({
+            format: "YYYY-MM-DD",
+            useCurrent: false
+          });
+          break;
+
+        case 'Bulanan':
+          $('#tanggal2').prop('disabled', false);
+          $('#tanggal2').datetimepicker({
+            format: "M",
+            viewMode: "months",
+            useCurrent: false
+          });
+          break
+
+        case 'Tahunan':
+          $('#tanggal2').prop('disabled', false);
+          $('#tanggal2').datetimepicker({
+            format: "YYYY",
+            viewMode: "years",
+            useCurrent: false
+          });
+          break
+      
+        default:
+          break;
       }
     });
 

@@ -157,4 +157,38 @@ class StockReportController extends Controller
 
         return view('toko.laporan.mutasi_print', compact('mutations', 'items', 'request'));
     }
+
+    public function stock_item_print(Request $request)
+    {
+        # code...
+        // dd(
+        //     Item::with('mutation')->whereHas('mutation', function($q){
+        //         $q->whereYear('created_at', 2021);
+        //     })->get()
+        // );
+        switch ($request->jenis2) {
+            case 'Harian':
+                # code...
+                $items = Item::with('mutation')->whereDate('created_at', $request->tanggal2)->get();
+                break;
+            
+            case 'Bulanan':
+                # code...
+                $items = Item::with('mutation')->whereMonth('created_at', $request->tanggal2)->get();
+                break;
+            
+            case 'Tahunan':
+                # code...
+                $items = Item::with('mutation')->whereYear('created_at', $request->tanggal2)->get();
+                break;
+                
+            default:
+                # code...
+                $items = Item::with('mutation')->whereHas('mutation', function($q){
+                            $q->whereYear('created_at', 2021);
+                        })->get();
+                break;
+        }
+        return view('toko.laporan.mutasi_item_print', compact('items', 'request'));
+    }
 }
