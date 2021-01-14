@@ -82,8 +82,8 @@
                   <td class="align-middle text-left">{{ $item->nama }}</td>
                   <td class="align-middle text-center qty">{{ $item->pivot->jumlah }}</td>
                   <td class="align-middle">{{ $item->unit->nama }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->harga_beli) }}</td>
-                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->pivot->jumlah*$item->harga_beli) }}</td>
+                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->harga_jual) }}</td>
+                  <td class="align-middle text-nowrap">{{ 'Rp. '.number_format($item->pivot->jumlah*$item->harga_jual) }}</td>
                 </tr>
               @endforeach
             @endforeach

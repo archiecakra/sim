@@ -44,7 +44,24 @@
       </div>
       <!-- /.col -->
       <div class="col-sm-6 invoice-col">
-        <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
+        {{-- <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br> --}}
+        @switch($request->jenis2)
+        
+        @case('Harian')
+          <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
+        @break
+
+        @case('Bulanan')
+          <b>Periode {{ $request->jenis2 }} {{ Carbon\Carbon::createFromFormat('n', $request->tanggal2)->isoFormat('MMMM') }}</b><br>
+        @break
+
+        @case('Tahunan')
+          <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
+        @break
+
+        @default
+          <b>Semua Periode</b><br>
+        @endswitch
         <br>
         {{-- <b>Barang Terjual :</b> <span id="total_item"></span><br> --}}
         {{-- <b>Jumlah Transaksi :</b> {{ $sales->count() }} --}}

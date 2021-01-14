@@ -24,12 +24,12 @@
             <form method="POST" action="{{ url('/items') }}" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
-                <label for="nama">Nama</label>
+                <label for="nama">Nama Barang</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-laptop"></i></span>
                   </div>
-                <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Buku Tulis Sidu 58 Lembar" value="{{ old('nama') }}">
+                <input type="text" class="form-control form-control-sm @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Masukkan Nama Barang" value="{{ old('nama') }}">
                   @error('nama')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
@@ -40,8 +40,9 @@
                   <div class="form-group">
                     <label for="category_id">Kategori</label>
                     <select name="category_id" id="category_id" class="select2 form-control form-control-sm @error('category_id') is-invalid @enderror">
+                      <option value="">Pilih Kategori Barang</option>
                       @foreach ($categories as $category)
-                      <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                        <option value="{{ $category->id }}">{{ $category->nama }}</option>
                       @endforeach
                     </select>
                     @error('category_id')
@@ -53,8 +54,9 @@
                   <div class="form-group">
                     <label for="unit_id">Satuan</label>
                     <select name="unit_id" id="unit_id" class="select2 form-control form-control-sm @error('unit_id') is-invalid @enderror">
+                      <option value="">Pilih Satuan Barang</option>
                       @foreach ($units as $unit)
-                      <option value="{{ $unit->id }}">{{ $unit->nama }}</option>
+                        <option value="{{ $unit->id }}">{{ $unit->nama }}</option>
                       @endforeach
                     </select>
                     @error('unit_id')
@@ -64,15 +66,6 @@
                 </div>
               </div>
               <div class="form-row">
-                {{-- <div class="col-4">
-                  <div class="form-group">
-                    <label for="stok">Stok</label>
-                    <input type="text" class="form-control form-control-sm @error('stok') is-invalid @enderror" id="stok" name="stok" placeholder="23" value="{{ old('stok') }}">
-                    @error('stok')
-                      <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                </div> --}}
                 <div class="col-6">
                   <div class="form-group">
                     <label for="harga_beli">Harga Beli</label>
@@ -80,7 +73,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas">Rp.</i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm @error('harga_beli') is-invalid @enderror" id="harga_beli" name="harga_beli" placeholder="45000" value="{{ old('harga_beli') }}">
+                      <input type="text" class="form-control form-control-sm @error('harga_beli') is-invalid @enderror" id="harga_beli" name="harga_beli" placeholder="Masukkan Harga Beli Barang" value="{{ old('harga_beli') }}">
                       @error('harga_beli')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -94,7 +87,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas">Rp.</i></span>
                       </div>
-                      <input type="text" class="form-control form-control-sm @error('harga_jual') is-invalid @enderror" id="harga_jual" name="harga_jual" placeholder="50000" value="{{ old('harga_jual') }}">
+                      <input type="text" class="form-control form-control-sm @error('harga_jual') is-invalid @enderror" id="harga_jual" name="harga_jual" placeholder="Masukkan Harga Jual Barang" value="{{ old('harga_jual') }}">
                       @error('harga_jual')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror

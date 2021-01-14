@@ -17,7 +17,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::with('user', 'items')->get();
+        $sales = Sale::with('user', 'items')->orderBy('created_at', 'desc')->get();
         // dd($sale);
         return view('penjualan.penjualan_index', compact('sales'));
     }

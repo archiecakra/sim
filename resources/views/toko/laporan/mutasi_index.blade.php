@@ -42,7 +42,7 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Kartu Stock</h3>
+            <h3 class="card-title">Daftar Stok per Barang</h3>
           </div>
           <div class="card-body">
             <form action="{{ url('/reports/stock/item_print') }}" method="POST">

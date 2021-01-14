@@ -165,7 +165,7 @@
                       <td class="align-middle text-left">
                         <ul class="product-list">
                           @foreach ($sale->items as $item)
-                            <li>{{ $item->nama.' @Rp.'.$item->harga_beli.' x '.$item->pivot->jumlah.' '.$item->unit->nama }}</li>
+                            <li>{{ $item->nama.' @Rp.'.$item->harga_jual.' x '.$item->pivot->jumlah.' '.$item->unit->nama }}</li>
                           @endforeach
                         </ul>
                       </td>

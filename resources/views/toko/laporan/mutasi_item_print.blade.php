@@ -44,9 +44,23 @@
       </div>
       <!-- /.col -->
       <div class="col-sm-6 invoice-col">
-        @isset($request->jenis2)
-          <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
-        @endisset
+        @switch($request->jenis2)
+        
+          @case('Harian')
+            <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
+          @break
+
+          @case('Bulanan')
+            <b>Periode {{ $request->jenis2 }} {{ Carbon\Carbon::createFromFormat('n', $request->tanggal2)->isoFormat('MMMM') }}</b><br>
+          @break
+
+          @case('Tahunan')
+            <b>Periode {{ $request->jenis2 }} {{ $request->tanggal2 }}</b><br>
+          @break
+
+          @default
+            <b>Semua Periode</b><br>
+        @endswitch
       </div>
       <!-- /.col -->
     </div>

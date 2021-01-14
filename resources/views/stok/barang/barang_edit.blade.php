@@ -65,7 +65,7 @@
                 </div>
               </div>
               <div class="form-row">
-                <div class="col-4">
+                {{-- <div class="col-4">
                   <div class="form-group">
                     <label for="stok">Stok</label>
                     <input type="text" class="form-control form-control-sm @error('stok') is-invalid @enderror" id="stok" name="stok" placeholder="23" value="{{ $item->stok }}">
@@ -73,7 +73,7 @@
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
-                </div>
+                </div> --}}
                 <div class="col-4">
                   <div class="form-group">
                     <label for="harga_beli">Harga Beli</label>
