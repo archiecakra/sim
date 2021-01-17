@@ -20,7 +20,13 @@
 <body id="background" class="hold-transition login-page" style='background-image: url({{ url("/img/sites_img/login.jpg") }})'>
 <div class="login-box">
   <div class="login-logo">
-    <a href="#" class="text-white display-5"><b>Mentari</b> <br>Alat Tulis Grosir</a>
+    <a href="#" class="text-white display-5">
+      @if ($agent->isMobile())
+        <b>Aplikasi Katalog</b> <br>
+      @endif
+      <b>Mentari</b> <br>
+      Alat Tulis Grosir
+    </a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

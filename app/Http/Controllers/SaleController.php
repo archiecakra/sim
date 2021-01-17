@@ -31,7 +31,7 @@ class SaleController extends Controller
     {
         $transaction_code = 'SLS'.sprintf("%04s", Sale::all()->count());
         $customers = User::where('role', 'customer')->get();
-        $items = Item::all();
+        $items = Item::where('stok', '!=', 'NULL')->get();
         return view('penjualan.penjualan_create', compact('customers', 'transaction_code', 'items'));
     }
 

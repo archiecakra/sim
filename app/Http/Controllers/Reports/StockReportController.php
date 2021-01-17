@@ -15,7 +15,7 @@ class StockReportController extends Controller
     public function stock(Request $request)
     {
         $stock = Item::with('mutation')->get();
-        // dump($stock);
+        // dd($stock);
         if ($request->tanggal==NULL) {
             # code...
             if ($request->item_id==NULL) {
@@ -75,7 +75,7 @@ class StockReportController extends Controller
 
         }
         $items = Item::all();
-
+        
         $data_masuk = StockMutation::where('jenis_mutasi', 'penambahan')->get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('F');
         })->map(function ($row) {
@@ -100,7 +100,7 @@ class StockReportController extends Controller
         $chart->keluar_labels = (array_keys($chart_data_keluar));
         $chart->masuk_datasets = (array_values($chart_data_masuk));
         $chart->keluar_datasets = (array_values($chart_data_keluar));
-
+        // dd($chart);
         return view('toko.laporan.mutasi_index', compact('mutations', 'items', 'request', 'chart', 'stock'));
     }
 

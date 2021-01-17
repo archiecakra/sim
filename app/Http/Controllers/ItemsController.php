@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Unit;
+use App\Models\StockMutation;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -56,7 +57,7 @@ class ItemsController extends Controller
 
         $namaGambar = $request->nama.'.'.$request->gambar->extension();
 
-        Item::create([
+        $item = Item::create([
             'nama' => $request->nama,
             'category_id' => $request->category_id,
             'unit_id' => $request->unit_id,
@@ -64,6 +65,15 @@ class ItemsController extends Controller
             'harga_beli' => $request->harga_beli,
             'stok' => 0,
             'gambar' => $request->gambar->store('','items_img')
+        ]);
+
+        StockMutation::create([
+            'item_id' => $item->id,
+            'stok_awal' => 0,
+            'stok_mutasi' => 0,
+            'stok_akhir' => 0,
+            'jenis_mutasi' => 'penambahan',
+            'keterangan' => 'Inisialisasi Barang Baru',
         ]);
 
         return redirect('/items')->with('message', 'Data Barang Berhasil Ditambahkan');

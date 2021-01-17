@@ -66,6 +66,9 @@
         </p>
       </div>
     </div>
+    <a id="back-to-top" href="{{ url('/shop') }}" class="btn btn-success back-to-top" role="button" aria-label="Scroll to top">
+      Kembali
+    </a>
   </div>
 
   <!-- jQuery -->

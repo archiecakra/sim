@@ -108,7 +108,7 @@
             <!-- /.card-body -->
             <div class="card-footer">
               <button type="submit" class="btn btn-md btn-primary float-right">Simpan</button>
-              <a href="{{ url('/employees') }}" class="btn btn-md btn-secondary">Kembali</a>
+              <a href="{{ url('/items/purchases') }}" class="btn btn-md btn-secondary">Kembali</a>
             </div>
           </form>
           <!-- /.card-footer-->

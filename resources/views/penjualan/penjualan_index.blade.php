@@ -64,12 +64,12 @@
                           
                         @else
                           <a href="{{ url('/sales/'.$sale->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="nav-icon fas fa-pen"></i></a>
+                          <form style="all: unset;" action="{{ url('/sales/'.$sale->id) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash"></i></button>
+                          </form>
                         @endif
-                        <form style="all: unset;" action="{{ url('/sales/'.$sale->id) }}" method="POST">
-                          @method('delete')
-                          @csrf
-                          <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash"></i></button>
-                        </form>
                       </td>
                     </tr>
                   @endforeach

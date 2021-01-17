@@ -25,23 +25,14 @@ class ShopController extends Controller
         $cart_count = Cart::where('user_id', Auth::user()->id)->count();
         if (is_null($request->search)) {
             # code...
-            $items = Item::all();
+            $items = Item::where('stok', '!=', 'NULL')->get();
             return view ('shop.landing', compact('categories', 'items', 'cart_count'));
         } else {
             # code...
-            $items = Item::where('nama', 'like', '%'.$request->search.'%')->get();
+            $items = Item::where('nama', 'like', '%'.$request->search.'%')->where('stok', '!=', 'NULL')->get();
             return view ('shop.landing', compact('categories', 'items', 'cart_count', 'request'));
         }
     }
-
-    // public function search(Request $request)
-    // {
-    //     # code...
-    //     $categories = Category::all();
-    //     $items = Item::where('nama', 'like', '%'.$request->search.'%')->get();
-    //     $cart_count = Cart::where('user_id', Auth::user()->id)->count();
-    //     return view ('shop.landing', compact('categories', 'items', 'cart_count', 'request'));
-    // }
 
     /**
      * Show the form for creating a new resource.

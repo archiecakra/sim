@@ -34,7 +34,6 @@
                 <div class="col-sm-2">
                   <select class="form-control select2" name="status" id="status">
                     <option value="Belum Dibayar" @if ($sales->status=='Belum Dibayar') selected @endif>Belum Dibayar</option>
-                    <option value="Bayar Di Tempat" @if ($sales->status=='Bayar Di Tempat') selected @endif>Bayar Di Tempat</option>
                     <option value="Lunas" @if ($sales->status=='Lunas') selected @endif>Lunas</option>
                   </select>
                 </div>

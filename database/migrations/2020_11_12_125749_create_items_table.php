@@ -16,6 +16,7 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->softDeletes();
             $table->foreignId('category_id')->nullable();
             $table->foreignId('unit_id')->nullable();
             $table->integer('harga_beli');

@@ -32,13 +32,37 @@ class StartingSeeder extends Seeder
                 'password' => Hash::make('12345678')
             ],
             [
-                'name' => 'Admin',
+                'name' => 'Super Admin',
+                'username' => 'superadmin',
+                'email' => 'super@super.com',
+                'phone' => '081331818699',
+                'role' => 'super_admin',
+                'password' => Hash::make('123')
+            ],
+            [
+                'name' => 'Gudang',
+                'username' => 'gudang',
+                'email' => 'gudang@gudang.com',
+                'phone' => '082345678123',
+                'role' => 'warehouse',
+                'password' => Hash::make('123')
+            ],
+            [
+                'name' => 'admin',
                 'username' => 'admin',
                 'email' => 'admin@admin.com',
-                'phone' => '081331818699',
+                'phone' => '082938928475',
                 'role' => 'admin',
                 'password' => Hash::make('123')
-            ]
+            ],
+            [
+                'name' => 'owner',
+                'username' => 'owner',
+                'email' => 'owner@owner.com',
+                'phone' => '082938248582',
+                'role' => 'owner',
+                'password' => Hash::make('123')
+            ],
         ]);
         
         foreach ($users as $user) {
