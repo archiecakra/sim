@@ -63,7 +63,7 @@ class ItemsController extends Controller
             'harga_jual' => $request->harga_jual,
             'harga_beli' => $request->harga_beli,
             'stok' => 0,
-            'gambar' => $request->gambar->store('items_img','items_img')
+            'gambar' => $request->gambar->store('','items_img')
         ]);
 
         return redirect('/items')->with('message', 'Data Barang Berhasil Ditambahkan');
@@ -116,7 +116,7 @@ class ItemsController extends Controller
                 'unit_id' => $request->unit_id,
                 'harga_jual' => $request->harga_jual,
                 'harga_beli' => $request->harga_beli,
-                'stok' => $request->stok,
+                'stok' => $item->stok,
                 'gambar' => $gambar
             ]);
         return redirect('/items')->with('message', 'Data Barang Berhasil Diubah');

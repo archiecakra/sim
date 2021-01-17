@@ -87,7 +87,7 @@ class StartingSeeder extends Seeder
                 'harga_beli' => '34500',
                 'harga_jual' => '40000',
                 'stok' => '0',
-                'gambar' => 'gambar/Buku Tulis Sidu 58 Lembar.png',
+                'gambar' => '5tzd0t3O3166ncLPmqHL2DHPIpuEHGUo4fZzMJNw.jpg',
             ],
             [
                 'nama' => 'Buku Tulis Sinar Dunia 38',
@@ -96,7 +96,7 @@ class StartingSeeder extends Seeder
                 'harga_beli' => '23800',
                 'harga_jual' => '28000',
                 'stok' => '0',
-                'gambar' => 'gambar/Buku Tulis Sidu 38 Lembar.png',
+                'gambar' => 'ib9P7dEWpbpRdQEELjj43YVdbpkVmVRk6whWDAOt.jpg',
             ],
             [
                 'nama' => 'Buku Tulis Sinar Dunia 32',
@@ -105,7 +105,7 @@ class StartingSeeder extends Seeder
                 'harga_beli' => '20500',
                 'harga_jual' => '25000',
                 'stok' => '0',
-                'gambar' => 'gambar/Buku Tulis Sinar Dunia 32.png',
+                'gambar' => 'hajyVkUS9P5qvuzIT5CQuOpL7Xtc08a9PCBJIZCW.jpg',
             ],
             [
                 'nama' => 'Buku Gambar A3',
@@ -114,7 +114,7 @@ class StartingSeeder extends Seeder
                 'harga_beli' => '23000',
                 'harga_jual' => '28000',
                 'stok' => '0',
-                'gambar' => 'gambar/Bolpoint Faster 13mm Hitam.png',
+                'gambar' => '9ICnmyJqhis7hFANTOptXqoxfsts2kxD954w9JtI.png',
             ],
             [
                 'nama' => 'Buku Gambar A4',
@@ -123,7 +123,7 @@ class StartingSeeder extends Seeder
                 'harga_beli' => '20000',
                 'harga_jual' => '25000',
                 'stok' => '0',
-                'gambar' => 'gambar/Buku Tulis Sidu 58 Lembar.png',
+                'gambar' => 'd5ecvbUQLXBWNFz5eRDvvootFl0wdSN959xO7hv7.webp',
             ],
         ]);
         
