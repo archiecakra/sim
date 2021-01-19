@@ -97,7 +97,7 @@ class SaleReportController extends Controller
         $chart->labels2 = (array_keys($chart_data2));
         $chart->datasets2 = (array_values($chart_data2));
 
-        $items = Item::with(['sale' => function($query) use($request) {
+        $items = Item::withTrashed()->with(['sale' => function($query) use($request) {
             $query->where('status', 'Lunas');
         } ])->get();
 
@@ -175,7 +175,7 @@ class SaleReportController extends Controller
         switch ($request->jenis2) {
             case 'Harian':
                 # code...
-                $items = Item::with(['sale' => function($query) use ($request) {
+                $items = Item::withTrashed()->with(['sale' => function($query) use ($request) {
                             $query->whereDate('created_at', $request->tanggal2);
                             $query->where('status', 'Lunas');
                         }])->whereHas('sale', function($q) use ($request) {
@@ -186,7 +186,7 @@ class SaleReportController extends Controller
             
             case 'Bulanan':
                 # code...
-                $items = Item::with(['sale' => function($query) use ($request) {
+                $items = Item::withTrashed()->with(['sale' => function($query) use ($request) {
                             $query->whereMonth('created_at', $request->tanggal2);
                             $query->where('status', 'Lunas');
                         }])->whereHas('sale', function($q) use ($request) {
@@ -197,7 +197,7 @@ class SaleReportController extends Controller
             
             case 'Tahunan':
                 # code...
-                $items = Item::with(['sale' => function($query) use ($request) {
+                $items = Item::withTrashed()->with(['sale' => function($query) use ($request) {
                             $query->whereYear('created_at', $request->tanggal2);
                             $query->where('status', 'Lunas');
                         }])->whereHas('sale', function($q) use ($request) {
@@ -208,7 +208,7 @@ class SaleReportController extends Controller
                 
             default:
                 # code...
-                $items = Item::with(['sale' => function($query) use($request) {
+                $items = Item::withTrashed()->with(['sale' => function($query) use($request) {
                     $query->where('status', 'Lunas');
                 } ])->whereHas('sale', function($q) use ($request) {
                     $q->where('status', 'Lunas');
