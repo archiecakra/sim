@@ -36,17 +36,27 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
         </ul>
-        
         <ul class="nav navbar-nav ml-auto">
-          <a class="btn btn-danger btn-sm" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-          </a>
-
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-          </form>
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-bell fa-lg"></i>
+              @if (count(App\Models\Item::where('stok', '<', '10')->get())<1)                  
+              @else
+                <span class="badge badge-danger navbar-badge" style="font-size: 1em;">{{ count(App\Models\Item::where('stok', '<', '10')->get()) }}</span>
+              @endif
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              <span class="dropdown-header">Notifikasi</span>
+              @foreach (App\Models\Item::where('stok', '<', '10')->get() as $item)    
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item text-danger">
+                <i class="fas fa-exclamation mr-2"></i> Stok {{ $item->nama }}
+                <span class="float-right font-weight-bold text-sm">tersisa {{ $item->stok }}</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              @endforeach
+            </div>
+          </li>
         </ul>
 
         <!-- SEARCH FORM -->
@@ -72,6 +82,14 @@
             </div>
             <div class="info">
               <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
+            <div class="info">
+              <a class="btn btn-danger btn-sm" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+              </a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
             </div>
           </div>
 
